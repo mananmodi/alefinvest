@@ -1,0 +1,145 @@
+<?php
+
+namespace Drupal\{{ module }}\Plugin\IMEX;
+
+use Drupal\basket_imex\Plugins\IMEX\BasketIMEXBaseForm;
+
+/**
+ * @BasketIMEX(
+ *   id        = "{{ id }}",
+ *   name      = "{{ name }}",
+ * )
+ */
+class {{ class }} extends BasketIMEXBaseForm {
+
+  /**
+	 * Whether the field matching service is available to the plugin.
+	 *
+	 * @return bool
+	 */
+	public function getImportExportSettings() {
+	  return TRUE;
+	}
+
+	/**
+	 * List of fields that will participate in the settings.
+	 *
+	 * @return array
+	 */
+	public function getSettingsFields() {
+	  return [
+	    'name',
+	    'description',
+	    '...'
+	  ];
+	}
+
+	/**
+	 * Entity search.
+	 *
+	 * @param $updateInfo
+	 *
+	 * @return object|null
+	 */
+	public function getEntity($updateInfo) {
+	  return NULL;
+	}
+
+	/**
+	 * Call after updating / creating entity.
+	 *
+	 * @param $entity
+	 * @param $updateInfo
+	 *
+	 * @return mixed
+	 */
+	public function postSave($entity, $updateInfo) {
+
+	}
+
+	/**
+	 * Import fields.
+	 *
+	 * @param $form
+	 * @param $form_state
+	 *
+	 * @return array|null
+	 */
+	public function getImportFormFields(&$form, $form_state) {
+    $form['info'] = [
+      '#markup'     => 'Import fields.'
+    ];
+	}
+
+	/**
+	 * Get the list to run for import.
+	 *
+	 * @param $form_state
+	 *
+	 * @return array|null
+	 */
+	public function getImportRows($form_state) {
+    $items  = [];
+
+    $items[] = [
+      'run_id'  => 1
+    ];
+
+    return $items;
+	}
+
+	/**
+	 * Import Handler Calbeck.
+	 *
+	 * @param $info
+	 * @param $context
+	 *
+	 * @return mixed
+	 */
+	public function processImport($info, &$context) {
+
+	}
+
+	/**
+	 * Export fields.
+	 *
+	 * @param $form
+	 * @param $form_state
+	 *
+	 * @return mixed
+	 */
+	public function getExportFormFields(&$form, $form_state) {
+    $form['info'] = [
+      '#markup'     => 'Export fields.'
+    ];
+	}
+
+	/**
+	 * Getting the list to run for export.
+	 *
+	 * @param $form_state
+	 *
+	 * @return array|null
+	 */
+	public function getExportRows($form_state) {
+    $items  = [];
+
+    $items[] = [
+      'run_id'  => 1
+    ];
+
+    return $items;
+	}
+
+	/**
+	 * Export Handler Calbeck.
+	 *
+	 * @param $info
+	 * @param $context
+	 *
+	 * @return mixed
+	 */
+	public function processExport($info, &$context) {
+
+	}
+}

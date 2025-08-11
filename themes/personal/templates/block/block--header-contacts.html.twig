@@ -1,0 +1,21 @@
+{%
+  set classes = [
+    'block',
+    'block-' ~ elements['#id']|clean_id|clean_class
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  <div class="block__layout">
+  {{ title_suffix }}
+  {% block content %}
+    <div{{ content_attributes.addClass('content') }}>
+      <div class="top">
+        {{ content }}
+      </div>
+      <div class="bottom">
+        {{ bottom }}
+      </div>
+    </div>
+  {% endblock %}
+  </div>
+</div>

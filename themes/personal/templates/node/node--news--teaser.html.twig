@@ -1,0 +1,25 @@
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div{{ content_attributes.addClass('node__content b-news-small') }}>
+    {{ content.field_news_image }}
+    <div class="b-news-small__date">{{ node.getCreatedTime|format_date('custom', 'd F') }}</div>
+    <div class="b-news-small__title">{{ label }}</div>
+    {{ content|without('field_news_image') }}
+    <a href="{{ url }}" class="entity-link"></a>
+  </div>
+
+</div>

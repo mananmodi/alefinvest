@@ -1,0 +1,156 @@
+<?php
+
+use Drupal\novaposhta\AdminPages;
+use Drupal\novaposhta\ViewsAlter;
+use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Drupal\novaposhta\API\NovaPoshtaAPI;
+
+define('NOVAPOSHTA_VIEW_ID', 'novaposhta');
+define('NOVAPOSHTA_VIEW_DISPLAY_ID', 'block_1');
+define('NOVAPOSHTA_EN_DAYS', 14);
+
+/**
+ * Implements hook_basket_translate_context_alter().
+ */
+function novaposhta_basket_translate_context_alter(&$context){
+	$context[] = 'novaposhta';
+}
+
+/**
+ * Implements hook_cron().
+ */
+function novaposhta_cron(){
+	\Drupal::getContainer()->get('NovaPoshta')
+    ->cronRun();
+}
+
+/**
+ * Implements hook_basket_admin_page_alte().
+ */
+function novaposhta_basket_admin_page_alter(&$element, $params){
+  (new AdminPages)->alter($element, $params);
+}
+
+/**
+ * Implements hook_basket_pages_alter().
+ * 
+ */
+function novaposhta_basket_pages_alter(&$element, $page_type, $page_subtype) {
+  switch($page_type) {
+    case'api':
+      switch($page_subtype) {
+        case'novaposhta_get_cities':
+          $items = [];
+          $search = \Drupal::request()->query->get('q');
+          if(!empty($search)) {
+            $API = new NovaPoshtaAPI(\Drupal::config('novaposhta.settings')->get('config.api_key'));
+            $results = $API->searchSettlements($search);
+            if(!empty($results['data'][0]['Addresses'])) {
+              foreach ($results['data'][0]['Addresses'] as $row) {
+                $items[] = [
+                  'value' => $row['Present'],
+                  'label' => $row['Present']
+                ];
+              }
+            }
+          }
+          $element = new JsonResponse($items);
+          break;
+        case'novaposhta_get_address':
+          $items = [];
+          $search = \Drupal::request()->query->get('q');
+          $ref = \Drupal::request()->query->get('ref');
+          if(!empty($search) && !empty($ref)) {
+            $API = new NovaPoshtaAPI(\Drupal::config('novaposhta.settings')->get('config.api_key'));
+            $results = $API->searchSettlementStreets($search, $ref);
+            if(!empty($results['data'][0]['Addresses'])) {
+              foreach ($results['data'][0]['Addresses'] as $row) {
+                $items[] = [
+                  'value' => $row['Present'],
+                  'label' => $row['Present']
+                ];
+              }
+            }
+          }
+          $element = new JsonResponse($items);
+          break;
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view_table().
+ */
+function novaposhta_preprocess_views_view_table(&$vars){
+	if($vars['view']->id() == 'novaposhta'){
+    (new ViewsAlter)->viewsViewTable($vars);
+	}
+}
+
+/**
+ * Implements hook_theme().
+ */
+function novaposhta_theme(){
+  $tpls = [];
+  foreach ([
+    'novaposhta_en_view',
+    'novaposhta_en_tracking',
+  ] as $tpl_name){
+    $tpls[$tpl_name] = [
+      'variables' => [
+        'info' => NULL,
+      ],
+    ];
+  }
+  return $tpls;
+}
+  
+  /**
+   * hook_form_views_exposed_form_alter().
+   */
+function novaposhta_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id){
+  $view = $form_state->getStorage('view');
+  if($view['view']->id() == NOVAPOSHTA_VIEW_ID && $view['view']->current_display == NOVAPOSHTA_VIEW_DISPLAY_ID) {
+    (new ViewsAlter)->formAlter($form);
+  }
+}
+
+/**
+ * Implements hook_basket_order_links_alter().
+ */
+function novaposhta_basket_order_links_alter(&$links, $order){
+  (new AdminPages)->orderLinks($links, $order);
+}
+function novaposhta_preprocess_basket_lk_goods_table(&$vars){
+  if(!empty($vars['info']['order']->id)){
+    $vars['info']['NP'] = (new AdminPages)->loadOrderEN($vars['info']['order']->id);
+  }
+}
+
+/**
+ * Implements hook_basket_noty_twig_tokens_alter().
+ */
+function novaposhta_basket_noty_twig_tokens_alter(&$tokens) {
+  if(!empty($tokens['order']->id)){
+    $tokens['NP'] = (new AdminPages)->loadOrderEN($tokens['order']->id);
+  }
+}
+
+/**
+ * Implements hook_basketTemplateTokens_alter().
+ * 
+ */
+function novaposhta_basketTemplateTokens_alter(&$tokens, $templateKey){
+  $tokens['NP'] = 'NP order info';
+}
+
+/**
+ * Implements hook_basketTokenValue_alter().
+ */
+function novaposhta_basketTokenValue_alter(&$value, $tokenName, $params){
+  if($tokenName == 'NP' && !empty($params['order']->id)){
+    $value = (new AdminPages)->loadOrderEN($params['order']->id);
+  }
+}

@@ -1,0 +1,35 @@
+{% if info.data[0] %}
+	<div class="status_wrap">
+		{% if info.data[0].RecipientDateTime %}
+			<div class="status is-complete">{{ 'Retrieved'|t([], {'context': 'novaposhta_tracking'}) }} {{ info.data[0].RecipientDateTime }}</div>
+			<div class="sub_status">{{ info.data[0].Status }}</div>
+		{% else %}
+			<div class="status">{{ info.data[0].Status }}</div>
+		{% endif %}
+	</div>
+	{% if info.data[0].CitySender and info.data[0].CityRecipient %}
+		<div class="route_wrap">
+			<div class="label">{{ 'Route'|t([], {'context': 'novaposhta_tracking'}) }}</div>
+			<div class="routes">
+				<div class="start">{{ info.data[0].CitySender }}</div>
+				<div class="end">{{ info.data[0].CityRecipient }}</div>
+			</div>
+		</div>
+	{% endif %}
+	<div class="items">
+		{% if info.data[0].WarehouseRecipient %}
+			<div class="item">
+				<div class="label">{{ 'Delivery address'|t([], {'context': 'novaposhta_tracking'}) }}</div>
+				<div class="value">{{ info.data[0].WarehouseRecipient }}</div>
+			</div>
+		{% endif %}
+		{% if info.data[0].AmountToPay %}
+			<div class="item">
+				<div class="label">{{ 'Amount to be paid'|t([], {'context': 'novaposhta_tracking'}) }}</div>
+				<div class="value">{{ info.data[0].AmountToPay }} грн</div>
+			</div>
+		{% endif %}
+	</div>
+{% else %}
+	<div class="empty">{{ 'Enter your tracking number'|t([], {'context': 'novaposhta_tracking'}) }}</div>
+{% endif %}

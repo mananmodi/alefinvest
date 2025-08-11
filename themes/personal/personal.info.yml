@@ -1,0 +1,32 @@
+name: Personal
+type: theme
+base theme: classy
+description: 'A flexible, recolorable theme with many regions and a responsive, mobile-first layout.'
+package: Core
+version: VERSION
+core_version_requirement: ^9 || ^10
+libraries:
+  - personal/global-styling
+ckeditor_stylesheets:
+  - css/base/elements.css
+  - css/components/captions.css
+  - css/components/table.css
+  - css/components/text-formatted.css
+stylesheets-remove:
+  - core/themes/classy/css/components/menu.css
+  - core/themes/classy/css/components/form.css
+  - core/themes/classy/css/components/forum.css
+  - core/themes/classy/css/components/inline-form.css
+  - core/themes/classy/css/components/user.css
+  - modules/contrib/better_exposed_filters/css/better_exposed_filters.css
+  - modules/contrib/views_ef_fieldset/css/views_ef_fieldset.css
+  - modules/glyanec/drupal_noty_messages/misc/css/animate.css
+
+regions:
+  header_top: 'Header top'
+  content_top: 'Content top'
+  title: 'Title'
+  content: Content
+  sidebar_left: 'Left sidebar'
+  footer_first: 'Footer first'
+  footer: 'Footer second'

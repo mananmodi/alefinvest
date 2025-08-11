@@ -1,0 +1,6 @@
+simple_pass_reset.admin_settings:
+  title: 'Simple Password Reset'
+  description: 'Set the destination after password reset.'
+  route_name: simple_pass_reset.admin_settings
+  parent: user.admin_index
+  weight: 10

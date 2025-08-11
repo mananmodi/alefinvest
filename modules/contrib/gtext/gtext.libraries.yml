@@ -1,0 +1,46 @@
+gtext:
+  version: 1.x
+  css:
+    theme:
+      misc/css/admin.css: {}
+  js:
+    misc/js/admin.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.form
+    - core/drupal.ajax
+    - core/drupal.dialog.ajax
+
+gtext.string:
+  version: 1.x
+  css:
+    theme:
+      misc/css/admin.string.css: {}
+  js:
+    misc/js/admin.string.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.form
+    - core/drupal.ajax
+    - core/drupal.dialog.ajax
+
+entity-form-translate:
+  version: 1.x
+  css:
+    theme:
+      misc/css/entity-form.css: {}
+  js:
+    misc/js/entity-form.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.form
+    - core/drupal.ajax
+    - core/drupal.dialog.ajax
+
+gtext.copy:
+  version: 1.x
+  js:
+    misc/js/copy.js: {}

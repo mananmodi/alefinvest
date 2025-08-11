@@ -1,0 +1,18 @@
+basket_other.js:
+  version: 1.x
+  js:
+    misc/basket_other.js: {}
+    misc/fix_details.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/drupal.ajax
+
+tooltipster:
+  version: 1.x
+  css:
+    theme:
+      misc/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-shadow.min.css: {}
+      misc/tooltipster/dist/css/tooltipster.bundle.min.css: {}
+  js:
+    misc/tooltipster/dist/js/tooltipster.bundle.min.js: {}

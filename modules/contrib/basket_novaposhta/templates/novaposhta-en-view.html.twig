@@ -1,0 +1,137 @@
+<div class="novaposhta_en_view" data-en_num="{{ info.en_num }}">
+	<div class="header_">
+		<div class="invoice__date">{{ 'Created by:'|t([], {'context': 'novaposhta'}) }} {{ info.created|date('d.m.Y') }}</div>
+		<div class="invoice-header">
+			<div class="invoice-header__left">
+				{{ info.en_num }}
+			</div>
+			<div class="invoice-header__right">
+				<div class="row">
+					<div class="label">{{ 'Description'|t([], {'context': 'novaposhta'}) }}</div>
+					<div class="val">{{ info.description }}</div>
+				</div>
+				<div class="row">
+					<div class="label">{{ 'Announced price'|t([], {'context': 'novaposhta'}) }}</div>
+					<div class="val">{{ info.cost|round(2) }} {{ 'UAH'|t([], {'context': 'novaposhta'}) }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% if info.all_info.BackwardDeliveryMoney %}
+		{% set BackwardDeliveryMoney = info.all_info.BackwardDeliveryMoney %}
+	{% endif %}
+	{% if info.all_info.BackwardDeliveryData[0].RedeliveryString and info.all_info.BackwardDeliveryData[0].CargoType == 'Money' %}
+		{% set BackwardDeliveryMoney = info.all_info.BackwardDeliveryData[0].RedeliveryString %}
+	{% endif %}
+
+	<div class="content_">
+		<div class="invoice-body">
+			<div class="invoice-body__left">
+				<div class="invoice-state">
+					<div class="invoice-state__progress"></div>
+					<div class="invoice-state__startpoint">
+						{{ 'Date of departure'|t([], {'context': 'novaposhta'}) }}: {% if info.all_info.DateTime %}{{ info.all_info.DateTime|date('d.m.Y') }}{% else %}---{% endif %}
+						<div class="invoice-state__startpoint-location">
+							{% if info.all_info.CitySenderDescription %}
+								{{ info.all_info.CitySenderDescription }}, {{ info.all_info.SenderAddressDescription }}
+							{% endif %}
+						</div>
+					</div>
+					<div class="invoice-state__name">{{ info.status }}</div>
+					<div class="invoice-state__endpoint">
+						<span class="ng-star-inserted">
+							{{ 'Estimated delivery date'|t([], {'context': 'novaposhta'}) }}: {% if info.delivery_day %}{{ info.delivery_day|date('d.m.Y') }}{% else %}---{% endif %}
+						</span>
+						<div class="invoice-state__endpoint-location">
+							{% if info.all_info.CityRecipientDescription %}
+								{% if info.all_info.RedirectingData.WarehouseRecipientAddress %}
+									<s>{{ info.all_info.CityRecipientDescription }}, {{ info.all_info.RecipientAddressDescription }}</s><br/>
+									{{ info.all_info.RedirectingData.WarehouseRecipientAddress }}
+								{% else %}
+									{{ info.all_info.CityRecipientDescription }}, {{ info.all_info.RecipientAddressDescription }}
+								{% endif %}
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="invoice-body__right">
+				<div class="row">
+					<div class="label">{{ 'Recipient'|t([], {'context': 'novaposhta'}) }}</div>
+					<div class="val">
+						{% if info.all_info.Recipient %}{{ info.all_info.Recipient }}<br/>{% endif %}
+						{% if info.all_info.ContactRecipient %}{{ info.all_info.ContactRecipient }}{% endif %}
+					</div>
+				</div>
+				<div class="row">
+					<div class="label">{{ 'Recipient\'s phone'|t([], {'context': 'novaposhta'}) }}</div>
+					<div class="val">
+						{% if info.all_info.RecipientsPhone %}{{ info.all_info.RecipientsPhone }}{% else %}---{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+		{% if BackwardDeliveryMoney %}
+			<div class="invoice__info">
+				<div class="info-row">
+					<div class="row">
+						<div class="label">{{ 'Cash on delivery'|t([], {'context': 'novaposhta'}) }}</div>
+						<div class="val">{{ BackwardDeliveryMoney }} {{ 'UAH'|t([], {'context': 'novaposhta'}) }}</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+		<div class="invoice__info">
+			<div class="info-row">
+				<div class="row">
+					<div class="label">{{ 'Shipping cost'|t([], {'context': 'novaposhta'}) }}</div>
+					<div class="val">
+						{{ info.cost_delivery|round(2) }} {{ 'UAH'|t([], {'context': 'novaposhta'}) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="label">{{ 'Payer'|t([], {'context': 'novaposhta'}) }}</div>
+					<div class="val">{% if info.all_info.PayerType %}{{ info.all_info.PayerType }}{% else %}---{% endif %}</div>
+				</div>
+			</div>
+			<div class="info-row">
+				<div class="row">
+					<div class="label">{{ 'Form of payment'|t([], {'context': 'novaposhta'}) }}</div>
+					<div class="val">{% if info.all_info.PaymentMethod %}{{ info.all_info.PaymentMethod }}{% else %}---{% endif %}</div>
+				</div>
+				<div class="row">
+					<div>
+						<a 
+						href="javascript:void(0);" 
+						class="button--link" 
+						onclick="basket_admin_ajax_link(this, '{{ url('basket.admin.pages', {'page_type': 'api-novaposhta-updateInfo'}) }}')" 
+						data-post="{{ {'enNum': info.en_num}|json_encode }}"
+						>{{ 'Update the data'|t([], {'context': 'novaposhta'}) }}</a>
+						<a
+							href="{{ info.print_link }}"
+							class="button--link"
+							style="margin: 0;"
+						>{{ 'Print'|t([], {'context': 'novaposhta'}) }}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="invoice__info">
+			<div class="info-row">
+				<div class="row">
+					<div class="label">{{ 'Type of cargo'|t([], {'context': 'novaposhta'}) }}</div>
+					<div class="val">{% if info.all_info.CargoType %}{{ info.all_info.CargoType }}{% else %}---{% endif %}</div>
+				</div>
+				<div class="row">
+					<div class="label">{{ 'Weight'|t([], {'context': 'novaposhta'}) }}</div>
+					<div class="val">{% if info.weight %}{{ info.weight|round(2) }} {{ 'kg'|t([], {'context': 'novaposhta'}) }}{% else %}---{% endif %}</div>
+				</div>
+				<div class="row">
+					<div class="label">{{ 'Number of seats'|t([], {'context': 'novaposhta'}) }}</div>
+					<div class="val">{% if info.seats_amount %}{{ info.seats_amount }}{% else %}---{% endif %}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

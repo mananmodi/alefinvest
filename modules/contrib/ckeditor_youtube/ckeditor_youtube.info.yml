@@ -1,0 +1,14 @@
+name: CKEditor Youtube
+type: module
+description: This plugin extends the button interface in CKEditor 4 and presents a Youtube embed video button.
+core: 8.x
+package: CKEditor
+configure: ckeditor_youtube.settings_form
+core_version_requirement: ^8 || ^9 || ^10
+dependencies:
+  - drupal:ckeditor
+
+# Information added by Drupal.org packaging script on 2022-12-15
+version: '8.x-1.5'
+project: 'ckeditor_youtube'
+datestamp: 1671069985

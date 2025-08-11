@@ -1,0 +1,10 @@
+name: Double field
+description: Provides a field type with two separate sub-fields.
+package: Field types
+core_version_requirement: ^9 || ^10
+type: module
+
+# Information added by Drupal.org packaging script on 2023-12-03
+version: '4.2.0'
+project: 'double_field'
+datestamp: 1701624364

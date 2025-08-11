@@ -1,0 +1,159 @@
+{
+    "cid": "Drush\\Commands\\core\\DrupalDirectoryCommands",
+    "data": {
+        "drupalDirectory": {
+            "schema": 4,
+            "class": "Drush\\Commands\\core\\DrupalDirectoryCommands",
+            "method_name": "drupalDirectory",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "drupal:directory",
+            "description": "Return the filesystem path for modules\/themes and other key folders.",
+            "help": "",
+            "aliases": [
+                "dd",
+                "drupal-directory"
+            ],
+            "annotations": {
+                "command": "drupal:directory"
+            },
+            "example_usages": {
+                "cd $(drush dd devel)": "Navigate into the devel module directory",
+                "cd $(drush dd)": "Navigate to the root of your Drupal site",
+                "cd $(drush dd files)": "Navigate to the files directory.",
+                "drush dd @alias:%files": "Print the path to the files directory on the site @alias.",
+                "edit $(drush dd devel)\/devel.module": "Open devel module in your editor"
+            },
+            "return_type": null,
+            "arguments": {
+                "target": {
+                    "description": "A module\/theme name, or special names like root, files, private, or an \u003cinfo\u003ealias:path\u003c\/info\u003e string such as @alias:%files.",
+                    "default": "root"
+                }
+            },
+            "options": {
+                "local-only": {
+                    "description": "Reject any target that specifies a remote site.",
+                    "default": false
+                }
+            }
+        },
+        "preHook": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "preHook",
+            "mtime": 1633432454,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "pre:hook",
+            "description": "Persist commandData for use in primary command callback. Used by 'topic' commands.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "pre-command *"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "commandData": {
+                    "description": ""
+                }
+            },
+            "options": []
+        },
+        "setProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "processManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "processManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "hasProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "hasProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "startBrowser": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "startBrowser",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setLogger": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setLogger",
+            "mtime": 1620040827,
+            "injected_classes": []
+        },
+        "getConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "getConfig",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "parentGetConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "parentGetConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setInput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setInput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setOutput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setOutput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setSiteAliasManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\core\\DrupalDirectoryCommands",
+            "method_name": "setSiteAliasManager",
+            "mtime": 1645660758,
+            "injected_classes": []
+        },
+        "siteAliasManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\core\\DrupalDirectoryCommands",
+            "method_name": "siteAliasManager",
+            "mtime": 1645660758,
+            "injected_classes": []
+        },
+        "hasSiteAliasManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\core\\DrupalDirectoryCommands",
+            "method_name": "hasSiteAliasManager",
+            "mtime": 1645660758,
+            "injected_classes": []
+        }
+    },
+    "created": 1663697447,
+    "expire": 0
+}

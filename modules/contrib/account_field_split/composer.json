@@ -1,0 +1,41 @@
+{
+  "name": "drupal/account_field_split",
+  "description": "Split up user profile \\\"User name and password\\\" fields.",
+  "type": "drupal-module",
+  "license": "GPL-2.0-or-later",
+  "keywords": ["Drupal"],
+  "homepage": "https://www.drupal.org/project/account_field_split",
+  "authors": [
+    {
+      "name": "Dima Storozhuk (dstorozhuk)",
+      "homepage": "https://www.drupal.org/u/dstorozhuk",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Nikita Melnik (nikitamelnik)",
+      "homepage": "https://www.drupal.org/u/nikitamelnik",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Greg Boggs",
+      "homepage": "https://www.drupal.org/u/greg-boggs",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Wesley Sandra (weseze)",
+      "homepage": "https://www.drupal.org/u/weseze",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Viktor Holovachek (AstonVictor)",
+      "homepage": "https://www.drupal.org/u/astonvictor",
+      "role": "Maintainer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/account_field_split",
+    "source": "https://git.drupalcode.org/project/account_field_split"
+  },
+  "require": {  }
+}

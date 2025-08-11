@@ -1,0 +1,21 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "Boggs",
+    "Dima",
+    "dstorozhuk",
+    "Holovachek",
+    "Melnik",
+    "nikitamelnik",
+    "Storozhuk",
+    "Viktor",
+    "weseze"
+  ],
+  "ignoreWords": [
+    "Behat",
+    "dragable",
+    "isset",
+    "E-mail"
+  ]
+}

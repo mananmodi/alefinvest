@@ -1,0 +1,805 @@
+{
+    "cid": "Drupal\\webform\\Commands\\WebformCommands",
+    "data": {
+        "drush_webform_export_validate": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_export_validate",
+            "mtime": 1644873819,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "drush_webform_export_validate",
+            "description": "",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "validate webform:export"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_webform_export": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_export",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:export",
+            "description": "Exports webform submissions to a file.",
+            "help": "",
+            "aliases": [
+                "wfx",
+                "webform-export"
+            ],
+            "annotations": {
+                "command": "webform:export"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "webform": {
+                    "description": "The webform ID you want to export (required unless --entity-type and --entity-id are specified)",
+                    "default": null
+                }
+            },
+            "options": {
+                "exporter": {
+                    "description": "The type of export. (delimited, table, yaml, or json)"
+                },
+                "delimiter": {
+                    "description": "Delimiter between columns (defaults to site-wide setting). This option may need to be wrapped in quotes. i.e. --delimiter=\"\\t\"."
+                },
+                "multiple-delimiter": {
+                    "description": "Delimiter between an element with multiple values (defaults to site-wide setting)."
+                },
+                "file-name": {
+                    "description": "File name used to export submission and uploaded filed. You may use tokens."
+                },
+                "archive-type": {
+                    "description": "Archive file type for submission file uploadeds and generated records. (tar or zip)"
+                },
+                "header-format": {
+                    "description": "Set to \"label\" (default) or \"key\""
+                },
+                "options-item-format": {
+                    "description": "Set to \"label\" (default) or \"key\". Set to \"key\" to print select list values by their keys instead of labels."
+                },
+                "options-single-format": {
+                    "description": "Set to \"separate\" (default) or \"compact\" to determine how single select list values are exported."
+                },
+                "options-multiple-format": {
+                    "description": "Set to \"separate\" (default) or \"compact\" to determine how multiple select list values are exported."
+                },
+                "entity-reference-items": {
+                    "description": "Comma-separated list of entity reference items (id, title, and\/or url) to be exported."
+                },
+                "excluded-columns": {
+                    "description": "Comma-separated list of component IDs or webform keys to exclude."
+                },
+                "uuid": {
+                    "description": "Use UUIDs for all entity references. (Only applies to CSV download)"
+                },
+                "entity-type": {
+                    "description": "The entity type to which this submission was submitted from."
+                },
+                "entity-id": {
+                    "description": "The ID of the entity of which this webform submission was submitted from."
+                },
+                "range-type": {
+                    "description": "Range of submissions to export: \"all\", \"latest\", \"serial\", \"sid\", or \"date\"."
+                },
+                "range-latest": {
+                    "description": "Integer specifying the latest X submissions will be downloaded. Used if \"range-type\" is \"latest\" or no other range options are provided."
+                },
+                "range-start": {
+                    "description": "The submission ID or start date at which to start exporting."
+                },
+                "range-end": {
+                    "description": "The submission ID or end date at which to end exporting."
+                },
+                "uid": {
+                    "description": "The ID of the user who submitted the form."
+                },
+                "order": {
+                    "description": "The submission order \"asc\" (default) or \"desc\"."
+                },
+                "state": {
+                    "description": "Submission state to be included: \"completed\", \"draft\" or \"all\" (default)."
+                },
+                "sticky": {
+                    "description": "Flagged\/starred submission status."
+                },
+                "files": {
+                    "description": "Download files: \"1\" or \"0\" (default). If set to 1, the exported CSV file and any submission file uploads will be download in a gzipped tar file."
+                },
+                "destination": {
+                    "description": "The full path and filename in which the CSV or archive should be stored. If omitted the CSV file or archive will be outputted to the command line."
+                }
+            }
+        },
+        "drush_webform_import_validate": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_import_validate",
+            "mtime": 1644873819,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "drush_webform_import_validate",
+            "description": "",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "validate webform:import"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_webform_import": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_import",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:import",
+            "description": "Imports webform submissions from a CSV file.",
+            "help": "",
+            "aliases": [
+                "wfi",
+                "webform-import"
+            ],
+            "annotations": {
+                "command": "webform:import"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "webform": {
+                    "description": "The webform ID you want to import (required unless --entity-type and --entity-id are specified)",
+                    "default": null
+                },
+                "import_uri": {
+                    "description": "The path or URI for the CSV file to be imported.",
+                    "default": null
+                }
+            },
+            "options": {
+                "skip_validation": {
+                    "description": "Skip form validation."
+                },
+                "treat_warnings_as_errors": {
+                    "description": "Treat all warnings as errors."
+                },
+                "entity-type": {
+                    "description": "The entity type to which this submission was submitted from."
+                },
+                "entity-id": {
+                    "description": "The ID of the entity of which this webform submission was submitted from."
+                }
+            }
+        },
+        "drush_webform_purge_validate": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_purge_validate",
+            "mtime": 1644873819,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "drush_webform_purge_validate",
+            "description": "",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "validate webform:purge"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_webform_purge": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_purge",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:purge",
+            "description": "Purge webform submissions from the databases",
+            "help": "",
+            "aliases": [
+                "wfp",
+                "webform-purge"
+            ],
+            "annotations": {
+                "command": "webform:purge"
+            },
+            "example_usages": {
+                "drush webform:purge": "Pick a webform and then purge its submissions.",
+                "drush webform:purge contact": "Delete 'Contact' webform submissions.",
+                "drush webform:purge ::all": "Purge all webform submissions."
+            },
+            "return_type": null,
+            "arguments": {
+                "webform_id": {
+                    "description": "A webform machine name. If not provided, user may choose from a list of names.",
+                    "default": null
+                }
+            },
+            "options": {
+                "all": {
+                    "description": "Flush all submissions",
+                    "default": false
+                },
+                "entity-type": {
+                    "description": "The entity type for webform submissions to be purged"
+                },
+                "entity-id": {
+                    "description": "The ID of the entity for webform submissions to be purged"
+                }
+            }
+        },
+        "drush_webform_tidy_validate": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_tidy_validate",
+            "mtime": 1644873819,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "drush_webform_tidy_validate",
+            "description": "",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "validate webform:tidy"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_webform_tidy": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_tidy",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:tidy",
+            "description": "Tidy export webform configuration files",
+            "help": "",
+            "aliases": [
+                "wft",
+                "webform-tidy"
+            ],
+            "annotations": {
+                "command": "webform:tidy"
+            },
+            "example_usages": {
+                "drush webform:tidy webform": "Tidies YAML configuration files in 'webform\/config' for the Webform module"
+            },
+            "return_type": null,
+            "arguments": {
+                "target": {
+                    "description": "The module (config\/install), config directory (sync), or path (\/some\/path) that needs its YAML configuration files tidied. (Defaults to webform)",
+                    "default": null
+                }
+            },
+            "options": {
+                "dependencies": {
+                    "description": "Add module dependencies to installed webform and options configuration entities.",
+                    "default": false
+                },
+                "prefix": {
+                    "description": "Prefix for file names to be tidied. (Defaults to webform)"
+                }
+            }
+        },
+        "drush_webform_libraries_status": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_libraries_status",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:libraries:status",
+            "description": "Displays the status of third party libraries required by the Webform module.",
+            "help": "",
+            "aliases": [
+                "wfls",
+                "webform-libraries-status"
+            ],
+            "annotations": {
+                "command": "webform:libraries:status"
+            },
+            "example_usages": {
+                "webform:libraries:status": "Displays the status of third party libraries required by the Webform module."
+            },
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_webform_libraries_composer": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_libraries_composer",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:libraries:composer",
+            "description": "Generates the Webform module's composer.json with libraries as repositories.",
+            "help": "",
+            "aliases": [
+                "wflc",
+                "webform-libraries-composer"
+            ],
+            "annotations": {
+                "command": "webform:libraries:composer"
+            },
+            "example_usages": {
+                "webform:libraries:composer": "Generates the Webform module's composer.json with libraries as repositories."
+            },
+            "return_type": null,
+            "arguments": [],
+            "options": {
+                "disable-tls": {
+                    "description": "If set to true all HTTPS URLs will be tried with HTTP instead and no network level encryption is performed.",
+                    "default": false
+                }
+            }
+        },
+        "drush_webform_libraries_download": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_libraries_download",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:libraries:download",
+            "description": "Download third party libraries required by the Webform module.",
+            "help": "",
+            "aliases": [
+                "wfld",
+                "webform-libraries-download"
+            ],
+            "annotations": {
+                "command": "webform:libraries:download"
+            },
+            "example_usages": {
+                "webform:libraries:download": "Download third party libraries required by the Webform module."
+            },
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_webform_libraries_remove": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_libraries_remove",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:libraries:remove",
+            "description": "Removes all downloaded third party libraries required by the Webform module.",
+            "help": "",
+            "aliases": [
+                "wflr",
+                "webform-libraries-remove"
+            ],
+            "annotations": {
+                "command": "webform:libraries:remove"
+            },
+            "example_usages": {
+                "webform:libraries:remove": "Removes all downloaded third party libraries required by the Webform module."
+            },
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_webform_generate_validate": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_generate_validate",
+            "mtime": 1644873819,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "drush_webform_generate_validate",
+            "description": "",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "validate webform:generate"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_webform_generate": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_generate",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:generate",
+            "description": "Create submissions in specified webform.",
+            "help": "",
+            "aliases": [
+                "wfg",
+                "webform-generate"
+            ],
+            "annotations": {
+                "command": "webform:generate"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "webform_id": {
+                    "description": "Webform id into which new submissions will be inserted.",
+                    "default": null
+                },
+                "num": {
+                    "description": "Number of submissions to insert. Defaults to 50.",
+                    "default": null
+                }
+            },
+            "options": {
+                "kill": {
+                    "description": "Delete all submissions in specified webform before generating.",
+                    "default": false
+                },
+                "feedback": {
+                    "description": "An integer representing interval for insertion rate logging. Defaults to 1000"
+                },
+                "entity-type": {
+                    "description": "The entity type to which this submission was submitted from."
+                },
+                "entity-id": {
+                    "description": "The ID of the entity of which this webform submission was submitted from."
+                }
+            }
+        },
+        "drush_webform_repair": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_repair",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:repair",
+            "description": "Makes sure all Webform admin configuration and webform settings are up-to-date.",
+            "help": "",
+            "aliases": [
+                "wfr",
+                "webform-repair"
+            ],
+            "annotations": {
+                "command": "webform:repair"
+            },
+            "example_usages": {
+                "webform:repair": "Repairs admin configuration and webform settings are up-to-date."
+            },
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_webform_remove_orphans": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_remove_orphans",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:remove:orphans",
+            "description": "Removes orphaned submissions where the submission's webform was deleted.",
+            "help": "",
+            "aliases": [
+                "wfro",
+                "webform-remove-orphans"
+            ],
+            "annotations": {
+                "command": "webform:remove:orphans"
+            },
+            "example_usages": {
+                "webform:remove:orphans": "Removes orphaned submissions where the submission's webform was deleted."
+            },
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_webform_docs_validate": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_docs_validate",
+            "mtime": 1644873819,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "drush_webform_docs_validate",
+            "description": "",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "validate webform:docs"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_webform_docs": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_docs",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:docs",
+            "description": "Generates HTML documentation.",
+            "help": "",
+            "aliases": [
+                "wfd",
+                "webform-docs"
+            ],
+            "annotations": {
+                "command": "webform:docs"
+            },
+            "example_usages": {
+                "webform:docs": "Generates HTML documentation used by the Webform module's documentation pages."
+            },
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_webform_composer_update_validate": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_composer_update_validate",
+            "mtime": 1644873819,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "drush_webform_composer_update_validate",
+            "description": "",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "validate webform:composer:update"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_webform_composer_update": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_composer_update",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:composer:update",
+            "description": "Updates the Drupal installation's composer.json to include the Webform module's selected libraries as repositories.",
+            "help": "",
+            "aliases": [
+                "wfcu",
+                "webform-composer-update"
+            ],
+            "annotations": {
+                "command": "webform:composer:update"
+            },
+            "example_usages": {
+                "webform:composer:update": "Updates the Drupal installation's composer.json to include the Webform module's selected libraries as repositories."
+            },
+            "return_type": null,
+            "arguments": [],
+            "options": {
+                "disable-tls": {
+                    "description": "If set to true all HTTPS URLs will be tried with HTTP instead and no network level encryption is performed.",
+                    "default": false
+                }
+            }
+        },
+        "drush_webform_generate_commands": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommands",
+            "method_name": "drush_webform_generate_commands",
+            "mtime": 1644873819,
+            "injected_classes": [],
+            "name": "webform:generate:commands",
+            "description": "Generate Drush commands from webform.drush.inc for Drush 8.x to WebformCommands for Drush 9.x.",
+            "help": "",
+            "aliases": [
+                "wfgc",
+                "webform-generate-commands"
+            ],
+            "annotations": {
+                "command": "webform:generate:commands"
+            },
+            "example_usages": {
+                "drush webform:generate:commands": "Generate Drush commands from webform.drush.inc for Drush 8.x to WebformCommands for Drush 9.x."
+            },
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "drush_confirm": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommandsBase",
+            "method_name": "drush_confirm",
+            "mtime": 1644873819,
+            "injected_classes": []
+        },
+        "drush_choice": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommandsBase",
+            "method_name": "drush_choice",
+            "mtime": 1644873819,
+            "injected_classes": []
+        },
+        "drush_log": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommandsBase",
+            "method_name": "drush_log",
+            "mtime": 1644873819,
+            "injected_classes": []
+        },
+        "drush_print": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommandsBase",
+            "method_name": "drush_print",
+            "mtime": 1644873819,
+            "injected_classes": []
+        },
+        "drush_get_option": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommandsBase",
+            "method_name": "drush_get_option",
+            "mtime": 1644873819,
+            "injected_classes": []
+        },
+        "drush_user_abort": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommandsBase",
+            "method_name": "drush_user_abort",
+            "mtime": 1644873819,
+            "injected_classes": []
+        },
+        "drush_set_error": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommandsBase",
+            "method_name": "drush_set_error",
+            "mtime": 1644873819,
+            "injected_classes": []
+        },
+        "drush_redispatch_get_options": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommandsBase",
+            "method_name": "drush_redispatch_get_options",
+            "mtime": 1644873819,
+            "injected_classes": []
+        },
+        "drush_download_file": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommandsBase",
+            "method_name": "drush_download_file",
+            "mtime": 1644873819,
+            "injected_classes": []
+        },
+        "drush_move_dir": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommandsBase",
+            "method_name": "drush_move_dir",
+            "mtime": 1644873819,
+            "injected_classes": []
+        },
+        "drush_mkdir": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommandsBase",
+            "method_name": "drush_mkdir",
+            "mtime": 1644873819,
+            "injected_classes": []
+        },
+        "drush_tarball_extract": {
+            "schema": 4,
+            "class": "Drupal\\webform\\Commands\\WebformCommandsBase",
+            "method_name": "drush_tarball_extract",
+            "mtime": 1644873819,
+            "injected_classes": []
+        },
+        "preHook": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "preHook",
+            "mtime": 1633432454,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "pre:hook",
+            "description": "Persist commandData for use in primary command callback. Used by 'topic' commands.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "pre-command *"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "commandData": {
+                    "description": ""
+                }
+            },
+            "options": []
+        },
+        "setProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "processManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "processManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "hasProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "hasProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "startBrowser": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "startBrowser",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setLogger": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setLogger",
+            "mtime": 1620040827,
+            "injected_classes": []
+        },
+        "getConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "getConfig",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "parentGetConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "parentGetConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setInput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setInput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setOutput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setOutput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        }
+    },
+    "created": 1663697448,
+    "expire": 0
+}

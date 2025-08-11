@@ -1,0 +1,22 @@
+views.field.fieldset:
+  type: views_field
+  label: 'Views fieldset field'
+  mapping:
+    fields:
+      type: sequence
+      sequence:
+        type: string
+    wrapper:
+      type: string
+    legend:
+      type: string
+    classes:
+      type: string
+    collapsible:
+      type: boolean
+      constraints:
+        NotNull: [ ]
+    collapsed:
+      type: boolean
+      constraints:
+        NotNull: [ ]

@@ -1,0 +1,31 @@
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div{{ content_attributes.addClass('node__content b-promotion') }}>
+    <div class="b-promotion__top">
+      {{ content.field_promotion_image }}
+      {{ content.field_promotion_image_full }}
+      {{ content.field_promotion_date_end }}
+    </div>
+    <div class="b-promotion__title">
+      <h1>{{ label }}</h1>
+    </div>
+
+    {{ content|without('field_promotion_image', 'field_promotion_image_full', 'field_promotion_date_end') }}
+    {{ share }}
+  </div>
+
+</div>

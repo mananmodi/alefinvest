@@ -1,0 +1,11 @@
+liqpay.settings:
+  title: 'Liqpay settings'
+  title_context: 'liqpay'
+  parent: system.admin_config_development
+  route_name: liqpay.settings
+
+liqpay.payments:
+  title: 'Payments'
+  title_context: 'liqpay'
+  parent: liqpay.settings
+  route_name: liqpay.payments

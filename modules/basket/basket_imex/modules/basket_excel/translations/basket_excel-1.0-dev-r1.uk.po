@@ -1,0 +1,97 @@
+# uk translation of basket_excel
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-05-06 17:28+0300\n"
+"PO-Revision-Date: 2020-05-06 17:28+0300\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgctxt "basket_excel"
+msgid "Category"
+msgstr "Категорія"
+
+msgctxt "basket_excel"
+msgid "link"
+msgstr "посиланням"
+
+msgctxt "basket_excel"
+msgid "Export completed successfully."
+msgstr "Експорт успішно завершено."
+
+msgctxt "basket_excel"
+msgid "If the automatic download has not started - click on the @link@."
+msgstr ""
+"Якщо не почалося автоматичне "
+"скачування - перейдіть за @link@."
+
+msgctxt "basket_excel"
+msgid "Close page"
+msgstr "Закрити сторінку"
+
+msgctxt "basket_excel"
+msgid "Access to Excel"
+msgstr "Доступ до Excel"
+
+msgctxt "basket_excel"
+msgid "Additional Information"
+msgstr "Додаткова інформація"
+
+msgctxt "basket_excel"
+msgid ""
+"When importing by a key field, the material is searched on the site "
+"and updated. If it is not found, it will be created automatically."
+msgstr ""
+"При імпорті по ключовому полю "
+"відбувається пошук матеріалу на сайті "
+"і оновлюється. Якщо він не знайдений, "
+"він створиться автоматично."
+
+msgctxt "basket_excel"
+msgid "General rules:"
+msgstr "Загальні правила:"
+
+msgctxt "basket_excel"
+msgid ""
+"If the product is not in the import file, it is not deleted on the "
+"site."
+msgstr ""
+"Якщо товару немає у файлі імпорту, він "
+"не видаляється на сайті."
+
+msgctxt "basket_excel"
+msgid ""
+"Data is updated according to a previously programmed template "
+"(settings)."
+msgstr ""
+"Дані оновлюються відповідно до раніше "
+"запрограмованого шаблону "
+"(налаштування)."
+
+msgctxt "basket_excel"
+msgid "Import / Export file structure:"
+msgstr "Структура файлу імпорту / експорту:"
+
+msgctxt "basket_excel"
+msgid "All multi values in the fields are filled through the \"Enter\"."
+msgstr ""
+"Всі мульти значення в полях "
+"заповнюються через \"Enter\"."
+
+msgctxt "basket_excel"
+msgid "Column name"
+msgstr "Назва стовпця"
+
+msgctxt "basket_excel"
+msgid "Description"
+msgstr "Опис"
+
+msgctxt "basket_excel"
+msgid "* The key field!"
+msgstr "* Ключове поле!"
+

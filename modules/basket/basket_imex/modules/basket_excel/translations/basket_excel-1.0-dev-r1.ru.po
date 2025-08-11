@@ -1,0 +1,97 @@
+# ru translation of basket_excel
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-05-06 17:28+0300\n"
+"PO-Revision-Date: 2020-05-06 17:28+0300\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgctxt "basket_excel"
+msgid "Category"
+msgstr "Категория"
+
+msgctxt "basket_excel"
+msgid "link"
+msgstr "ссылке"
+
+msgctxt "basket_excel"
+msgid "Export completed successfully."
+msgstr "Экспорт успешно завершен."
+
+msgctxt "basket_excel"
+msgid "If the automatic download has not started - click on the @link@."
+msgstr ""
+"Если не началось автоматическое "
+"скачивание — перейдите по @link@."
+
+msgctxt "basket_excel"
+msgid "Close page"
+msgstr "Закрыть страницу"
+
+msgctxt "basket_excel"
+msgid "Access to Excel"
+msgstr "Доступ к Excel"
+
+msgctxt "basket_excel"
+msgid "Additional Information"
+msgstr "Дополнительная информация"
+
+msgctxt "basket_excel"
+msgid ""
+"When importing by a key field, the material is searched on the site "
+"and updated. If it is not found, it will be created automatically."
+msgstr ""
+"При импорте по ключевому полю "
+"происходит поиск материала на сайте и "
+"обновляется. Если он не найден, он "
+"создастся автоматически."
+
+msgctxt "basket_excel"
+msgid "General rules:"
+msgstr "Основные правила:"
+
+msgctxt "basket_excel"
+msgid ""
+"If the product is not in the import file, it is not deleted on the "
+"site."
+msgstr ""
+"Если товара нет в файле импорта, он не "
+"удаляется на сайте."
+
+msgctxt "basket_excel"
+msgid ""
+"Data is updated according to a previously programmed template "
+"(settings)."
+msgstr ""
+"Данные обновляются в соответствии с "
+"предварительно запрограммированным "
+"шаблоном (настройками)."
+
+msgctxt "basket_excel"
+msgid "Import / Export file structure:"
+msgstr "Структура файла импорта / экспорта:"
+
+msgctxt "basket_excel"
+msgid "All multi values in the fields are filled through the \"Enter\"."
+msgstr ""
+"Все мульти значения в полях "
+"заполняются через \"Enter\"."
+
+msgctxt "basket_excel"
+msgid "Column name"
+msgstr "Название колонки"
+
+msgctxt "basket_excel"
+msgid "Description"
+msgstr "Описание"
+
+msgctxt "basket_excel"
+msgid "* The key field!"
+msgstr "* Ключевое поле!"
+

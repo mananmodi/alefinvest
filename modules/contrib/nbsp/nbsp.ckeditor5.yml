@@ -1,0 +1,14 @@
+nbsp_nbsp:
+  ckeditor5:
+    plugins: [nbsp.Nbsp]
+  drupal:
+    toolbar_items:
+      nbsp:
+        label: Non-breaking space
+    label: Non-breaking space
+    admin_library: nbsp/nbsp.admin
+    library: nbsp/nbsp.ckeditor5
+    elements:
+      - <nbsp>
+    conditions:
+      filter: nbsp_cleaner_filter

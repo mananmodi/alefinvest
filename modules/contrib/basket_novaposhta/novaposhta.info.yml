@@ -1,0 +1,16 @@
+name: 'NovaPoshta API'
+type: module
+package: 'Online store'
+core_version_requirement: '^9.3 || ^10'
+configure: novaposhta.settings
+php: 8.1
+dependencies:
+  - basket
+  - 'drupal:views'
+'interface translation project': novaposhta
+'interface translation server pattern': modules/basket/%project/translations/%project-%version.%language.po
+
+# Information added by Drupal.org packaging script on 2024-06-04
+version: '1.0.14'
+project: 'basket_novaposhta'
+datestamp: 1717505699

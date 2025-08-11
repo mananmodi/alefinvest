@@ -1,0 +1,15 @@
+{
+    "name": "drupal/gtext",
+    "description": "Utility to simplify the translation of lines on the site.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/gtext",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/gtext",
+        "source": "https://git.drupalcode.org/project/gtext"
+    },
+    "require": {
+        "google/cloud-translate": "^1.10"
+    }
+}

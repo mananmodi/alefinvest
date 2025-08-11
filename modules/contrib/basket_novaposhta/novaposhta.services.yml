@@ -1,0 +1,3 @@
+services:
+  NovaPoshta:
+    class: Drupal\novaposhta\NovaPoshta

@@ -1,0 +1,31 @@
+admin:
+  version: 1.x
+  css:
+    theme:
+      misc/admin.scss:
+        namespace: 'novaposhta'
+        namespace_type: 'module'
+  js:
+    misc/inputmask.js: {}
+  dependencies:
+    - core/jquery
+    - core/once
+    - novaposhta/np
+
+chosen:
+  version: 1.x
+  css:
+    theme:
+      misc/chosen/chosen.min.css: {}
+  js:
+    misc/chosen/chosen.jquery.min.js: {}
+  dependencies:
+    - novaposhta/np
+
+np:
+  version: 1.x
+  js:
+    misc/np.js: {}
+  dependencies:
+    - core/jquery
+    - core/once

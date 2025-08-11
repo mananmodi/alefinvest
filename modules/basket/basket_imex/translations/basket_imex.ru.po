@@ -1,0 +1,190 @@
+# ru translation of basket_imex
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2022-04-22 16:18+0300\n"
+"PO-Revision-Date: 2022-04-22 16:18+0300\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgctxt "basket_imex"
+msgid "Import / Export"
+msgstr "Импорт / Экспорт"
+
+msgctxt "basket_imex"
+msgid "No import / export systems found."
+msgstr "Системы импорта / экспорта не найдены."
+
+msgctxt "basket_imex"
+msgid "Access to Import / Export"
+msgstr "Доступ к импорту / экспорту"
+
+msgctxt "basket_imex"
+msgid "Start import"
+msgstr "Начать импорт"
+
+msgctxt "basket_imex"
+msgid "Import"
+msgstr "Импортировать"
+
+msgctxt "basket_imex"
+msgid "Start export"
+msgstr "Начать экспорт"
+
+msgctxt "basket_imex"
+msgid "Export"
+msgstr "Экспорт"
+
+msgctxt "basket_imex"
+msgid "Settings"
+msgstr "Настройки"
+
+msgctxt "basket_imex"
+msgid "Field name"
+msgstr "Имя поля"
+
+msgctxt "basket_imex"
+msgid "Column"
+msgstr "Колонка"
+
+msgctxt "basket_imex"
+msgid "Field plugin"
+msgstr "Плагин поля"
+
+msgctxt "basket_imex"
+msgid "Save configuration"
+msgstr "Сохранить конфигурацию"
+
+msgctxt "basket_imex"
+msgid "Material type"
+msgstr "Тип материала"
+
+msgctxt "basket_imex"
+msgid "Redirect from the old link"
+msgstr "Перенаправление со старой ссылки"
+
+msgctxt "basket_imex"
+msgid "Plain text"
+msgstr "Простой текст"
+
+msgctxt "basket_imex"
+msgid "Product Category Field"
+msgstr "Поле категории товара"
+
+msgctxt "basket_imex"
+msgid "No plugin found for field"
+msgstr "Плагин не найден для поля"
+
+msgctxt "basket_imex"
+msgid "Logical field"
+msgstr "Логическое поле"
+
+msgctxt "basket_imex"
+msgid "Big text"
+msgstr "Большой текст"
+
+msgctxt "basket_imex"
+msgid "File"
+msgstr "Файл"
+
+msgctxt "basket_imex"
+msgid "Search by field"
+msgstr "Поиск по полю"
+
+msgctxt "basket_imex"
+msgid "Taxonomy term"
+msgstr "Термин таксономии"
+
+msgctxt "basket_imex"
+msgid "Double field"
+msgstr "Двойное поле"
+
+msgctxt "basket_imex"
+msgid "Url"
+msgstr "Ссылка"
+
+msgctxt "basket_imex"
+msgid "Number"
+msgstr "Число"
+
+msgctxt "basket_imex"
+msgid "Plugin field"
+msgstr "Поле плагина"
+
+msgctxt "basket_imex"
+msgid "URL alias"
+msgstr "Синоним URL"
+
+msgctxt "basket_imex"
+msgid "Timestamp"
+msgstr "Отметка времени"
+
+msgctxt "basket_imex"
+msgid "Datetime"
+msgstr "Дата и время"
+
+msgctxt "basket_imex"
+msgid "Category"
+msgstr "Категория"
+
+msgctxt "basket_imex"
+msgid "Import / Export of goods through the Excel file"
+msgstr "Импорт / Экспорт товаров через файл Excel"
+
+msgctxt "basket_imex"
+msgid "Import goods to a site with prom.ua"
+msgstr "Импортируйте товары на сайт с prom.ua"
+
+msgctxt "basket_imex"
+msgid "Upload items to Google Merchant Center"
+msgstr "Выгрузка товаров на Google Merchant Center"
+
+msgctxt "basket_imex"
+msgid "Unloading goods on rozetka.com.ua"
+msgstr "Выгрузка товаров на rozetka.com.ua"
+
+msgctxt "basket_imex"
+msgid "Unloading products in Hotline XML format"
+msgstr "Выгрузка товаров в формате Hotline XML"
+
+msgctxt "basket_imex"
+msgid "Unloading goods at prom.ua"
+msgstr "Выгрузка товаров на пром.ua"
+
+msgctxt "basket_imex"
+msgid "Facebook feed for catalogs"
+msgstr "Facebook фид данных для каталогов"
+
+msgctxt "basket_imex"
+msgid "Big text (strip_tags)"
+msgstr "Большой текст (strip_tags)"
+
+msgctxt "basket_imex"
+msgid "To delete"
+msgstr "На удаление"
+
+msgctxt "basket_imex"
+msgid "Delete mark"
+msgstr "Пометка на удаление"
+
+msgctxt "basket_imex"
+msgid "File in folder /IMEX_FILES/"
+msgstr "Файл в папке /IMEX_FILES/"
+
+msgctxt "basket_imex"
+msgid "Big text (Summary)"
+msgstr "Большой текст (резюме)"
+
+msgctxt "basket_imex"
+msgid "File tab"
+msgstr "Вкладка файла"
+
+msgctxt "basket_imex"
+msgid "Do not update if data is available"
+msgstr "Не обновлять при наличии данных"
+

@@ -1,0 +1,692 @@
+<?php
+	
+use Drupal\block\Entity\Block;
+use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Render\Markup;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+
+function personal_preprocess_image(&$vars) {
+  $vars['attributes']['data-width'] = $vars['width'];
+  $vars['attributes']['data-height'] = $vars['height'];
+  if (pathinfo($vars['uri'], PATHINFO_EXTENSION) === 'svg') {
+    if (empty($vars['attributes']['width'])) {
+      $vars['attributes']['width'] = $vars['width'];
+    } else if ($vars['attributes']['width'] > $vars['width']) {
+      $vars['attributes']['width'] = $vars['width'];
+    }
+    if (empty($vars['attributes']['height'])) {
+      $vars['attributes']['height'] = $vars['height'];
+    } else if ($vars['attributes']['height'] > $vars['height']) {
+      $vars['attributes']['height'] = $vars['height'];
+    }
+    if (empty($vars['attributes']['alt'])) $vars['attributes']['alt'] = '';
+  }
+}
+
+function personal_preprocess_youtube_thumbnail(&$vars) {
+  if (isset($vars['image']) && $vars['image'] instanceof Link) {
+    $text = $vars['image']->getText();
+    $text['#attributes']['lazy_enabled'] = TRUE;
+    $vars['image']->setText($text);
+  }
+}
+
+function personal_preprocess_region__header_top(&$vars) {
+  $content = $vars['content'];
+  $vars['content'] = [
+    'mobile_btn_wrapper' => [
+      '#type' => 'container',
+      '#attributes' => [
+        'class'       => ['mobile-btn-wrapper']
+      ],
+      'mobile_button' => [
+        '#markup' => '<div class="js-main-menu mobile-btn--menu"><span></span></div>'
+      ],
+    ],
+    'content' => [
+      '#type' => 'markup',
+      '#markup' => $content,
+    ]
+  ];
+}
+
+function personal_preprocess_block(&$vars) {
+  if (!empty($vars['elements']['content']['#block_content'])) {
+    $bundle = $vars['elements']['content']['#block_content']->bundle();
+    $vars['attributes']['class'][] = 'block-type-' . str_replace('_', '-', $bundle);
+  }
+  if (isset($vars['elements']['content']['#type']) && $vars['elements']['content']['#type'] === 'view') {
+    $vars['attributes']['class'][] = 'view-block-' . $vars['elements']['content']['#name'];
+  }
+
+  $id = $vars['elements']['#id'];
+  if($id === 'user_login') {
+      if(\Drupal::currentUser()->isAnonymous()) {
+          $vars['attributes']['class'][] ='block-user-login--anonymous';
+      }  else {
+          $vars['attributes']['class'][] ='block-user-login--authorized';
+      }
+  }
+
+//  if($id === 'exposed_form_catalog_page_4') {
+//    $vars['content']['button'] = [
+//      '#markup' => '<div class="search-btn js-search-btn">'. t('Search') .'</div>'
+//    ];
+//  }
+
+}
+
+//function personal_preprocess_block__search_block(&$vars) {
+//  $vars['content']['button'] = [
+//    '#markup' => '<div class="search-btn js-search-btn">'. t('Search') .'</div>'
+//  ];
+//}
+
+function personal_preprocess_links__language_block(&$vars) {
+  $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  foreach($vars['links'] as $key => &$link) {
+    $link['attributes']->removeAttribute('hreflang');
+    if ($key == $lang) $link['attributes']->addClass('active-lang');
+    switch ($key) {
+      case 'en':
+        $link['link']['#title'] = 'En';
+        break;
+      case 'ru':
+        $link['link']['#title'] = 'Ru';
+        break;
+      case 'uk':
+        $link['link']['#title'] = 'Ua';
+        break;
+    }
+  }
+}
+
+function personal_preprocess_form_element(&$vars) {
+  if ($vars['element']['#title_display'] === 'invisible') {
+    $vars['attributes']['class'][] = 'form-item-label-invisible';
+  }
+  if (!empty($vars['element']['#required'])) {
+    $vars['attributes']['class'][] = 'form-item-required';
+  }
+  if (isset($vars['element']['#type'])) {
+    if ($vars['element']['#type'] === 'item' || $vars['element']['#type'] === 'vertical_tabs') {
+      unset($vars['label']['#id']);
+    }
+  }
+}
+
+function personal_theme_suggestions_taxonomy_term_alter(array &$suggestions, array $variables) {
+  $term = $variables['elements']['#taxonomy_term'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'taxonomy_term__' . $sanitized_view_mode;
+  $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'taxonomy_term__' . $term->id() . '__' . $sanitized_view_mode;
+}
+
+function personal_product_price($price, $old_price = 0, $currency = '') {
+  $origin_price = $price;
+  $origin_old_price = $old_price;
+  if ($price == (int)$price) {
+    $price = (int)$price;
+  }
+  else {
+    if(!empty($price)) {
+        $price = number_format($price, 2, ',', ' ');
+    }
+  }
+  if (!empty($old_price)) {
+    if ($old_price == (int)$old_price) {
+      $old_price = (int)$old_price;
+    }
+    else {
+      if(!empty($old_price)) {
+          $old_price = number_format($old_price, 2, ',', ' ');
+      }
+
+    }
+  }
+
+  if (!empty($currency)) {
+    $currency = ' ' . t($currency, [], ['context' => 'basket']);
+  }
+
+  $output = '<div class="b-price">';
+    $output .= '<div class="left">';
+      $output .= '<div class="price">' . $price . $currency . '</div>';
+    $output .= '</div>';
+    if (!empty($origin_old_price)) {
+      if ($origin_price < $origin_old_price) {
+      $output .= '<div class="right">';
+        $output .= '<div class="discount">';
+          $output .= '-' . round((100 - ((float)$origin_price / (float)$origin_old_price) * 100)) . '%';
+        $output .= '</div>';
+        $output .= '<div class="old-price">' . $old_price . $currency . '</div>';
+      $output .= '</div>';
+      }
+    }
+  $output .= '</div>';
+
+  return $output;
+}
+
+function personal_preprocess_basket_other_node_price_full(&$vars) {
+  $price = !empty($vars['info']['price']->priceConvert) ? $vars['info']['price']->priceConvert : '';
+  $old_price = !empty($vars['info']['price']->priceConvertOld) ? $vars['info']['price']->priceConvertOld : '';
+  $currency = !empty($vars['info']['currency']) ? $vars['info']['currency'] : '';
+  $vars['price'] = [
+    '#markup' => personal_product_price($price, $old_price, $currency)
+  ];
+}
+
+function personal_preprocess_field(&$vars) {
+  $field_name = $vars['element']['#field_name'];
+  $element = $vars['element'];
+  if ($element['#field_type'] == 'image') {
+    // Reduce number of images in teaser view mode to single image
+    if ($element['#view_mode'] === 'teaser' || $element['#view_mode'] === 'compare') {
+      $item = reset($vars['items']);
+      $vars['items'] = array($item);
+    }
+  }
+  switch ($field_name) {
+    case 'field_comment_rating':
+      if (!empty($vars['items'])) {
+        foreach ($vars['items'] as $key => &$item) {
+          if (!empty($item['content']['#markup'])) {
+            $rating = $item['content']['#markup'];
+          } else {
+            $rating = 0;
+          }
+          $output = '<div class="b-rating">';
+            $output .= '<div class="b-rating__inner" style="width:' . 20 * $rating . '%"></div>';
+          $output .= '</div>';
+          $item['content']['#markup'] = Markup::create($output);
+        }
+      }
+      break;
+
+    case 'field_paragraph_link':
+      if ($vars['element']['#bundle'] === 'socials') {
+        foreach ($vars['items'] as &$item) {
+          if (!$item['content']['#url']->isRouted()) {
+            if (substr($item['content']['#title'], 0, 5 ) === "viber") {
+              $item['content'] = [
+                '#markup' => '<a href="' . $item['content']['#url']->getUri() . '" class="js-viber" rel="nofollow"></a>'
+              ];
+            } else {
+              $item['content'] = [
+                '#markup' => '<a href="' . $item['content']['#url']->getUri() . '" rel="nofollow" target="_blank"></a>'
+              ];
+            }
+          }
+        }
+      }
+      break;
+
+    // Add ability to disable social links by checkbox
+    case 'field_block_paragraph':
+      if (!empty($vars['element'][0]['#paragraph']) && $vars['element'][0]['#paragraph']->bundle() === 'socials') {
+        foreach ($vars['items'] as $key => &$item) {
+          $fields = $item['content']['#paragraph']->getFields();
+          if (!empty($fields['field_paragraph_bool']) && $fields['field_paragraph_bool']->getString() != 1) {
+            unset($vars['items'][$key]);
+          }
+        }
+      }
+      break;
+
+    case 'field_promotion_date_end':
+      $vars['items'] = [];
+      if ($time = $vars['element']['#items']->getString()) {
+        $time = strtotime($time);
+        if ($time > time()) {
+          $output = personal_stock_counter($time, '');
+          $vars['items'] = [];
+          $vars['items'][0]['content']['#markup'] = Markup::create($output);
+        }
+      }
+      break;
+      case 'field_block_link':
+          if ($vars['element']['#bundle'] === 'user') {
+              foreach ($vars['items'] as $key => &$item) {
+                  if ($key === 0) $item['attributes']->setAttribute('class', 'login');
+                  if ($key === 1) $item['attributes']->setAttribute('class', 'register');
+                  if ($key === 2) $item['attributes']->setAttribute('class', 'user');
+                  if ($key === 3) $item['attributes']->setAttribute('class', 'logout');
+              }
+          }
+        break;
+  }
+}
+
+function _personal_remove_trailing_zero($number) {
+  if ($number == (int)$number) {
+    $number = number_format($number, 0, ',', ' ');
+  }
+  else {
+    $number = number_format($number, 2, ',', ' ');
+  }
+  return $number;
+}
+
+function personal_preprocess_node__product(&$vars) {
+  $node = $vars['elements']['#node'];
+  $view_mode = $vars['elements']['#view_mode'];
+  switch ($view_mode) {
+    case 'teaser':
+      if ($node->hasField('field_product_promotion')) {
+        $nid = $node->get('field_product_promotion')->getString();
+        if (!empty($nid)) {
+          $promotion_node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+          if ($promotion_node->hasField('field_promotion_date_end')) {
+            $time = $promotion_node->get('field_promotion_date_end')->getString();
+            if (($time = strtotime($time)) - time() > 0) {
+              // Invalidate node cache when promotion is over.
+              $vars['#cache']['max-age'] = $time - time();
+              $output = personal_stock_counter($time, '');
+              $vars['personal_counter'] = Markup::create($output);
+            }
+          }
+        }
+      }
+      break;
+    case 'full':
+      $block = Block::load('node_delivery');
+      if (!empty($block)) {
+        $render = \Drupal::entityTypeManager()
+          ->getViewBuilder('block')
+          ->view($block);
+        $vars['delivery'] = $render;
+      }
+//      $share = Block::load('share');
+//      if (!empty($share)) {
+//        $vars['share'] = \Drupal::entityTypeManager()
+//          ->getViewBuilder('block')
+//          ->view($share);
+//      }
+      if ($node->hasField('field_product_rating')) {
+        $query = \Drupal::database()->select('comment_field_data', 'cfd');
+        $query->leftJoin('comment__field_comment_rating', 'cr', 'cfd.cid = cr.entity_id');
+        $query->condition('cfd.status', 1);
+        $query->condition('cfd.entity_id', $node->id(), '=');
+        $query->condition('cfd.comment_type', 'product_comments', '=');
+        $query->isNull('cfd.pid');
+        $query->addExpression('COUNT(cr.field_comment_rating_value)', 'count');
+        $result = $query->execute()->fetch();
+
+        $rating = $node->get('field_product_rating')->getString();
+        $output  = '<div class="b-product-comments__top">';
+          $output .= '<div class="b-product-comments__left">';
+            if ($rating <= 0) $rating = 0;
+            $output .= '<div class="b-review-info">';
+              $output .= '<div class="b-rating-big">';
+                $output .= '<div class="b-rating-big__inner" style="width:' . 20 * $rating . '%"></div>';
+              $output .= '</div>';
+              $output .= '<div class="b-review-info__rating">';
+                $output .= '<div>' . $rating . '</div>';
+              $output .= '</div>';
+              $output .= '<div class="b-review-info__count">';
+                $output .= \Drupal::translation()->formatPlural($result->count, '@count review', '@count reviews');
+              $output .= '</div>';
+            $output .= '</div>';
+          $output .= '</div>';
+        $output .= '</div>';
+        $vars['top_rating'] = Markup::create($output);
+        
+        $vars['rate']['count'] = empty($result->count) ? 5 : $result->count;;
+        $vars['rate']['value'] = empty($rating) ? 5 : $rating;
+        if(!empty($vars['content']['field_product_description'][0])){
+          $vars['content']['field_product_description']['#attributes']['itemprop'] = 'description';
+        }
+      }
+      break;
+
+    case 'compare':
+      if ($node->hasField('field_product_rating')) {
+        $query = \Drupal::database()->select('comment_field_data', 'cfd');
+        $query->leftJoin('comment__field_comment_rating', 'cr', 'cfd.cid = cr.entity_id');
+        $query->condition('cfd.status', 1);
+        $query->condition('cfd.entity_id', $node->id(), '=');
+        $query->condition('cfd.comment_type', 'product_comments', '=');
+        $query->isNull('cfd.pid');
+        $query->addExpression('COUNT(cr.field_comment_rating_value)', 'count');
+        $result = $query->execute()->fetch();
+
+        $rating = $node->get('field_product_rating')->getString();
+        $output  = '<div class="b-product-comments__top">';
+          $output .= '<div class="b-product-comments__left">';
+            if ($rating <= 0) $rating = 0;
+            $output .= '<div class="b-review-info">';
+              $output .= '<div class="b-rating-small">';
+                $output .= '<div class="b-rating-small__inner" style="width:' . 20 * $rating . '%"></div>';
+              $output .= '</div>';
+              $output .= '<div class="b-review-info__count">';
+                $output .= \Drupal::translation()->formatPlural($result->count, '@count review', '@count reviews');
+              $output .= '</div>';
+            $output .= '</div>';
+          $output .= '</div>';
+        $output .= '</div>';
+        $vars['top_rating'] = Markup::create($output);
+      }
+      break;
+  }
+
+  $vars['status_info'] = [];
+  if ($node->hasField('field_product_top')) {
+    if ($node->get('field_product_top')->getString()) {
+      $vars['status_info']['popular'] = [
+        '#markup' => '<div class="status-top item">'. t('Top', [], ['context' => 'status']) . '</div>',
+      ];
+    }
+  }
+  if ($node->hasField('field_product_promotion')) {
+    if ($node->get('field_product_promotion')->getString()) {
+      $vars['status_info']['promotion'] = [
+        '#markup' => '<div class="status-promotion item">'. t('Promotion', [], ['context' => 'status']) . '</div>',
+      ];
+    }
+  }
+
+  if ($node->hasField('field_product_description')) {
+    $vars['content']['short_text'] = $node->get('field_product_description')->view([
+      'label' => 'hidden',
+      'type' => 'text_summary_or_trimmed',
+      'settings' => [
+        'trim_length' => 300
+      ]
+    ]);
+    $text = isset($vars['content']['short_text'][0]['#text']) ? strip_tags($vars['content']['short_text'][0]['#text']) : '';
+    $text = Unicode::truncate(strip_tags($text), 300, false, true);
+    $vars['content']['short_text'][0]['#text'] = $text;
+  }
+
+  $price = !empty($vars['content']['node_price']['#context']['priceConvert']) ? $vars['content']['node_price']['#context']['priceConvert'] : '';
+  $old_price = !empty($vars['content']['node_price']['#context']['priceConvertOld']) ? $vars['content']['node_price']['#context']['priceConvertOld'] : '';
+  $currency = !empty($vars['content']['node_price']['#context']['currency']) ? $vars['content']['node_price']['#context']['currency'] : '';
+  $vars['price'] = [
+    '#markup' => personal_product_price($price, $old_price, $currency)
+  ];
+}
+
+
+function personal_preprocess_node__promotion(&$vars) {
+
+  // Invalidate node cache when promotion is over.
+  $node = $vars['elements']['#node'];
+  if ($node->hasField('field_promotion_date_end')) {
+    $time = $node->get('field_promotion_date_end')->getString();
+    if (($time = strtotime($time) - time()) > 0) {
+      $vars['#cache']['max-age'] = $time - time();
+    }
+  }
+
+  if ($vars['elements']['#view_mode'] === 'full') {
+    if ($node->hasField('field_promotion_image_full')) {
+      if ($node->get('field_promotion_image_full')->getString()) {
+        if (!empty($vars['content']['field_promotion_image'])) {
+          $vars['content']['field_promotion_image']['#access'] = FALSE;
+        }
+      }
+    }
+    $block = Block::load('share');
+    if (!empty($block)) {
+      $vars['share'] = \Drupal::entityTypeManager()
+        ->getViewBuilder('block')
+        ->view($block);
+    }
+  }
+}
+
+function personal_preprocess_node__video_review(&$vars) {
+  $node = $vars['elements']['#node'];
+  if ($node->hasField('field_video_review_video')) {
+    $video = $node->get('field_video_review_video')->getValue();
+    if (!empty($video[0]['input'])) {
+      $vars['video_url'] = $video[0]['input'];
+    }
+  }
+}
+
+function personal_preprocess_views_view(&$vars) {
+  $view = $vars['view'];
+  if ($view->id() === 'reviews' && $view->current_display === 'block_1') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (!empty($node)) {
+      if ($node->hasField('field_product_rating')) {
+        $query = \Drupal::database()->select('comment_field_data', 'cfd');
+        $query->leftJoin('comment__field_comment_rating', 'cr', 'cfd.cid = cr.entity_id');
+        $query->condition('cfd.status', 1);
+        $query->condition('cfd.entity_id', $node->id(), '=');
+        $query->condition('cfd.comment_type', 'product_comments', '=');
+        $query->isNull('cfd.pid');
+        $query->addExpression('COUNT(cr.field_comment_rating_value)', 'count');
+        $result = $query->execute()->fetch();
+
+        $rating = $node->get('field_product_rating')->getString();
+        $output  = '<div class="b-product-comments__top">';
+          $output .= '<div class="b-product-comments__left">';
+            $output .= '<div class="b-product-comments__title">' . t('Customer reviews') . '</div>';
+            if ($rating <= 0) $rating = 0;
+            $output .= '<div class="b-review-info">';
+              $output .= '<div class="b-rating-big">';
+                $output .= '<div class="b-rating-big__inner" style="width:' . 20 * $rating . '%"></div>';
+              $output .= '</div>';
+              $output .= '<div class="b-review-info__rating">';
+                $output .= '<div>' . $rating . '</div>';
+              $output .= '</div>';
+              $output .= '<div class="b-review-info__count">';
+                $output .= \Drupal::translation()->formatPlural($result->count, '@count review', '@count reviews');
+              $output .= '</div>';
+            $output .= '</div>';
+          $output .= '</div>';
+          $output .= '<div class="b-product-comments__button"><a href="#add-review" class="js-add-review btn--std">' . t('Write a review') . '</a></div>';
+        $output .= '</div>';
+
+        $vars['header'][] = [
+          '#markup' => Markup::create($output)
+        ];
+      }
+    }
+  }
+
+  if ($vars['id'] === 'map' && $vars['display_id'] === 'block_1') {
+    $view = $vars['view'];
+    $shop_list = '<div class="shop-list">';
+    $shop_list .= '<div class="shop-list__title">' . t('Waiting for you here:') . '</div>';
+      $shop_list .= '<div class="shop-list__list">';
+      foreach ($view->result as $row_key => $row) {
+        $coordinates = preg_split('/,/', $view->field['field_shop_address']->getValue($row));
+        $lat = trim($coordinates[0]);
+        $lng = trim($coordinates[1]);
+        $shop_list .= '<div class="shop-item" onclick="personalSwitchMap(this)" data-id="' . $row->nid . '" data-lat="' . $lat . '" data-lng="' . $lng . '">';
+          $title = $view->field['title']->getValue($row);
+          $shop_list .= '<div class="shop-item__title">' . $title . '</div>';
+          if (!empty($view->field['field_shop_phones'])) {
+            $phones = $view->field['field_shop_phones']->advancedRender($row);
+          }
+          if (!empty($view->field['field_shop_email'])) {
+            $email = $view->field['field_shop_email']->advancedRender($row);
+          }
+          if (!empty($view->field['field_shop_text'])) {
+            $text = $view->field['field_shop_text']->advancedRender($row);
+          }
+
+          if ($phones || $email || $text) {
+            $shop_list .= '<div class="shop-item__content">';
+              if ($phones || $email) {
+                $shop_list .= '<div class="shop-item__left">';
+                  $shop_list .= '<div class="shop-item__phones">' . html_entity_decode($phones) . '</div>';
+                  $shop_list .= '<div class="shop-item__email"><a href="mailto:'. $email . '">' . $email . '</a></div>';
+                $shop_list .= '</div>';
+              }
+              if ($text) {
+                $shop_list .= '<div class="shop-item__right">';
+                  $shop_list .= '<div class="shop-item__text">' . $text . '</div>';
+                $shop_list .= '</div>';
+              }
+            $shop_list .= '</div>';
+          }
+
+        $shop_list .= '</div>';
+      }
+      $shop_list .= '</div>';
+    $shop_list .= '</div>';
+
+    $vars['shop_list'] = [
+      '#type' => 'inline_template',
+      '#template' => $shop_list
+    ];
+    $vars['shop_info'] = [
+      '#markup' => '<div class="shop-info"></div>'
+    ];
+  }
+
+  if ($view->id() === 'promotions' && $view->current_display === 'page_1') {
+    if ($view->total_rows > 0) {
+      $vars['header']['count'] = [
+        '#markup' => '<div class="product-count">' . \Drupal::translation()->formatPlural($view->total_rows, '@count product', '@count products') . '</div>'
+      ];
+    }
+  }
+  if ($view->id() === 'catalog' && $view->current_display === 'page_1') {
+    $vars['#attached']['library'][] = 'personal/jquery_touch';
+  }
+}
+
+function personal_stock_counter($time, $title = '') {
+  $end_time = $time - time();
+  if ($end_time > 0) {
+    $output = '<div class="b-counter" data-time="' . $time . '">';
+      if ($title) {
+        $output .= '<div class="b-counter__title">' . $title . '</div>';
+      }
+      $output .= '<div class="b-counter__list">';
+        $output .= '<div class="b-counter__item type-days">';
+          $output .= '<div class="number">--</div>';
+          $output .= '<div class="text">' . t('days') . '</div>';
+        $output .= '</div>';
+        $output .= '<div class="bullets"></div>';
+        $output .= '<div class="b-counter__item type-hours">';
+          $output .= '<div class="number">--</div>';
+          $output .= '<div class="text">' . t('hours') . '</div>';
+        $output .= '</div>';
+        $output .= '<div class="bullets"></div>';
+        $output .= '<div class="b-counter__item type-minutes">';
+          $output .= '<div class="number">--</div>';
+          $output .= '<div class="text">' . gtext('other')->t('min') . '</div>';
+        $output .= '</div>';
+        $output .= '<div class="bullets"></div>';
+        $output .= '<div class="b-counter__item type-seconds">';
+          $output .= '<div class="number">--</div>';
+          $output .= '<div class="text">' . t('sec') . '</div>';
+        $output .= '</div>';
+      $output .= '</div>';
+    $output .= '</div>';
+  } else {
+    $output = '';
+  }
+  return $output;
+}
+
+function personal_preprocess_views_view_fields(&$vars) {
+  foreach ($vars['fields'] as $key => &$field) {
+    if (isset($field->properties) && $field->properties['handler'] instanceof \Drupal\views_fieldsets\Plugin\views\field\Fieldset) {
+      $field->properties['element_type'] = '';
+      $field->properties['wrapper_element'] = '';
+    }
+    if (isset($field->children)) {
+      foreach ($field->children as $key => &$child) {
+        if (isset($child->properties) && $child->properties['handler'] instanceof \Drupal\views_fieldsets\Plugin\views\field\Fieldset) {
+          $child->properties['element_type'] = '';
+          $child->properties['wrapper_element'] = '';
+        }
+        if (isset($child->children)) {
+          foreach ($child->children as $key => &$child2) {
+            if (isset($child2->properties) && $child2->properties['handler'] instanceof \Drupal\views_fieldsets\Plugin\views\field\Fieldset) {
+              $child2->properties['element_type'] = '';
+              $child2->properties['wrapper_element'] = '';
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+function personal_preprocess_views_view_field(&$vars) {
+  $view = $vars['view'];
+  switch ($vars['field']->field) {
+    case 'field_taxonomy_image':
+      if ($view->id() === 'product_categories') {
+        switch ($vars['row']->index) {
+          case 0:
+            $images = $view->field['field_taxonomy_image']->getItems($vars['row']);
+            $output = '';
+            foreach ($images as $key => &$image) {
+              $image['rendered']['#image_style'] = '285x450m';
+              $output .= \Drupal::service('renderer')->render($image['rendered']);
+            }
+            $vars['output'] = Markup::create($output);
+            break;
+        }
+      }
+      break;
+
+    case 'name':
+      if ($view->id() === 'brands') {
+        $entity = $vars['row']->_entity;
+        $vars['output'] = Markup::create(Link::createFromRoute($entity->getName(), 'view.catalog.page_1', ['arg_0' => 'all'], ['query' => [
+          'fields' => [
+            'brand' => [
+              $entity->id() => $entity->id(),
+            ],
+          ],
+        ]])->toString());
+      }
+      break;
+  }
+}
+
+function personal_preprocess_details(&$vars) {
+  if (isset($vars['summary_attributes'])) {
+    $vars['summary_attributes']->removeAttribute('role');
+  }
+}
+
+function personal_preprocess_menu__account(&$vars) {
+  foreach ($vars['items'] as $key => &$item) {
+    // Ulogin social settings.
+    if ($key === 'menu_link_content:1301dd5f-1a2f-4042-a585-58281279f34f') {
+      $item['in_active_trail'] = FALSE;
+      $item['url'] = Url::fromUri('internal:/user/' . \Drupal::currentUser()->id() . '/ulogin', ['set_active_class' => TRUE]);
+    }
+  }
+}
+
+function personal_preprocess_basket_page_order(&$vars) {
+  if (\Drupal::currentUser()->isAnonymous()) {
+    $form = \Drupal::formBuilder()->getForm('Drupal\user\Form\UserLoginForm');
+    $output = [
+      '#type' => 'container',
+      'title' => [
+        '#markup' => '<div class="basket-login"><div class="basket-login__link type-new">' . t('I am a new customer') . '</div><div class="basket-login__link type-exists is-active">' . t('I am registered') . '</div></div>',
+      ],
+      'form' => $form,
+    ];
+
+    $vars['info']['login'] = $output;
+  }
+}
+
+function personal_page_attachments_alter(array &$attachments) {
+  if (!empty($attachments['#attached']['html_head'])) {
+    foreach ($attachments['#attached']['html_head'] as &$item) {
+      if ($item[1] === 'viewport') {
+        $item[0]['#attributes']['content'] = 'width=device-width, initial-scale=1.0, maximum-scale=1';
+      }
+    }
+  }
+}
+

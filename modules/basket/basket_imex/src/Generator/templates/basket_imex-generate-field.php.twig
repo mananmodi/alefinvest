@@ -1,0 +1,56 @@
+<?php
+
+namespace Drupal\{{ module }}\Plugin\IMEX\field;
+
+use Drupal\basket_imex\Plugins\IMEXfield\BasketIMEXfieldInterface;
+use Drupal\basket_imex\Plugins\IMEXfield\Annotation\BasketIMEXfield;
+
+/**
+ * @BasketIMEXfield(
+ *    id        = "{{ id }}",
+ *    type      = {"{{ type }}"},
+ *    name      = "{{ name }}",
+ * )
+ */
+class {{ class }} implements BasketIMEXfieldInterface {
+
+  /**
+	 * Getting data for export.
+	 *
+	 * @param $entity
+	 * @param $fieldName
+	 *
+	 * @return string
+	 */
+	public function getValues($entity, $fieldName) {
+	  $values = [];
+    return implode(PHP_EOL, $values);
+	}
+
+	/**
+	 * Data array formation.
+	 *
+	 * @param $entity
+	 * @param string $importValue
+	 *
+	 * @return mixed
+	 */
+	public function setValues($entity, $importValue = '') {
+    $setValue = [[
+			'value'		=> ''
+		]];
+    return $setValue;
+	}
+
+	/**
+	 * Additional field processing after $entity update / creation.
+	 *
+	 * @param $entity
+	 * @param string $importValue
+	 *
+	 * @return mixed
+	 */
+	public function postSave($entity, $importValue = '') {
+
+	}
+}

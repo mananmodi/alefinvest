@@ -1,0 +1,70 @@
+<h3>
+{% trans with {'context': 'basket_excel'} %}
+	General rules:
+{% endtrans %}
+</h3>
+<ul>
+	<li>
+		{% trans with {'context': 'basket_excel'} %}
+			When importing by a key field, the material is searched on the site and updated. If it is not found, it will be created automatically.
+		{% endtrans %}
+	</li>
+	<li>
+		{% trans with {'context': 'basket_excel'} %}
+			If the product is not in the import file, it is not deleted on the site.
+		{% endtrans %}
+	</li>
+	<li>
+		{% trans with {'context': 'basket_excel'} %}
+			All multi values in the fields are filled through the "Enter".
+		{% endtrans %}
+	</li>
+	<li>
+		{% trans with {'context': 'basket_excel'} %}
+			Data is updated according to a previously programmed template (settings).
+		{% endtrans %}
+	</li>
+</ul>
+<br/>
+{% if info.rows %}
+	<h3>
+		{% trans with {'context': 'basket_excel'} %}
+			Import / Export file structure:
+		{% endtrans %}
+	</h3>
+	{% for nodeType, config in info.rows %}
+		{{ config.name }} ({{ nodeType }})
+		<table class="border">
+			<thead>
+				<tr>
+					<th width="5%"></th>
+					<th>
+						{% trans with {'context': 'basket_excel'} %}
+							Column name
+						{% endtrans %}
+					</th>
+					<th>
+						{% trans with {'context': 'basket_excel'} %}
+							Description
+						{% endtrans %}
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for letter, row in config.columns %}
+					<tr>
+						<td>
+							{{ letter }}
+						</td>
+						<td>
+							{{ row.label }}
+						</td>
+						<td>
+							{{ row.description|raw }}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endfor %}
+{% endif %}

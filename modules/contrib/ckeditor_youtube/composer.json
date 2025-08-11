@@ -1,0 +1,26 @@
+{
+  "name": "drupal/ckeditor_youtube",
+  "type": "drupal-module",
+  "description": "Adds the Youtube plugin to CKEditor 4.",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "http://drupal.org/project/ckeditor_youtube",
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Mauricio Dinarte (dinarcon)",
+      "homepage": "https://www.drupal.org/u/dinarcon",
+      "role": "Maintainer"
+    }
+  ],
+  "support": {
+    "issues": "http://drupal.org/project/issues/ckeditor_youtube",
+    "source": "http://cgit.drupalcode.org/ckeditor_youtube"
+  },
+  "require": {
+    "php": "^7.1 || ^8.0",
+    "drupal/core": "^8 || ^9 || ^10",
+    "drupal/ckeditor": "*",
+    "drupal-ckeditor-libraries-group/youtube": "*"
+  }
+}

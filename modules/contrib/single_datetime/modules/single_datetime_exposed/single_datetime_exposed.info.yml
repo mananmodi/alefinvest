@@ -1,0 +1,12 @@
+name: Date Time Exposed Views Filters
+type: module
+description: Date time picker form attached to date exposed views filters.
+core_version_requirement: ^9.2 || ^10 || ^11
+
+dependencies:
+  - single_datetime:single_datetime
+
+# Information added by Drupal.org packaging script on 2024-06-01
+version: '2.0.0-beta2'
+project: 'single_datetime'
+datestamp: 1717202111

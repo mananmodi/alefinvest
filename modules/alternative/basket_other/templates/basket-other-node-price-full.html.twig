@@ -1,0 +1,20 @@
+<div class="b-product-small__prices">
+    <div class="b-product-small__price">
+        {{ info.price.priceConvert|number_format(0, ',', ' ') }} {{ basket_t(info.currency) }}
+    </div>
+    {% if info.price.priceConvertOld %}
+        <div class="b-product-small__price_old_wrap">
+          	<div class="b-product-small__price_percent">
+	            {% if info.price.priceConvert < info.price.priceConvertOld %}
+              		-
+            	{% else %}
+              		+
+            	{% endif %}
+            	{{ (100-(info.price.priceConvert/info.price.priceConvertOld)*100)|round }}%
+          	</div>
+          	<div class="b-product-small__price_old">
+            	{{ info.price.priceConvertOld|number_format(0, ',', ' ') }}
+          	</div>
+        </div>
+    {% endif %}
+</div>

@@ -1,0 +1,6 @@
+personal.mobile:
+  label: mobile
+  mediaQuery: 'screen and (max-width: 479px)'
+  weight: 1
+  multipliers:
+    - 1x

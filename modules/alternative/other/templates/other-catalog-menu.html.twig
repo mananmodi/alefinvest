@@ -1,0 +1,46 @@
+<div class="b-cMenu__wrapper">
+  <a href="{{ url('view.catalog.page_1', {'arg_0': 'all'}) }}" class="b-cMenu__btn">{{ 'Catalog'|t }}</a>
+  <div class="b-cMenu">
+    <div class="b-cMenu__left">
+      {% for category in output.categories %}
+        <div class="b-cMenu__item {{ category.children ? 'has-childs' }}">
+          <div class="b-cMenu__link-wrapper">
+            <a href="{{ category.url }}" class="b-cMenu__link">{{ category.name }}</a>
+            {% if category.children %}
+              <div class="arrow"></div>
+            {% endif %}
+          </div>
+          {% if category.children %}
+          <div class="b-cMenu__dropdown">
+            <div class="b-cMenu__back"></div>
+            <div class="b-dMenu">
+              <div class="b-dMenu__inner">
+                {% for child in category.children %}
+                  <div class="b-dMenu__item">
+                    <a href="{{ child.url }}" class="b-dMenu__link">{{ child.name }}</a>
+                    {% if child.children %}
+                    <div class="b-dMenu__childs">
+                      {% for child2 in child.children %}
+                        <div class="b-dMenu__child">
+                          <a href="{{ child2.url }}">{{ child2.name }}</a>
+                        </div>
+                      {% endfor %}
+                    </div>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="b-cMenu__promotions">
+              {% for promotion in output.promotions %}
+                <a href="{{ promotion.url }}" title="{{ promotion.title }}">{{ promotion.image }}</a>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>

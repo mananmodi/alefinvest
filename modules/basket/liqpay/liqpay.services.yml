@@ -1,0 +1,3 @@
+services:
+  LiqPay:
+    class: Drupal\liqpay\LiqPay

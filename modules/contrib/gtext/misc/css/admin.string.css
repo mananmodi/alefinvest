@@ -1,0 +1,38 @@
+.gtext-field-changed {
+  background-color: #ffd !important;
+}
+
+.gtext-translate-google-button,
+.gtext-all-translate-google-button {
+  background-image: url('../img/translate.png');
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  background-size: 100% 100%;
+  margin-top: 3px;
+  display: inline-block;
+}
+
+.page-title .gtext-translate-buttons,
+.page-title .gtext-all-translate-google-button,
+details summary .gtext-translate-buttons,
+details summary .gtext-all-translate-google-button {
+  display: inline-block;
+}
+
+.page-title .gtext-translate-buttons,
+.page-title .gtext-all-translate-google-button {
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.gtext-translate-buttons .ajax-progress {
+  margin: 0;
+}
+
+.gtext-in-process div:not(.ajax-progress__throbber),
+.gtext-in-process div:not(.ajax-progress) {
+  filter: grayscale(1);
+}

@@ -1,0 +1,27 @@
+
+{% import _self as menus %}
+
+<div class="b-pMenu">
+  {{ menus.p_menu(output.categories, 0) }}
+</div>
+
+{% macro p_menu(items, menu_level) %}
+  {% import _self as menus %}
+  {% if items %}
+    <div class="b-pMenu__list level-{{ menu_level }}">
+      {% for item in items %}
+        <div class="b-pMenu__item level-{{ menu_level }} {{ item.tid_active ? 'is-active' }}">
+          <div class="b-pMenu__link-wrapper">
+            <a href="{{ item.url }}" class="b-pMenu__link">{{ item.name }}</a>
+            {% if item.children %}
+              <div class="arrow {{ item.tid_active ? 'is-active' }}"></div>
+            {% endif %}
+          </div>
+          {% if item.children %}
+            {{ menus.p_menu(item.children, menu_level + 1) }}
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endmacro %}

@@ -1,0 +1,158 @@
+types:
+  card:
+    uk: оплата картою
+    ru: оплата картой
+    en: payment by card
+  privat24:
+    uk: через кабінет Приват24
+    ru: через кабинет приват24
+    en: through the Privat24 account
+  masterpass:
+    uk: через кабінет masterpass
+    ru: через кабинет masterpass
+    en: through masterpass account
+  moment_part:
+    uk: розстрочка
+    ru: рассрочка
+    en: Installment
+  cash:
+    uk: готівкою
+    ru: наличными
+    en: in cash
+  invoice:
+    uk: рахунок на e-mail
+    ru: счет на e-mail
+    en: invoice to e-mail
+  qr:
+    uk: сканування qr-коду
+    ru: сканирование qr-кода
+    en: QR code scanning
+statuses:
+  liqpay_new:
+    uk: Новий платіж
+    ru: Новый платеж
+    en: New payment
+  error:
+    uk: Неуспішний платіж. Некоректно заповнені дані
+    ru: Неуспешный платеж. Некорректно заполнены данные
+    en: Unsuccessful payment. Incorrectly filled data
+  failure:
+    uk: Неуспішний платіж
+    ru: Неуспешный платеж
+    en: Unsuccessful payment
+  reversed:
+    uk: Платіж повернений
+    ru: Платеж возвращен
+    en: The payment has been returned
+  subscribed:
+    uk: Підписка успішно оформлена
+    ru: Подписка успешно оформлена
+    en: The subscription has been successfully completed
+  success:
+    uk: Успішний платіж
+    ru: Успешный платеж
+    en: Successful payment
+  unsubscribed:
+    uk: Підписка успішно деактивована
+    ru: Подписка успешно деактивирована
+    en: Subscription successfully deactivated
+  3ds_verify:
+    uk: Потрібна 3DS верифікація. Для завершення платежу, потрібно виконати 3ds_verify
+    ru: Требуется 3DS верификация. Для завершения платежа, требуется выполнить 3ds_verify
+    en: 3DS verification required. To complete the payment, you need to perform 3ds_verify
+  captcha_verify:
+    uk: Очікується підтвердження captcha
+    ru: Ожидается подтверждение captcha
+    en: Captcha confirmation is pending
+  cvv_verify:
+    uk: Потрібне введення CVV картки відправника. Для завершення платежу, потрібно виконати cvv_verify
+    ru: Требуется ввод CVV карты отправителя. Для завершения платежа, требуется выполнить cvv_verify
+    en: It is necessary to enter the CVV of the sender's card. To complete the payment, you need to perform cvv_verify
+  ivr_verify:
+    uk: Очікується підтвердження дзвінком ivr
+    ru: Ожидается подтверждение звонком ivr
+    en: Waiting for confirmation by ivr call
+  otp_verify:
+    uk: Потрібне OTP підтвердження клієнта. OTP пароль відправлений на номер телефону Клієнта. Для завершення платежу, потрібно виконати otp_verify
+    ru: Требуется OTP подтверждение клиента. OTP пароль отправлен на номер телефона Клиента. Для завершения платежа, требуется выполнить otp_verify
+    en: Customer Verification OTP is required. The OTP password is sent to the Customer's phone number. To complete the payment, you need to perform otp_verify
+  password_verify:
+    uk: Очікується підтвердження пароля додатка Приват24
+    ru: Ожидается подтверждение пароля приложения Приват24
+    en: Privat24 application password confirmation is pending
+  phone_verify:
+    uk: Очікується введення телефону клієнтом. Для завершення платежу, потрібно виконати phone_verify
+    ru: Ожидается ввод телефона клиентом. Для завершения платежа, требуется выполнить phone_verify
+    en: The client's phone entry is expected. To complete the payment, you need to perform phone_verify
+  pin_verify:
+    uk: Очікується підтвердження pin-code
+    ru: Ожидается подтверждение pin-code
+    en: Pending pin-code confirmation
+  receiver_verify:
+    uk: Потрібне введення даних одержувача. Для завершення платежу, потрібно виконати receiver_verify
+    ru: Требуется ввод данных получателя. Для завершения платежа, требуется выполнить receiver_verify
+    en: Recipient data entry required. To complete the payment, you need to perform receiver_verify
+  sender_verify:
+    uk: Потрібне введення даних відправника. Для завершення платежу, потрібно виконати sender_verify
+    ru: Требуется ввод данных отправителя. Для завершения платежа, требуется выполнить sender_verify
+    en: Entering the sender's data is required. To complete the payment, you need to perform sender_verify
+  senderapp_verify:
+    uk: Очікується підтвердження в додатку Privat24
+    ru: Ожидается подтверждение в приложении Privat24
+    en: Confirmation is awaited in the Privat24 application
+  wait_qr:
+    uk: Очікується сканування QR-коду клієнтом
+    ru: Ожидается сканирование QR-кода клиентом
+    en: The client is expected to scan the QR code
+  wait_sender:
+    uk: Очікується підтвердження оплати клієнтом в додатку Privat24/SENDER
+    ru: Ожидается подтверждение оплаты клиентом в приложении Privat24/SENDER
+    en: Confirmation of payment by the client in the Privat24/SENDER application is awaited
+  cash_wait:
+    uk: Очікується оплата готівкою в ТСО
+    ru: Ожидается оплата наличными в ТСО
+    en: Payment is expected in cash at TSO
+  hold_wait:
+    uk: Сума успішно заблокована на рахунку відправника
+    ru: Сумма успешно заблокирована на счету отправителя
+    en: The amount has been successfully blocked on the sender's account
+  invoice_wait:
+    uk: Інвойс створений успішно, очікується оплата
+    ru: Инвойс создан успешно, ожидается оплата
+    en: Invoice created successfully, payment pending
+  prepared:
+    uk: Платіж створений, очікується його завершення відправником
+    ru: Платеж создан, ожидается его завершение отправителем
+    en: Платіж створений, очікується його завершення відправником
+  processing:
+    uk: Платіж обробляється
+    ru: Платеж обрабатывается
+    en: Payment is being processed
+  wait_accept:
+    uk: Кошти з клієнта списані, але магазин ще не пройшов перевірку. Якщо магазин не пройде активацію протягом 60 днів, платежі будуть автоматично скасовані
+    ru: Денежные средства с клиента списаны, но магазин еще не прошел проверку. Если магазин не пройдет активацию в течение 60 дней, платежи будут автоматически отменены.
+    en: The funds have been debited from the client, but the store has not yet been inspected. If the store is not activated within 60 days, payments will be automatically canceled
+  wait_card:
+    uk: Не встановлений спосіб відшкодування у одержувача
+    ru: Не установлен способ возмещения у получателя
+    en: Не установлен способ возмещения у получателя
+  wait_compensation:
+    uk: Платіж успішний, буде зарахований в щодобовій проводці
+    ru: Платеж успешный, будет зачислен в ежесуточной проводке
+    en: Платеж успешный, будет зачислен в ежесуточной проводке
+  wait_lc:
+    uk: Акредитив. Кошти з клієнта списані, очікується підтвердження доставки товару
+    ru: Аккредитив. Деньги с клиента списаны, ожидается подтверждение доставки товара
+    en: Аккредитив. Средства с клиента списаны, ожидается подтверждение доставки товара
+  wait_reserve:
+    uk: Грошові кошти за платежем зарезервовані для проведення повернення за раніше поданою заявкою
+    ru: Средства по платежу зарезервированы для проведения возврата по ранее поданной заявке
+    en: Денежные средства по платежу зарезервированы для проведения возврата по ранее поданной заявке
+  wait_secure:
+    uk: Платіж на перевірці
+    ru: Платеж на проверке
+    en: Платеж на проверке
+  sandbox:
+    uk: Тестовий платіж
+    ru: Тестовый платеж
+    en: Test payment

@@ -1,0 +1,158 @@
+{
+    "cid": "Drush\\Drupal\\Commands\\core\\EntityCommands",
+    "data": {
+        "delete": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\EntityCommands",
+            "method_name": "delete",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "entity:delete",
+            "description": "Delete content entities.",
+            "help": "To delete configuration entities, see config:delete command.",
+            "aliases": [
+                "edel",
+                "entity-delete"
+            ],
+            "annotations": {
+                "command": "entity:delete",
+                "throws": "\\Exception"
+            },
+            "example_usages": {
+                "drush entity:delete node --bundle=article": "Delete all article entities.",
+                "drush entity:delete shortcut": "Delete all shortcut entities.",
+                "drush entity:delete node 22,24": "Delete nodes 22 and 24.",
+                "drush entity:delete node --exclude=9,14,81": "Delete all nodes except node 9, 14 and 81.",
+                "drush entity:delete user": "Delete all users except uid=1.",
+                "drush entity:delete node --chunks=5": "Delete all node entities in steps of 5."
+            },
+            "return_type": null,
+            "arguments": {
+                "entity_type": {
+                    "description": "An entity machine name."
+                },
+                "ids": {
+                    "description": "A comma delimited list of Ids.",
+                    "default": null
+                }
+            },
+            "options": {
+                "bundle": {
+                    "description": "Restrict deletion to the specified bundle. Ignored when ids is specified.",
+                    "default": 2
+                },
+                "exclude": {
+                    "description": "Exclude certain entities from deletion. Ignored when ids is specified.",
+                    "default": 2
+                },
+                "chunks": {
+                    "description": "Define how many entities will be deleted in the same step.",
+                    "default": 50
+                }
+            }
+        },
+        "doDelete": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\EntityCommands",
+            "method_name": "doDelete",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "preHook": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "preHook",
+            "mtime": 1633432454,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "pre:hook",
+            "description": "Persist commandData for use in primary command callback. Used by 'topic' commands.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "pre-command *"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "commandData": {
+                    "description": ""
+                }
+            },
+            "options": []
+        },
+        "setProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "processManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "processManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "hasProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "hasProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "startBrowser": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "startBrowser",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setLogger": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setLogger",
+            "mtime": 1620040827,
+            "injected_classes": []
+        },
+        "getConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "getConfig",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "parentGetConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "parentGetConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setInput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setInput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setOutput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setOutput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        }
+    },
+    "created": 1663697448,
+    "expire": 0
+}

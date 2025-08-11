@@ -1,0 +1,7 @@
+novaposhta.settings:
+  path: '/admin/config/development/novaposhta'
+  defaults:
+    _title: 'NovaPoshta settings'
+    _form: '\Drupal\novaposhta\Form\NovaPoshtaSettingsForm'
+  requirements:
+    _permission: 'access novaposhta settings'

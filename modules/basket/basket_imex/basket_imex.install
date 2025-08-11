@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Basket IMEX module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function basket_imex_schema(): array {
+  $schema['basket_imex_redirect'] = [
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'nid' => [
+        'type' => 'int',
+        'size' => 'big',
+        'not null' => TRUE,
+        'description' => 'Node ID',
+      ],
+      'old_url' => [
+        'type' => 'varchar',
+        'length' => 512,
+        'not null' => TRUE,
+        'description' => 'Old url',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'nid' => ['nid'],
+      'old_url' => [['old_url', 255]],
+    ],
+  ];
+  return $schema;
+}
+
+/**
+ * Update imex modules path.
+ */
+function basket_imex_update_8001(): void {
+  drupal_flush_all_caches();
+}

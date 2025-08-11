@@ -1,0 +1,45 @@
+<div class="site-page">
+  <header class="site-header">
+    {% if page.header_top %}
+    <div class="site-header__top">
+      {{ page.header_top }}
+    </div>
+    {% endif %}
+  </header>
+  <div class="site-main">
+    {% if page.content_top %}
+    <div class="site-content__top">
+      {{ page.content_top }}
+    </div>
+    {% endif %}
+    <div class="site-content">
+      {% if page.title %}
+      <div class="site-content__title">
+        {{ page.title }}
+      </div>
+      {% endif %}
+      <div class="l">
+        <main class="site-middle">
+          {{ page.content }}
+        </main>
+        {% if page.sidebar_left %}
+        <aside class="site-leftbar">
+          {{ page.sidebar_left }}
+        </aside>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer" >
+    {% if page.footer_first %}
+    <div class="site-footer__first">
+      {{ page.footer_first }}
+    </div>
+    {% endif %}
+    {% if page.footer %}
+    <div class="site-footer__second">
+      {{ page.footer }}
+    </div>
+    {% endif %}
+  </footer>
+</div>

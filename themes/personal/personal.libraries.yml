@@ -1,0 +1,49 @@
+global-styling:
+  version: VERSION
+  css:
+    theme:
+      scss/ckeditor.scss: { css_path: '/css/'}
+      scss/styles.scss: {}
+  js:
+    libs/enquire/enquire.min.js: {}
+    libs/scrollama/scrollama.min.js: {}
+    js/personal.js: {}
+  dependencies:
+  - core/jquery
+  - core/drupal.ajax
+  - personal/magnificPopup
+
+swiper:
+  version: VERSION
+  css:
+    base:
+      libs/swiper/swiper.min.css: {}
+  js:
+    libs/swiper/swiper.min.js: {}
+    libs/swiper/swiper.extensions.js: {}
+    libs/swiper/swiper.auto-loop.js: {}
+    js/personal-sliders.js: {}
+
+fancybox:
+  version: VERSION
+  css:
+    base:
+      libs/fancybox/jquery.fancybox.min.css: {}
+  js:
+    libs/fancybox/jquery.fancybox.min.js: {}
+    js/personal-fancybox.js: {}
+  dependencies:
+  - core/jquery
+
+magnificPopup:
+  css:
+    base:
+      libs/magnificPopup/css/magnific-popup.css: {}
+  js:
+    libs/magnificPopup/js/jquery.magnific-popup.min.js: {}
+  dependencies:
+    - core/jquery
+
+jquery_touch:
+  js:
+    libs/jquery-touch/jquery_touch.min.js: {}

@@ -1,0 +1,7 @@
+gtext.settings:
+  type: config_object
+  label: 'gText Config'
+  mapping:
+    google_api_key:
+      type: string
+      label: 'Google API key'

@@ -1,0 +1,598 @@
+<?php
+	
+	use Drupal\block\Entity\Block;
+	use Drupal\Core\Access\AccessResult;
+	use Drupal\Core\Breadcrumb\Breadcrumb;
+	use Drupal\Core\Cache\CacheBackendInterface;
+	use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+	use Drupal\Core\Entity\EntityInterface;
+	use Drupal\Core\Form\FormStateInterface;
+	use Drupal\Core\Link;
+	use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Routing\RouteObjectInterface;
+use Drupal\Core\Session\AccountInterface;
+	use Drupal\Core\Url;
+	use Drupal\file\Entity\File;
+	use Drupal\image\Entity\ImageStyle;
+	use Drupal\media\Entity\Media;
+	use Drupal\node\Entity\Node;
+	use Drupal\taxonomy\Entity\Vocabulary;
+	use Drupal\user\Entity\User;
+	use Drupal\views\ViewExecutable;
+	use Drupal\views\Plugin\views\query\QueryPluginBase;
+
+function other_user_format_name_alter(&$name, $account) {
+	$user = User::load($account->id());
+	$u_name = [];
+  if(!empty($user->field_user_surname[0]->value)){
+    $u_name[] = $user->get('field_user_surname')->getValue()[0]['value'];
+  }
+	if(!empty($user->field_user_name[0]->value)){
+		$u_name[] = $user->get('field_user_name')->getValue()[0]['value'];
+	}
+	if(!empty($u_name)){
+		$name = implode(' ', $u_name);
+	}
+}
+
+function other_theme($existing, $type, $theme, $path) {
+  $templates = [
+    'other_header_block' => [
+      'variables' => [
+        'output' => NULL,
+      ],
+    ],
+    'other_catalog_menu' => [
+      'variables' => [
+        'output' => NULL,
+      ],
+    ],
+    'other_front_block' => [
+      'variables' => [
+        'output' => NULL,
+      ],
+    ],
+    'other_catalog_menu_page' => [
+      'variables' => [
+        'output' => NULL,
+      ],
+    ],
+  ];
+  return $templates;
+}
+
+function other_preprocess_html(&$vars) {
+
+  $node = \Drupal::service('current_route_match')->getParameter('node');
+  if (!empty($node) && $node instanceof Node) {
+    $vars['attributes']['class'][] = 'page-node-' . $node->id();
+  }
+  switch(\Drupal::service('current_route_match')->getRouteName()) {
+    case 'other.error_403':
+      $vars['attributes']['class'][] = 'page-error-403 page-error layout-center';
+      break;
+    case 'other.error_404':
+      $vars['attributes']['class'][] = 'page-error-404 page-error layout-center';
+      break;
+    case 'entity.user.canonical':
+      $vars['attributes']['class'][] = 'user-canonical';
+      break;
+  }
+
+  $vars['attributes']['class'][] = 'lang-' . \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+  if (isset($vars['page']['sidebar_left']) || isset($vars['page']['sidebar_right'])) {
+    $vars['attributes']['class'][] = 'page-sidebar';
+  }
+
+  if (\Drupal::currentUser()->hasPermission('administrator')) {
+    $vars['#attached']['library'][] = 'other/admin';
+  }
+
+}
+
+function other_block_access(Block $block, $operation, AccountInterface $account) {
+  $route_match = \Drupal::service('current_route_match');
+
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  $is_error_page = ($route_name === 'other.error_403' || $route_name === 'other.error_404') ? true : false;
+  if ($is_error_page) {
+    switch ($block->getRegion()) {
+      case 'content':
+      case 'title':
+      case 'sidebar_left':
+      case 'sidebar_right':
+        return AccessResult::forbidden();
+        break;
+    }
+  }
+
+  if ($operation === 'view') {
+    switch ($block->id()) {
+      case 'personal_page_title':
+        if (($node = $route_match->getParameter('node')) instanceof Node)  {
+          switch ($node->bundle()) {
+            case 'product':
+              return AccessResult::forbidden();
+              break;
+          }
+        }
+        break;
+
+      case 'viewed_products':
+      case 'views_block__catalog_block_3':
+        if (($node = $route_match->getParameter('node')) instanceof Node)  {
+          switch ($node->bundle()) {
+            case 'product':
+            case 'page':
+              return AccessResult::neutral();
+              break;
+          }
+        }
+        switch ($route_name) {
+          case 'view.catalog.page_2':
+          case 'view.basket.page_1':
+          case 'novaposhta_tracking.user':
+          case 'entity.user.canonical':
+            return AccessResult::neutral();
+            break;
+        }
+        return AccessResult::forbidden();
+        break;
+    }
+  }
+
+  return AccessResult::neutral();
+}
+
+function other_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (!empty($form['#attributes']['class']) && is_array($form['#attributes']['class'])) {
+    $form['#attributes']['class'][] = 'personal-form-style';
+  }
+
+  $info = $form_state->getBuildInfo();
+  if (isset($info['base_form_id'])) {
+    switch($info['base_form_id']) {
+      case 'webform_submission_questions_form':
+      case 'webform_submission_callback_form':
+        $form['actions']['submit']['#ajax']['effect'] = 'none';
+        break;
+    }
+  }
+
+  switch ($form_id) {
+    case 'user_login_form':
+      if (isset($form['name']['#attributes']['autocorrect'])) {
+        unset($form['name']['#attributes']['autocorrect']);
+      }
+      $form['#ajax_forms_placeholder'] = true ;
+        $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        if ($lang === 'en') {
+            $form['forget_pass'] = [
+                '#markup' => '<a href="/user/password" class="forgot-password-link">'.'Forgot password?'.'</a>'
+            ];
+        } else {
+            $form['forget_pass'] = [
+                '#markup' => '<a href="/'.$lang.'/user/password" class="forgot-password-link">'.'Forgot password?'.'</a>'
+            ];
+        }
+      break;
+
+    case 'user_register_form':
+      $form['#ajax_forms_placeholder'] = true ;
+      break;
+    case 'user_edit_profile_form':
+      $form['pass']['#required'] = TRUE;
+      $form['current_pass']['#required'] = TRUE;
+      $form['#ajax_forms_placeholder'] = true ;
+
+      break;
+    case 'ulogin_user_identity':
+      if ($route = \Drupal::request()->attributes->get(RouteObjectInterface::ROUTE_OBJECT)) {
+        $route->setDefault('_title', 'Social networks');
+      }
+      break;
+
+    case 'node_basket_order_form':
+//    case 'comment_product_comments_form':
+    case 'novaposhta_tracking_form':
+      $form['#ajax_forms_placeholder'] = true;
+      break;
+
+
+  }
+	
+  if ($form_id === 'comment_product_comments_form') {
+    $form['#attached']['library'][] = 'webform/libraries.jquery.inputmask';
+
+    $form_object = $form_state->getFormObject();
+    if (\Drupal::currentUser()->isAuthenticated() && $form_object->getEntity()->isNew()) {
+
+      $userEntity = \Drupal::entityTypeManager()->getStorage('user')->load(\Drupal::currentUser()->id());
+      if ($userEntity->hasField('field_user_name')) {
+        $name = $userEntity->get('field_user_name')->getString();
+        if (!empty($name)) {
+          $form['field_comment_name']['widget'][0]['value']['#default_value'] = $name;
+          $form['field_comment_name']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
+        }
+      }
+      if ($userEntity->hasField('field_user_phone')) {
+        $phone = $userEntity->get('field_user_phone')->getString();
+        if (!empty($phone)) {
+          $form['field_comment_phone']['widget'][0]['value']['#default_value'] = $phone;
+          $form['field_comment_phone']['#access'] = false;
+        }
+      }
+      $email = $userEntity->getEmail();
+      if (!empty($email)) {
+        $form['field_comment_email']['widget'][0]['value']['#default_value'] = $email;
+        $form['field_comment_email']['#access'] = false;
+      }
+    }
+
+    if ($form_object->getEntity()->hasParentComment()) {
+      $form['actions']['cancel']['#access'] = false;
+      $form['field_comment_rating']['#access'] = false;
+      $form['field_comment_text']['widget'][0]['value']['#title'] = t('Answer text');
+      $form['actions']['submit']['#value'] = t('Send');
+    }
+  }
+
+  if ($form['#id'] === 'views-exposed-form-promotions-page-1') {
+    $form['#attached']['library'][] = 'other/form';
+    $form['#attributes']['class'][] = 'auto-submit';
+    $form['actions']['#id'] = 'promotion-actions';
+
+    $form['sort_order']['#access'] = FALSE;
+    $options = [
+      'All' => t('All categories')
+    ];
+
+    $cid = 'promotions_category:' . \Drupal::languageManager()->getCurrentLanguage()->getId();
+    if ($cache = \Drupal::cache()->get($cid)) {
+      $options = $cache->data;
+    }
+    else {
+      $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('product_categories', 0, 1, TRUE);
+      if (!empty($terms)) {
+        $ids = [];
+        foreach ($terms as $term) {
+          $ids[] = $term->id();
+        }
+        if (!empty($ids)) {
+          $query = \Drupal::database()->select('taxonomy_index', 'ti');
+          $query->condition('ti.tid', $ids, 'IN');
+          $query->leftJoin('node_field_data', 'nfd', 'nfd.nid = ti.nid');
+          $query->condition('nfd.type', 'promotion');
+          $query->condition('nfd.status', 1);
+          $query->addExpression('COUNT(ti.nid)', 'count');
+          $query->addField('ti', 'tid');
+          $query->groupBy('ti.tid');
+          $results = $query->execute()->fetchAllKeyed();
+          foreach ($terms as $term) {
+            if (!isset($results[$term->id()])) {
+              continue;
+            }
+            $term = \Drupal::service('entity.repository')->getTranslationFromContext($term);
+            $options[$term->id()] = $term->getName();
+          }
+        }
+      }
+      \Drupal::cache()->set($cid, $options, CacheBackendInterface::CACHE_PERMANENT, ['handy_cache_tags:node:promotion']);
+    }
+
+    $form['category'] = [
+      '#type' => 'select',
+      '#options' => $options
+    ];
+  }
+
+  if ($form_id == 'user_edit_profile_form' ) {
+    $childrenInfo = [];
+    $childrenPasswords = [];
+      if(array_key_exists('mail', $form['account'])) {
+          $childrenInfo[] = $form['account']['mail'];
+          unset($form['account']['mail']);
+      }
+    $childrenInfo[] = $form['field_user_name'];
+    unset($form['field_user_name']);
+    $childrenInfo[] = $form['field_user_surname'];
+    unset($form['field_user_surname']);
+    $childrenInfo[] = $form['field_user_phone'];
+    unset($form['field_user_phone']);
+
+    $form['current_pass']['#required'] = true;
+    $form['current_pass']['#attributes']['class'][] = 'current-password';
+    $childrenPasswords[] = $form['current_pass'];
+    unset($form['current_pass']);
+    $childrenPasswords[] = $form['pass'];
+    unset($form['pass']);
+
+
+    $form['group_information'] = [
+      '#type' => 'fieldset',
+      '#title' => t('Contact information'),
+      '#optional' => TRUE,
+      '#weight' => 0,
+      '#attributes' => array(
+        'class' => 'info',
+      ),
+      'children' => $childrenInfo,
+    ];
+
+    $form['group_passwords'] = [
+      '#type' => 'fieldset',
+      '#title' => t('Change password'),
+      '#optional' => TRUE,
+      '#weight' => 6,
+      '#attributes' => array(
+        'class' => 'password',
+      ),
+      'children' => $childrenPasswords,
+    ];
+  }
+
+  if ($form_id == 'node_basket_order_form') {
+      $form['#attached']['library'][] = 'webform/webform.element.select2';
+  }
+}
+
+
+function other_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
+  if ($view->id() === 'promotions') {
+    switch ($view->current_display) {
+      case 'page_1':
+        $request = \Drupal::request()->query->all();
+        if (!empty($request['category']) && is_numeric($request['category'])) {
+          $definition = [
+            'table' => 'node__field_promotion_category',
+            'field' => 'entity_id',
+            'left_table' => 'node_field_data',
+            'left_field' => 'nid',
+          ];
+          $join = \Drupal::service('plugin.manager.views.join')->createInstance('standard', $definition);
+          $query->addRelationship('node__field_promotion_category', $join, 'node_field_data');
+          $query->addWhere(0, 'node__field_promotion_category.field_promotion_category_target_id', $request['category']);
+        }
+        break;
+
+    }
+  }
+}
+
+function other_preprocess_captcha(&$variables) {
+  if (isset($variables['element']['#captcha_validate']) && $variables['element']['#captcha_validate'] == 'recaptcha_captcha_validation') {
+    $variables['#attached']['library'][] = 'other/recaptcha-ajax';
+  }
+}
+
+function other_ckeditor_css_alter(array &$css, $editor) {
+  $css[] = 'themes/personal/css/ckeditor.css';
+}
+
+function other_views_post_execute(ViewExecutable $view) {
+  if ($view->id() === 'reviews' && $view->current_display === 'block_1') {
+    $ids = [];
+    if (!empty($view->result)) {
+      foreach ($view->result as $row) {
+        $ids[] = $row->cid;
+      }
+    }
+
+    if (!empty($ids)) {
+      $query = \Drupal::database()->select('comment_field_data', 'c');
+      $query->condition('c.comment_type', 'product_comments');
+      $query->condition('c.field_name', 'field_product_comments');
+      $query->condition('c.status', 1);
+      $query->condition('c.pid', $ids, 'IN');
+      $query->addExpression('COUNT(c.pid)', 'count');
+      $query->addField('c', 'pid', 'parent');
+      $query->groupBy('c.pid');
+      $results = $query->execute()->fetchAllKeyed();
+
+      foreach ($view->result as $row) {
+        if (!empty($results[$row->cid])) {
+          $row->_entity->hasChilds = $results[$row->cid];
+        }
+      }
+    }
+
+  }
+}
+
+function other_comment_insert(Drupal\Core\Entity\EntityInterface $entity) {
+	otherCommentUpdate($entity);
+}
+
+function other_comment_update(Drupal\Core\Entity\EntityInterface $entity) {
+  otherCommentUpdate($entity);
+}
+
+function other_comment_delete(Drupal\Core\Entity\EntityInterface $entity) {
+	otherCommentUpdate($entity);
+}
+
+function otherCommentUpdate($entity) {
+  if ($entity->bundle() === 'product_comments') {
+    $node = $entity->getCommentedEntity();
+    $rating = otherGetAvgRating($node);
+    $old_rating = $node->get('field_product_rating')->getString();
+    $new_rating = number_format($rating->avg, 1);
+
+    if ($old_rating !== $new_rating) {
+      $node->set('field_product_rating', $rating->avg);
+      $node->save();
+    }
+  }
+}
+
+function otherGetAvgRating($node) {
+  $query = \Drupal::database()->select('comment_field_data', 'cfd');
+  $query->leftJoin('comment__field_comment_rating', 'cr', 'cfd.cid = cr.entity_id');
+  $query->condition('cfd.status', 1);
+  $query->condition('cfd.entity_id', $node->id(), '=');
+  $query->condition('cfd.comment_type', 'product_comments', '=');
+  $query->isNull('cfd.pid');
+  $query->addExpression('AVG(cr.field_comment_rating_value)', 'avg');
+  $result = $query->execute()->fetch();
+  return $result;
+}
+
+function other_views_pre_build(ViewExecutable $view) {
+  if ($view->id() == 'catalog'){
+    switch ($view->current_display) {
+      case 'block_2':
+        $node = \Drupal::routeMatch()->getParameter('node');
+        if ($node instanceof Node && $node->getType() === 'product'){
+          if ($node->hasField('field_product_similar')) {
+            $similar_goods = $node->get('field_product_similar')->getValue();
+            $list = [];
+            foreach ($similar_goods as $item) {
+              $list[] = $item['target_id'];
+            }
+            $view->setArguments([implode(',', $list)]);
+          }
+        }
+        break;
+    }
+  }
+  if ($view->id() == 'catalog'){
+    switch ($view->current_display) {
+      case 'block_7':
+        $node = \Drupal::routeMatch()->getParameter('node');
+        if ($node instanceof Node && $node->getType() === 'product'){
+          if ($node->hasField('field_product_software')) {
+            $similar_goods = $node->get('field_product_software')->getValue();
+            $list = [];
+            foreach ($similar_goods as $item) {
+              $list[] = $item['target_id'];
+            }
+            $view->setArguments([implode(',', $list)]);
+          }
+        }
+        break;
+    }
+  }
+}
+
+function other_page_attachments_alter(array &$attachments) {
+  if (!isset($attachments['#attached']['html_head_link'])) {
+    return;
+  }
+
+  $unset_html_head_link = [
+    'shortlink',
+    'delete-form',
+    'edit-form',
+    'version-history',
+    'revision',
+    'forum-edit-form',
+    'forum-delete-form',
+    'forum-edit-container-form',
+  ];
+  foreach ($attachments['#attached']['html_head_link'] as $key => $value) {
+    if (isset($value[0]['rel']) && in_array($value[0]['rel'], $unset_html_head_link)) {
+      unset($attachments['#attached']['html_head_link'][$key]);
+    }
+  }
+}
+
+function other_module_implements_alter(&$implementations, $hook) {
+  if ($hook === 'page_attachments_alter') {
+    $group = $implementations['other'];
+    unset($implementations['other']);
+    $implementations['other'] = $group;
+  }
+}
+
+function other_node_view_alter(&$build,EntityInterface $entity, EntityViewDisplayInterface $display) {
+  if ($build['#view_mode'] === 'full') {
+    if (!isset($build['#attached']['html_head_link'])) {
+      return;
+    }
+    $unset_html_head_link = [
+      'delete-form',
+      'edit-form',
+      'clone-form',
+      'revision',
+    ];
+
+    foreach ($build['#attached']['html_head_link'] as $key => $value) {
+      if (isset($value[0]['rel']) && in_array($value[0]['rel'], $unset_html_head_link)) {
+        unset($build['#attached']['html_head_link'][$key]);
+      }
+    }
+  }
+}
+
+
+function other_pathauto_pattern_alter($pattern, $context) {
+  if ($context['module'] === 'node' && $context['bundle'] === 'product') {
+    $node = $context['data']['node'];
+    $categories = $node->get('field_product_category')->getValue();
+    if (!empty($categories)) {
+      $string = '/catalog/';
+      foreach ($categories as $key => $category) {
+        $string .= '[node:field_product_category:' . $key . ':entity:name]/';
+      }
+      $string .= '[node:title]';
+      $pattern->setPattern($string);
+    }
+  }
+}
+
+function other_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+  // Append the current page title to the breadcrumb for non-admin routes.
+  if ($breadcrumb && \Drupal::service('router.admin_context')->isAdminRoute()) {
+    $routeMatch = \Drupal::routeMatch();
+    switch ($routeMatch->getRouteName()) {
+      case 'entity.taxonomy_term.edit_form':
+        $term = $routeMatch->getParameter('taxonomy_term');
+        $vocabulary = Vocabulary::load($term->getVocabularyId());
+        $link = Link::fromTextAndUrl($vocabulary->get('name'), Url::fromUri('internal:/admin/structure/taxonomy/manage/' . $term->getVocabularyId() . '/overview'));
+        $breadcrumb->addLink($link);
+        break;
+    }
+
+    $title = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), $route_match->getRouteObject());
+    if (!empty($title)) {
+      $breadcrumb->addLink(Link::createFromRoute($title, '<none>'));
+    }
+  }
+}
+
+function other_node_build_defaults_alter(array &$build, EntityInterface $entity, $view_mode) {
+  if ($entity->bundle() === 'product') {
+    $view = $build['#node']->view;
+    if (!empty($view)) {
+      switch ($view->current_display) {
+        case 'page_2':
+        case 'page_3':
+          $build['#cache']['keys'][] = $view->current_display;
+          $build['#cache']['max-age'] = 259200;
+          break;
+      }
+    }
+  }
+}
+
+function other_field_group_form_process(array &$element, &$group, &$complete_form) {
+  if(!empty($element['#title'])){
+    $element['#title'] = t((string) $element['#title']);
+  }
+}
+
+function other_css_alter(&$cssCollection) {
+  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+    foreach ($cssCollection as &$style) {
+      if ($style['media'] == 'all') {
+        $style['weight'] = $style['group'] + $style['weight'];
+        $style['group'] = 0;
+        $style['every_page'] = TRUE;
+      }
+    }
+  }
+}
+
+
+

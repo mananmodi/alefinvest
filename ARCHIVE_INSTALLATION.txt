@@ -1,0 +1,60 @@
+1. To configure PHP on hosting, we need PHP 8.
+2. Unzip the DUMP.sql file to your PC.
+3. Create a database (save password and username).
+4. Import the database (DUMP.sql) on your hosting.
+5. Upload archive files to your hosting at the root of the site.
+6. Open the settings.php file.
+7. At the end of the file find the $databases.
+8. In the fields 'database', 'username', 'password' enter your data that we recorded in paragraph [5].
+9. Create an SSL certificate.
+10. Open the website.
+
+Data for login to the admin panel.
+Username: admin
+Password: 1Ov+jrDcb2vDWw+V
+
+!!! This project uses SCSS Compiler https://www.drupal.org/project/scss_compiler to convert scss code to css, it is already installed. !!!
+
+To edit styles you need to go to /themes/personal/scss/project(main site styles) or components (styles for individual components), there are all the necessary scss files, css folder does not need to be edited.
+
+Javascript files are located in the /themes/personal/js folder.
+
+Fonts are uploaded to the /themes/personal/fonts folder and written to the fonts.scss file.
+
+System requirements:
+Apache Apache 2.4.7 or higher,
+MySQL: 8 (with a lower version, there may be problems deploying the backup due to encoding)
+PHP: 8.3
+PHP extensions needed: PDO, XML, GD-library, OpenSSL, JSON, cURL, Mbstring.
+
+-------------------------------------------------------------------------------------------------
+
+1. Налаштувати PHP на хостингу, нам знадобиться PHP 8.
+2. Розархівувати файл DUMP.sql собі на ПК.
+3. Створити базу даних(пароль та ім'я користувача зберегти).
+4. Імпортувати базу даних (DUMP.sql) на своєму хостингу.
+5. Завантажити файли архіву на свій хостинг у корінь сайту.
+6. Відкрити файл settings.php.
+7. У кінці файлу знайти опис бази даних $databases.
+8. У поля 'database', 'username', 'password' вводимо свої дані які ми записали у пункті [5].
+9. Створити SSL сертифікат.
+10. Відкрити сайт.
+
+Дані для входу в адмін-панель.
+Ім'я користувача: admin
+Пароль: 1Ov+jrDcb2vDWw+V
+
+!!! У цьому проекті використовується SCSS Compiler https://www.drupal.org/project/scss_compiler для перетворення scss коду в css, він вже встановлений. !!!
+
+Для редагування стилів потрібно перейти /themes/personal/scss/project(основні стилі сайту) або components(стилі для окремих компонентів), там знаходяться всі необхідні файли scss, папку css редагувати не потрібно.
+
+Файли javascript знаходяться у папці /themes/personal/js.
+
+Шрифти загружаються у папку /themes/personal/fonts, та прописуються у файлі fonts.scss.
+
+Вимоги до серверу:
+Apache 2.4.7 або новішої версії
+MySQL: 8 (з нижчою версією можуть бути проблеми розгортання бекапу через кодування)
+PHP: 8.3
+Потрібні розширення PHP: PDO, XML, GD-library, OpenSSL, JSON, cURL, Mbstring.
+

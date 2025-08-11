@@ -1,0 +1,33 @@
+{% if threaded %}
+  {{ attach_library('classy/indented') }}
+{% endif %}
+{%
+  set classes = [
+    'comment',
+    'js-comment',
+    status != 'published' ? status,
+    comment.owner.anonymous ? 'by-anonymous',
+    author_id and author_id == commented_entity.getOwnerId() ? 'by-' ~ commented_entity.getEntityTypeId() ~ '-author',
+    comment.hasParentComment ? 'has-parent' : ''
+  ]
+%}
+
+<div{{ attributes.addClass(classes, 'b-comment') }}>
+  <div class="b-comment__top">
+    <div class="b-comment__name">
+      {{ content.field_comment_name }}
+    </div>
+    <div class="b-comment__date">
+      {{ comment.getCreatedTime|format_date('standard') }}
+    </div>
+  </div>
+  {{ content.field_comment_rating }}
+  {{ content.field_comment_text }}
+  <div class="b-comment__bottom">
+    {{ content.links }}
+    {% if comment.hasChilds %}
+      <a href="#more-comments" class="js-show-answer b-comment__answers" data-cid="{{ comment.id }}"><span>{{ 'Show answers'|t }}</span> ({{ comment.hasChilds }})</a>
+    {% endif %}
+  </div>
+</div>
+

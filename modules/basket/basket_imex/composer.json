@@ -1,0 +1,16 @@
+{
+    "name": "basket_v2/basket_imex",
+    "description": "Basket IMEX",
+    "type": "drupal-basket-v2-module",
+    "license": "NoLicense",
+    "authors": [
+        {
+            "name": "sunny",
+            "email": "sunny@glyanec.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.6"
+    }
+}

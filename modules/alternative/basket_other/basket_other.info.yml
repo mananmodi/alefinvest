@@ -1,0 +1,9 @@
+name: Basket other
+description: Basket other functions
+package: Online store
+
+type: module
+core_version_requirement: ^9 || ^10
+
+dependencies:
+  - basket

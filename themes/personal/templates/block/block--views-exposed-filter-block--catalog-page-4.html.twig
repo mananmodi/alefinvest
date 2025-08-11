@@ -1,0 +1,21 @@
+{%
+  set classes = [
+    'block',
+    'block-' ~ elements['#id']|clean_id|clean_class
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  <div class="block__layout">
+  {{ title_prefix }}
+  {% if label %}
+    <div{{ title_attributes.addClass('block__title') }}><span>{{ label }}</span></div>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+    <div{{ content_attributes.addClass('content') }}>
+      {{ content }}
+      <div class="search-btn js-search-btn">{{ 'Search'|trans }}</div>
+    </div>
+  {% endblock %}
+  </div>
+</div>

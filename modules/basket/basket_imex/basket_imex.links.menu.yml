@@ -1,0 +1,14 @@
+# Stock
+# - Import / Export
+basket.imex:
+  title: 'Import / Export'
+  title_context: 'basket_imex'
+  route_name: basket.admin.pages
+  menu_name: basket
+  route_parameters: 
+    page_type: 'stock-imex'
+  parent: 'basket.stock'
+  weight: 2
+  options:
+    ico_name: 'imex.svg'
+    ico_module: 'basket_imex'

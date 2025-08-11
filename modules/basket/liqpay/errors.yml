@@ -1,0 +1,455 @@
+# Помилки Anti-Fraud
+limit:
+  uk: "Перевищено ліміт на суму або кількість платежів клієнта"
+  ru: "Превышен лимит на сумму или количество платежей клиента"
+  en: "The limit on the amount or number of client payments has been exceeded"
+frod:
+  uk: "Транзакція визначена як нетипова / ризикова згідно Anti-Fraud правилами Банку"
+  ru: "Транзакция определена как нетипичная / рисковая согласно Anti-Fraud правилам Банка"
+  en: "The transaction is defined as atypical / risky according to the Bank's Anti-Fraud rules"
+decline:
+  uk: "Транзакція визначена як нетипова / ризикова згідно Anti-Fraud системи Банку"
+  ru: "Транзакция определена как нетипичная / рисковая согласно Anti-Fraud системы Банка"
+  en: "The transaction is defined as atypical / risky according to the Bank's Anti-Fraud system"
+# Помилки нефінансові
+err_auth:
+  uk: "Необхідна авторізація"
+  ru: "Необходимая авторизация"
+  en: "Authorization is required"
+err_cache:
+  uk: "Минув час зберігання даних для даної операції"
+  ru: "Прошло время хранения данных для данной операции"
+  en: "The data storage time for this operation has expired"
+user_not_found:
+  uk: "Користувач не знайдений"
+  ru: "Пользователь не найден"
+  en: "User not found"
+err_sms_send:
+  uk: "Не вдалося відправити смс"
+  ru: "Не удалось отправить смс"
+  en: "Failed to send SMS"
+err_sms_otp:
+  uk: "Пароль із смс вказаний невірно"
+  ru: "Пароль с смс указан неверно"
+  en: "The password from the SMS is incorrect"
+shop_blocked:
+  uk: "Магазин заблоковано"
+  ru: "Магазин заблокирован"
+  en: "The store is locked"
+shop_not_active:
+  uk: "Магазин не активний"
+  ru: "Магазин не активен"
+  en: "The store is not active"
+invalid_signature:
+  uk: "Невірний підпис запиту"
+  ru: "Неверная подпись запроса"
+  en: "Invalid request signature"
+order_id_empty:
+  uk: "Передано порожній order_id"
+  ru: "Передан пустой order_id"
+  en: "An empty order_id was passed"
+err_shop_not_agent:
+  uk: "Ви не є агентом для вказанного магазину"
+  ru: "Вы не являетесь агентом для указанного магазина"
+  en: "You are not an agent for the specified store"
+err_card_def_notfound:
+  uk: "Картка для отримання платежів не знайдена у гаманці"
+  ru: "Карта для получения платежей не найдена в кошельке"
+  en: "The card for receiving payments was not found in the wallet"
+err_no_card_token:
+  uk: "У користувача немає картки з таким card_token"
+  ru: "У пользователя нет карты с таким card_token"
+  en: "The user does not have a card with this card_token"
+err_card_liqpay_def:
+  uk: "Вкажіть іншу картку"
+  ru: "Укажите другую карту"
+  en: "Enter another card"
+err_card_type:
+  uk: "Невірний тип картки"
+  ru: "Неверный тип карты"
+  en: "Invalid card type"
+err_card_country:
+  uk: "Вкажіть іншу картку"
+  ru: "Укажите другую карту"
+  en: "Enter another card"
+err_limit_amount:
+  uk: "Сума переказу менше або більше заданого ліміту"
+  ru: "Сумма перевода меньше или больше заданного лимита"
+  en: "The transfer amount is less or more than the specified limit"
+err_payment_amount_limit:
+  uk: "Сума переказу менше або більше заданого ліміту"
+  ru: "Сумма перевода меньше или больше заданного лимита"
+  en: "The transfer amount is less or more than the specified limit"
+amount_limit:
+  uk: "Перевищено ліміт суми"
+  ru: "Перевищено ліміт суми"
+  en: "Amount limit exceeded"
+payment_err_sender_card:
+  uk: "Вкажіть іншу картку відправника"
+  ru: "Укажите другую карту отправителя"
+  en: "Specify a different sender card"
+payment_processing:
+  uk: "Платіж обробляється"
+  ru: "Платеж обрабатывается"
+  en: "Payment is being processed"
+err_payment_discount:
+  uk: "Знижка для даного платежу не знайдена"
+  ru: "Скидка для данного платежа не найдена"
+  en: "No discount found for this payment"
+err_wallet:
+  uk: "Не вдалося завантажити гаманець"
+  ru: "Не удалось загрузить кошелек"
+  en: "Failed to load wallet"
+err_get_verify_code:
+  uk: "Необхідна верифікація картки"
+  ru: "Необходимая верификация карты"
+  en: "Card verification is required"
+err_verify_code:
+  uk: "Невірний код верифікації"
+  ru: "Неверный код верификации"
+  en: "Invalid verification code"
+wait_info:
+  uk: "Очікується додаткова інформація, спробуйте пізніше"
+  ru: "Ожидается дополнительная информация, попробуйте позже"
+  en: "More information is pending, try again later"
+err_path:
+  uk: "Невірна адреса запиту"
+  ru: "Неверный адрес запроса"
+  en: "Invalid request address"
+err_payment_cash_acq:
+  uk: "Платіж не може бути проведений в цьому магазині"
+  ru: "Платеж не может быть произведен в этом магазине"
+  en: "Payment cannot be made in this store"
+err_split_amount:
+  uk: "Сума платежів розщеплення не співпадає з сумою платежу"
+  ru: "Сумма платежей расщепления не совпадает с суммой платежа"
+  en: "The amount of split payments does not match the payment amount"
+err_card_receiver_def:
+  uk: "Отримувач не встановив картку для отримання платежів"
+  ru: "Получатель не установил карту для получения платежей"
+  en: "The recipient has not set up a card to receive payments"
+payment_err_status:
+  uk: "Невірний статус платежу"
+  ru: "Неверный статус платежа"
+  en: "Invalid payment status"
+public_key_not_found:
+  uk: "Не знайдено public_key"
+  ru: "Не найдено public_key"
+  en: "No public_key found"
+payment_not_found:
+  uk: "Платіж не знайдено"
+  ru: "Платеж не найден"
+  en: "Payment not found"
+payment_not_subscribed:
+  uk: "Платіж не є регулярним"
+  ru: "Платеж не является регулярным"
+  en: "The payment is not regular"
+wrong_amount_currency:
+  uk: "Валюта платежу не співпадає с валютою debit"
+  ru: "Валюта платежа не совпадает с валютой"
+  en: "The payment currency does not match the debit currency"
+err_amount_hold:
+  uk: "Сума не може бути більше суми платежу"
+  ru: "Сумма не может быть больше суммы платежа"
+  en: "The amount cannot be more than the payment amount"
+err_access:
+  uk: "Помилка доступу"
+  ru: "Ошибка доступа"
+  en: "Access error"
+order_id_duplicate:
+  uk: "Такий order_id вже існує"
+  ru: "Такой order_id уже существует"
+  en: "Such order_id already exists"
+err_blocked:
+  uk: "Доступ в акаунт закрито"
+  ru: "Доступ в аккаунт закрыт"
+  en: "Access to the account is closed"
+err_empty:
+  uk: "Параметр не заповнений"
+  ru: "Параметр не заполнен"
+  en: "The parameter is not filled"
+err_empty_phone:
+  uk: "Параметр phone не заповнений"
+  ru: "Параметр phone не заполнен"
+  en: "The phone parameter is not filled"
+err_missing:
+  uk: "Параметр не передано"
+  ru: "Параметр не передан"
+  en: "Parameter not passed"
+err_wrong:
+  uk: "Невірно вказано параметр"
+  ru: "Неверно указан параметр"
+  en: "The parameter is incorrect"
+err_wrong_currency:
+  uk: "Невірно вказана валюта"
+  ru: "Неверно указанная валюта"
+  en: "The currency is incorrect"
+err_phone:
+  uk: "Введено невірний номер телефону"
+  ru: "Введен неверный номер телефона"
+  en: "Invalid phone number entered"
+err_card:
+  uk: "Невірно вказано номер картки"
+  ru: "Неверно указан номер карты"
+  en: "The card number is incorrect"
+err_card_bin:
+  uk: "Бін картки не знайдено"
+  ru: "Бин карты не найдено"
+  en: "Bin card not found"
+err_terminal_notfound:
+  uk: "Термінал не знайдено"
+  ru: "Терминал не найден"
+  en: "Terminal not found"
+err_commission_notfound:
+  uk: "Комісія не знайдена"
+  ru: "Комиссия не найдена"
+  en: "Commission not found"
+err_payment_create:
+  uk: "Не вдалося створити платіж"
+  ru: "Не удалось создать платеж"
+  en: "Failed to create payment"
+err_mpi:
+  uk: "Не вдалося перевірити картку"
+  ru: "Не удалось проверить карту"
+  en: "Card verification failed"
+err_currency_is_not_allowed:
+  uk: "Валюта заборонена"
+  ru: "Валюта запрещена"
+  en: "Currency is prohibited"
+err_look:
+  uk: "Не вдалося завершити операцію"
+  ru: "Не удалось завершить операцию"
+  en: "The operation could not be completed"
+err_mods_empty:
+  uk: "Не вдалося завершити операцію"
+  ru: "Не удалось завершить операцию"
+  en: "The operation could not be completed"
+payment_err_type:
+  uk: "Невірний тип платежу"
+  ru: "Неверный тип платежа"
+  en: "Invalid payment type"
+err_payment_currency:
+  uk: "Валюта картки чи переводу заборонені"
+  ru: "Валюта карты или перевода запрещены"
+  en: "The currency of the card or transfer is prohibited"
+err_payment_exchangerates:
+  uk: "Не вдалося знайти відповідний курс валют"
+  ru: "Не удалось найти соответствующий курс валют"
+  en: "Could not find a suitable exchange rate"
+err_signature:
+  uk: "Невірний підпис запиту"
+  ru: "Неверная подпись запроса"
+  en: "Invalid request signature"
+err_api_action:
+  uk: "Не переданий параметр action"
+  ru: "Не передан параметр action"
+  en: "The action parameter was not passed"
+err_api_callback:
+  uk: "Не переданий параметр callback"
+  ru: "Не передан параметр callback"
+  en: "No callback parameter passed"
+err_api_ip:
+  uk: "У цьому мерчанті заборонений виклик API з цього IP"
+  ru: "В этом мерчанте запрещен вызов API из этого IP"
+  en: "This merchant does not allow API calls from this IP"
+expired_phone:
+  uk: "Закінчився термін підтвердження платежу введенням номера телефону"
+  ru: "Истек срок подтверждения платежа вводом номера телефона"
+  en: "The deadline for confirming payment by entering a phone number has expired"
+expired_3ds:
+  uk: "Закінчився термін 3DS вертфікації клієнта"
+  ru: "Истек срок 3DS вертификации клиента"
+  en: "3DS client verification has expired"
+expired_otp:
+  uk: "Закінчився термін підтвердження платежу OTP паролем"
+  ru: "Истек срок подтверждения платежа OTP паролем"
+  en: "The OTP payment confirmation period has expired"
+expired_cvv:
+  uk: "Закінчився термін підтвердження платежу введнням CVV коду"
+  ru: "Истек срок подтверждения платежа введением CVV кода"
+  en: "The deadline for confirming the payment by entering the CVV code has expired"
+expired_p24:
+  uk: "Закінчився термін вибору картки в Приват24"
+  ru: "Истек срок выбора карты в Приват24"
+  en: "The card selection period in Privat24 has expired"
+expired_sender:
+  uk: "Закінчився термін отримання данних відправника"
+  ru: "Истек срок получения данных отправителя"
+  en: "The deadline for receiving the sender's data has expired"
+expired_pin:
+  uk: "Закінчився термін підтвердження платежу pin-кодом картки"
+  ru: "Истек срок подтверждения платежа pin-кодом карты"
+  en: "The card PIN payment confirmation period has expired"
+expired_ivr:
+  uk: "Закінчився термін підтвердження платежу викликом IVR"
+  ru: "Истек срок подтверждения платежа вызовом IVR"
+  en: "IVR payment confirmation has expired"
+expired_captcha:
+  uk: "Закінчився термін підтвердження платежу за допомогою captcha"
+  ru: "Истек срок подтверждения платежа с помощью captcha"
+  en: "The captcha payment confirmation period has expired"
+expired_password:
+  uk: "Закінчився термін підтвердження платежу паролем Приват24"
+  ru: "Истек срок подтверждения платежа паролем Приват24"
+  en: "The term for confirming the payment with the Privat24 password has expired"
+expired_senderapp:
+  uk: "Закінчився термін підтвердження платежу формою в Приват24"
+  ru: "Истек срок подтверждения платежа по форме в Приват24"
+  en: "The payment confirmation period in Privat24 has expired"
+expired_prepared:
+  uk: "Закінчився термін завершення створенного платежу"
+  ru: "Истек срок завершения созданного платежа"
+  en: "The created payment has expired"
+expired_mp:
+  uk: "Закінчився термін завершення платежу у гаманці MasterPass"
+  ru: "Истек срок завершения платежа в кошельке MasterPass"
+  en: "The MasterPass wallet has expired"
+expired_qr:
+  uk: "Закінчився термін підтвердження платежу скануванням QR коду"
+  ru: "Истек срок подтверждения платежа сканированием QR кода"
+  en: "The deadline for confirming the payment by scanning the QR code has expired"
+5:
+  uk: "Картка не підтримує 3DSecure"
+  ru: "Карта не поддерживает 3DSecure"
+  en: "The card does not support 3DSecure"
+# Помилки фінансові
+90:
+  uk: "Загальна помилка під час обробки"
+  ru: "Общая ошибка при обработке"
+  en: "General error during processing"
+101:
+  uk: "Токен створений не цим мерчантом"
+  ru: "Токен создан не этим мерчантом"
+  en: "The token was not created by this merchant"
+102:
+  uk: "Надісланий токен не активний"
+  ru: "Отправленный токен не активен"
+  en: "The sent token is not active"
+103:
+  uk: "Досягнута максимальна сума покупок по токену"
+  ru: "Достигнута максимальная сумма покупок по токену"
+  en: "The maximum amount of token purchases has been reached"
+104:
+  uk: "Ліміт транзакцій по токену вичерпаний"
+  ru: "Лимит транзакций по токену исчерпан"
+  en: "The token transaction limit has been reached"
+105:
+  uk: "Картка не підтримується"
+  ru: "Карта не поддерживается"
+  en: "The card is not supported"
+106:
+  uk: "Мерчанту не дозволена преавторізація"
+  ru: "Мерчанту не разрешена преавторизация"
+  en: "The merchant is not allowed to pre-authorize"
+107:
+  uk: "Еквайєр не підтримує 3ds"
+  ru: "Эквайер не поддерживает 3ds"
+  en: "Acquirer does not support 3ds"
+108:
+  uk: "Такий токен не існує"
+  ru: "Такой токен не существует"
+  en: "No such token exists"
+109:
+  uk: "Перевищено ліміт спроб з даного IP"
+  ru: "Превышен лимит попыток по данному IP"
+  en: "The limit of attempts from this IP has been exceeded"
+110:
+  uk: "Сесія закінчилася"
+  ru: "Сессия закончилась"
+  en: "The session has ended"
+111:
+  uk: "Бранч картки заблокований"
+  ru: "Бранч карты заблокирован"
+  en: "Branch of the card is blocked"
+112:
+  uk: "Досягнуто денний ліміт картки по бранчу"
+  ru: "Достигнут дневной лимит карты по бранчу"
+  en: "Daily brunch card limit reached"
+113:
+  uk: "Тимчасово закрита можливість проведення P2P-платежів з карток ПБ на картки зарубіжних банків"
+  ru: "Временно закрыта возможность проведения P2P-платежей с карт ПБ на карты зарубежных банков"
+  en: "The possibility of making P2P payments from PB cards to cards of foreign banks is temporarily closed"
+114:
+  uk: "Досягнуто ліміт по комплітам"
+  ru: "Достигнут лимит по комплитам"
+  en: "The limit on completes has been reached"
+115:
+  uk: "Невірне ім'я одержувача"
+  ru: "Неверное имя получателя"
+  en: "Invalid recipient name"
+2903:
+  uk: "Досягнуто денний ліміт використання картки"
+  ru: "Достигнут дневной лимит использования карты"
+  en: "The daily limit of card usage has been reached"
+2915:
+  uk: "Такий order_id вже існує"
+  ru: "Такой order_id уже существует"
+  en: "Such order_id already exists"
+3914:
+  uk: "Платежі для даної країни заборонені"
+  ru: "Платежи для данной страны запрещены"
+  en: "Payments for this country are prohibited"
+9851:
+  uk: "Термін дії картки закінчився"
+  ru: "Срок действия карты истек"
+  en: "The card has expired"
+9852:
+  uk: "Невірний номер картки"
+  ru: "Неверный номер карты"
+  en: "Invalid card number"
+9854:
+  uk: "Платіж відхилено. Спробуйте пізніше"
+  ru: "Платеж отклонен. Попробуйте позже"
+  en: "Payment declined. Try again later"
+9855:
+  uk: "Картка не підтримує даний вид транзакції"
+  ru: "Карта не поддерживает данный вид транзакции"
+  en: "The card does not support this type of transaction"
+9857:
+  uk: "Картка не підтримує даний вид транзакції"
+  ru: "Карта не поддерживает данный вид транзакции"
+  en: "The card does not support this type of transaction"
+9859:
+  uk: "Недостатньо коштів"
+  ru: "Недостаточно средств"
+  en: "Insufficient funds"
+9860:
+  uk: "Перевищено ліміт операцій по картці"
+  ru: "Превышен лимит операций по карте"
+  en: "The limit of transactions on the card has been exceeded"
+9861:
+  uk: "Перевищено ліміт на оплату в інтернеті"
+  ru: "Превышен предел на оплату в интернете"
+  en: "The limit for online payment has been exceeded"
+9863:
+  uk: "На картці встановлено обмеження. Зверніться в підтримку банку"
+  ru: "На карте установлены ограничения. Обратитесь в поддержку банка"
+  en: "There is a limit on the card. Contact the bank's support"
+9867:
+  uk: "Невірно вказана сума транзакції"
+  ru: "Неверно указана сумма транзакции"
+  en: "The transaction amount is incorrect"
+9868:
+  uk: "Платіж відхилено. Банк не підтвердив операцію. Зверніться в банк"
+  ru: "Платеж отклонен. Банк не подтвердил сделку. Обратитесь в банк"
+  en: "Payment declined. The bank did not confirm the transaction. Contact the bank"
+9872:
+  uk: "Банк не підтвердив операцію. Зверніться в банк"
+  ru: "Банк не подтвердил сделку. Обратитесь в банк"
+  en: "The bank did not confirm the transaction. Contact the bank"
+9882:
+  uk: "Невірно передані параметри або транзакція з такою умовою не дозволена"
+  ru: "Неверно передаваемые параметры или транзакция с таким условием не разрешены"
+  en: "Incorrectly passed parameters or a transaction with this condition is not allowed"
+9886:
+  uk: "Мерчанту не дозволено використовувати рекурентні платежі"
+  ru: "Мерчанту не разрешено использовать рекуррентные платежи"
+  en: "The merchant is not allowed to use recurring payments"
+9961:
+  uk: "Платіж відхилено. Зверніться в підтримку банку"
+  ru: "Платеж отклонен. Обратитесь в поддержку банка"
+  en: "Payment declined. Contact the bank's support"
+9989:
+  uk: "Платіж відхилено. Перевірте правильність введених реквізитів картки"
+  ru: "Платеж отклонен. Проверьте правильность введенных реквизитов карты"
+  en: "Payment declined. Check the correctness of the entered card details"

@@ -1,0 +1,19 @@
+services:
+
+  basket_imex.generate_class:
+    class: Drupal\basket_imex\Command\ImexClassCommand
+    arguments: ['@console.extension_manager', '@console.validator', '@console.string_converter', '@basket_imex.generator']
+    tags:
+      - { name: drupal.command }
+
+  basket_imex.generate_field:
+    class: Drupal\basket_imex\Command\ImexFieldCommand
+    arguments: ['@console.extension_manager', '@console.validator', '@console.string_converter', '@basket_imex.generator']
+    tags:
+      - { name: drupal.command }
+
+  basket_imex.generator:
+    class: Drupal\basket_imex\Generator\ImexGenerator
+    arguments: ['@console.extension_manager']
+    tags:
+      - { name: drupal.generator }

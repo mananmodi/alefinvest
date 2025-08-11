@@ -1,0 +1,24 @@
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+
+{%
+  set mobileImage = content.field_paragraph_image_2.0 ? 'data-mobile="' ~ content.field_paragraph_image_2.0['#item'].entity.fileuri | image_style('768x400') ~ '"': ''
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {{ content.field_paragraph_image }}
+    {% block content %}
+      <div class="l">
+        <div class="slider-inner">
+          {{ content|without('field_paragraph_image', 'field_paragraph_image_2') }}
+        </div>
+      </div>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

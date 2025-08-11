@@ -1,0 +1,13 @@
+{
+  "name": "drupal/liqpay",
+  "description": "LiqPay API 3.0",
+  "type": "drupal-module",
+  "license": "NoLicense",
+  "homepage": "https://www.drupal.org/project/liqpay",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/liqpay",
+    "source": "https://git.drupalcode.org/project/liqpay"
+  },
+  "require": {}
+}

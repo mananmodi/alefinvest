@@ -1,0 +1,156 @@
+{
+    "cid": "Drupal\\simple_sitemap\\Commands\\SimplesitemapCommands",
+    "data": {
+        "generate": {
+            "schema": 4,
+            "class": "Drupal\\simple_sitemap\\Commands\\SimplesitemapCommands",
+            "method_name": "generate",
+            "mtime": 1633516410,
+            "injected_classes": [],
+            "name": "simple-sitemap:generate",
+            "description": "Regenerate all XML sitemap variants or continue generation.",
+            "help": "",
+            "aliases": [
+                "ssg",
+                "simple-sitemap-generate"
+            ],
+            "annotations": {
+                "command": "simple-sitemap:generate",
+                "validate-module-enabled": "simple_sitemap"
+            },
+            "example_usages": {
+                "drush simple-sitemap:generate": "Regenerate all XML sitemap variants or continue generation."
+            },
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "rebuildQueue": {
+            "schema": 4,
+            "class": "Drupal\\simple_sitemap\\Commands\\SimplesitemapCommands",
+            "method_name": "rebuildQueue",
+            "mtime": 1633516410,
+            "injected_classes": [],
+            "name": "simple-sitemap:rebuild-queue",
+            "description": "Queue all or specific sitemap variants for regeneration.",
+            "help": "",
+            "aliases": [
+                "ssr",
+                "simple-sitemap-rebuild-queue"
+            ],
+            "annotations": {
+                "command": "simple-sitemap:rebuild-queue",
+                "validate-module-enabled": "simple_sitemap",
+                "throws": "\\Drupal\\Component\\Plugin\\Exception\\PluginException"
+            },
+            "example_usages": {
+                "drush simple-sitemap:rebuild-queue": "Rebuild the sitemap queue for all sitemap variants.",
+                "drush simple-sitemap:rebuild-queue --variants=default,test": "Rebuild the sitemap queue queuing only variants 'default' and 'test'."
+            },
+            "return_type": null,
+            "arguments": [],
+            "options": {
+                "variants": {
+                    "description": "Queue all or specific sitemap variants for regeneration.",
+                    "default": ""
+                }
+            }
+        },
+        "preHook": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "preHook",
+            "mtime": 1633432454,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "pre:hook",
+            "description": "Persist commandData for use in primary command callback. Used by 'topic' commands.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "pre-command *"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "commandData": {
+                    "description": ""
+                }
+            },
+            "options": []
+        },
+        "setProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "processManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "processManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "hasProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "hasProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "startBrowser": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "startBrowser",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setLogger": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setLogger",
+            "mtime": 1620040827,
+            "injected_classes": []
+        },
+        "getConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "getConfig",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "parentGetConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "parentGetConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setInput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setInput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setOutput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setOutput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        }
+    },
+    "created": 1663697448,
+    "expire": 0
+}

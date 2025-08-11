@@ -1,0 +1,7 @@
+ckeditor_youtube.settings_form:
+ path: 'admin/config/content/ckeditor_youtube'
+ defaults:
+   _form: '\Drupal\ckeditor_youtube\Form\YouTubePluginForm'
+   _title: 'CKEditor Youtube Plugin'
+ requirements:
+   _permission: 'administer site configuration'

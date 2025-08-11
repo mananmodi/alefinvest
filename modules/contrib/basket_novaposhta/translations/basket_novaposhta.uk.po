@@ -1,0 +1,502 @@
+# uk translation of basket_novaposhta
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2022-04-13 17:39+0300\n"
+"PO-Revision-Date: 2022-04-13 17:39+0300\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgctxt "novaposhta"
+msgid "Region"
+msgstr "Область"
+
+msgctxt "novaposhta"
+msgid "City"
+msgstr "Місто"
+
+msgctxt "novaposhta"
+msgid "Point"
+msgstr "Відділення"
+
+msgctxt "novaposhta"
+msgid "Not specified"
+msgstr "Не вказано"
+
+msgctxt "novaposhta"
+msgid "API KEY"
+msgstr "API-ключ"
+
+msgctxt "novaposhta"
+msgid "New API KEY"
+msgstr "Новий API-ключ"
+
+msgctxt "novaposhta"
+msgid "Access NovaPoshta settings"
+msgstr "Доступ до налаштувань НоваПошта"
+
+msgctxt "novaposhta"
+msgid "Save configuration"
+msgstr "Зберегти конфігурацію"
+
+msgctxt "novaposhta"
+msgid "The configuration options have been saved."
+msgstr "Параметри конфігурації збережено."
+
+msgctxt "novaposhta"
+msgid "Create invoice"
+msgstr "Створити ЕН"
+
+msgctxt "novaposhta"
+msgid "Sender data"
+msgstr "Дані відправника"
+
+msgctxt "novaposhta"
+msgid "Recipient data"
+msgstr "Дані одержувача"
+
+msgctxt "novaposhta"
+msgid "Sender"
+msgstr "Відправник"
+
+msgctxt "novaposhta"
+msgid "Contact person"
+msgstr "Контактна особа"
+
+msgctxt "novaposhta"
+msgid "Sender's phone"
+msgstr "Телефон відправника"
+
+msgctxt "novaposhta"
+msgid "Add another phone number"
+msgstr "Додати інший номер телефону"
+
+msgctxt "novaposhta"
+msgid "Recipient"
+msgstr "Одержувач"
+
+msgctxt "novaposhta"
+msgid "Recipient's phone"
+msgstr "Телефон одержувача"
+
+msgctxt "novaposhta"
+msgid "Create sender"
+msgstr "Створити відправника"
+
+msgctxt "novaposhta"
+msgid "Create recipient"
+msgstr "Створити одержувача"
+
+msgctxt "novaposhta"
+msgid "Create"
+msgstr "Створити"
+
+msgctxt "novaposhta"
+msgid "Name"
+msgstr "Ім'я"
+
+msgctxt "novaposhta"
+msgid "Surname"
+msgstr "Прізвище"
+
+msgctxt "novaposhta"
+msgid "Middle name"
+msgstr "По батькові"
+
+msgctxt "novaposhta"
+msgid "Phone"
+msgstr "Телефон"
+
+msgctxt "novaposhta"
+msgid "E-mail"
+msgstr "Електронна пошта"
+
+msgctxt "novaposhta"
+msgid "Counterparty type"
+msgstr "Тип контрагента"
+
+msgctxt "novaposhta"
+msgid "Form of ownership"
+msgstr "Форма власності"
+
+msgctxt "novaposhta"
+msgid "Organization name"
+msgstr "Назва організації"
+
+msgctxt "novaposhta"
+msgid "Counterparty successfully created"
+msgstr "Контрагент успішно створив"
+
+msgctxt "novaposhta"
+msgid "Create a contact person"
+msgstr "Створити контактну особу"
+
+msgctxt "novaposhta"
+msgid "Contact person created successfully"
+msgstr "Контактна особа успішно створена"
+
+msgctxt "novaposhta"
+msgid "Parameters of departure"
+msgstr "Параметри відправлення"
+
+msgctxt "novaposhta"
+msgid "Payment Information"
+msgstr "Інформація про оплату"
+
+msgctxt "novaposhta"
+msgid "Type of cargo"
+msgstr "Тип вантажу"
+
+msgctxt "novaposhta"
+msgid "Total weight"
+msgstr "Загальна вага"
+
+msgctxt "novaposhta"
+msgid "kg"
+msgstr "кг"
+
+msgctxt "novaposhta"
+msgid "Number of seats"
+msgstr "Кількість місць"
+
+msgctxt "novaposhta"
+msgid "Description of departure"
+msgstr "Опис відправлення"
+
+msgctxt "novaposhta"
+msgid "Total amount of shipment"
+msgstr "Загальний об'єм відправлення"
+
+msgctxt "novaposhta"
+msgid "Announced price"
+msgstr "Оголошена ціна"
+
+msgctxt "novaposhta"
+msgid "Date of dispatch"
+msgstr "Дата відправлення"
+
+msgctxt "novaposhta"
+msgid "Pallet options"
+msgstr "Параметри палет"
+
+msgctxt "novaposhta"
+msgid "Payer"
+msgstr "Платник"
+
+msgctxt "novaposhta"
+msgid "Form of payment"
+msgstr "Форма оплати"
+
+msgctxt "novaposhta"
+msgid "Internal number"
+msgstr "Внутрішній номер відправлення"
+
+msgctxt "novaposhta"
+msgid "Time to create invoice"
+msgstr "Дата створення"
+
+msgctxt "novaposhta"
+msgid "The list is empty."
+msgstr "Список порожній."
+
+msgctxt "novaposhta"
+msgid "Invoice number"
+msgstr "Номер"
+
+msgctxt "novaposhta"
+msgid "Estimated delivery date"
+msgstr "Орієнтовна дата доставки"
+
+msgctxt "novaposhta"
+msgid "Shipping cost"
+msgstr "Вартість доставки"
+
+msgctxt "novaposhta"
+msgid "Weight"
+msgstr "Вага"
+
+msgctxt "novaposhta"
+msgid "Number of places of departure"
+msgstr "Кількість місць"
+
+msgctxt "novaposhta"
+msgid "Description"
+msgstr "Опис відправлення"
+
+msgctxt "novaposhta"
+msgid "Receive address"
+msgstr "Адреса отримання"
+
+msgctxt "novaposhta"
+msgid "Status"
+msgstr "Статус"
+
+msgctxt "novaposhta"
+msgid "Date of receiving"
+msgstr "Дата отримання"
+
+msgctxt "novaposhta"
+msgid "Invoices"
+msgstr "Накладні"
+
+msgctxt "novaposhta"
+msgid "Refresh list"
+msgstr "Оновити список"
+
+msgctxt "novaposhta"
+msgid "Update the list of invoices for the last week"
+msgstr ""
+"Оновити список накладних за останній "
+"тиждень"
+
+msgctxt "novaposhta"
+msgid "Settings"
+msgstr "Налаштування"
+
+msgctxt "novaposhta"
+msgid "Edit"
+msgstr "Редагувати"
+
+msgctxt "novaposhta"
+msgid "View"
+msgstr "Детальныше"
+
+msgctxt "novaposhta"
+msgid "Created by:"
+msgstr "Створена:"
+
+msgctxt "novaposhta"
+msgid "Date of departure"
+msgstr "Дата виїзду"
+
+msgctxt "novaposhta"
+msgid "Print"
+msgstr "Друк"
+
+msgctxt "novaposhta"
+msgid "Track down"
+msgstr "Відстежити"
+
+msgctxt "novaposhta"
+msgid "Filter"
+msgstr "Фільтр"
+
+msgctxt "novaposhta"
+msgid "Ends on"
+msgstr "Закінчується на"
+
+msgctxt "novaposhta"
+msgid "Nova Poshta"
+msgstr "Нова почта"
+
+msgctxt "novaposhta"
+msgid "Settings Nova Poshta"
+msgstr "Налаштування Нова Пошта"
+
+msgctxt "novaposhta"
+msgid "Save API KEY"
+msgstr "Зберегти API-ключ"
+
+msgctxt "novaposhta"
+msgid "Hide labels of the fields of the basket"
+msgstr "Приховати мітки з полів кошика"
+
+msgctxt "novaposhta"
+msgid "Status update frequency"
+msgstr "Частота оновлення статусу"
+
+msgctxt "novaposhta"
+msgid "hours"
+msgstr "годин"
+
+msgctxt "novaposhta"
+msgid "Template EN"
+msgstr "Шаблон ЕН"
+
+msgctxt "novaposhta"
+msgid "The data is filled individually"
+msgstr "Дані заповнюються індивідуально"
+
+msgctxt "novaposhta"
+msgid "Save template"
+msgstr "Зберегти шаблон"
+
+msgctxt "novaposhta"
+msgid "Update invoice"
+msgstr "Оновити ЕН"
+
+msgctxt "novaposhta"
+msgid "Delete"
+msgstr "Видалити"
+
+msgctxt "novaposhta"
+msgid "Update the data"
+msgstr "Оновити дані"
+
+msgctxt "novaposhta"
+msgid "Document is already printed"
+msgstr "Документ вже надруковано"
+
+msgctxt "novaposhta"
+msgid "Access NovaPoshta EN"
+msgstr "Доступ до NovaPoshta EN"
+
+msgctxt "novaposhta"
+msgid "NovaPoshta Delivery"
+msgstr "Доставка NovaPoshta"
+
+msgctxt "novaposhta"
+msgid "Estimated Shipping Cost"
+msgstr "Орієнтовна вартість доставки"
+
+msgctxt "novaposhta"
+msgid "Вес"
+msgstr "Вага"
+
+msgctxt "novaposhta"
+msgid "UAH"
+msgstr "грн"
+
+msgctxt "novaposhta"
+msgid "Scheduler"
+msgstr "Планувальник"
+
+msgctxt "novaposhta"
+msgid "Automatically launch status updates through server settings"
+msgstr ""
+"Автоматично запускати оновлення "
+"статусу через налаштування сервера"
+
+msgctxt "novaposhta"
+msgid "Automatically create a recipient from an order"
+msgstr ""
+"Автоматично створювати одержувача з "
+"замовлення"
+
+msgctxt "novaposhta"
+msgid "EN"
+msgstr "ТТН"
+
+msgctxt "novaposhta"
+msgid "Cash on delivery"
+msgstr "Наложений платіж"
+
+msgctxt "novaposhta"
+msgid "Cash on delivery amount"
+msgstr "Сума наложеного платежу"
+
+msgctxt "novaposhta"
+msgid "No matches"
+msgstr "Немає збігів"
+
+msgctxt "novaposhta"
+msgid "NovaPoshta Delivery Address"
+msgstr "Доставка на адресу NovaPoshta"
+
+msgctxt "novaposhta"
+msgid "Street"
+msgstr "Вулиця:"
+
+msgctxt "novaposhta"
+msgid "House number"
+msgstr "Номер будинку:"
+
+msgctxt "novaposhta"
+msgid "Apartment number"
+msgstr "Номер квартири:"
+
+msgctxt "novaposhta"
+msgid "st."
+msgstr "вул."
+
+msgctxt "novaposhta"
+msgid "apt."
+msgstr "кв."
+
+msgctxt "novaposhta"
+msgid "Enter search data"
+msgstr "Введіть дані пошуку"
+
+msgctxt "novaposhta"
+msgid "NovaPoshta (Search City)"
+msgstr "НоваПошта (Пошук міста)"
+
+msgctxt "novaposhta"
+msgid "Print by Number - PDF"
+msgstr "Друк по Номеру - PDF"
+
+msgctxt "novaposhta"
+msgid "Print 100x100 - PDF"
+msgstr "Друк 100х100 - PDF"
+
+msgctxt "novaposhta"
+msgid "Print 85x85 - PDF"
+msgstr "Друк 85x85 - PDF"
+
+msgctxt "novaposhta"
+msgid "Printing forms"
+msgstr "Друковані форми"
+
+msgctxt "novaposhta"
+msgid "Warehouse - Warehouse"
+msgstr "Склад - Склад"
+
+msgctxt "novaposhta"
+msgid "Warehouse - Address"
+msgstr "Склад - Адреса"
+
+msgctxt "novaposhta"
+msgid "Delivery type"
+msgstr "Тип доставки"
+
+msgctxt "novaposhta"
+msgid "Recipient type"
+msgstr "Тип одержувача"
+
+msgctxt "novaposhta"
+msgid "Last name"
+msgstr "Прізвище"
+
+msgctxt "novaposhta"
+msgid "Editing is only available in the business office"
+msgstr ""
+"Редагування доступне лише в бізнес "
+"кабінеті"
+
+msgctxt "novaposhta"
+msgid "Added TTN"
+msgstr "Додано ТТН"
+
+msgctxt "novaposhta"
+msgid "Changed TTN"
+msgstr "Змінено ТТН"
+
+msgctxt "novaposhta"
+msgid "Comment to the address"
+msgstr "Коментар до адреси:"
+
+msgctxt "novaposhta"
+msgid "Large cell"
+msgstr "Велика комірка"
+
+msgctxt "novaposhta"
+msgid "@size@ cm, maximum weight @weight@ kg."
+msgstr "@size@  см, максимальна вага @weight@ кг."
+
+msgctxt "novaposhta"
+msgid "Middle cell"
+msgstr "Середня комірка"
+
+msgctxt "novaposhta"
+msgid "Small cell"
+msgstr "Маленька комірка"
+
+msgctxt "novaposhta"
+msgid "Cell"
+msgstr "Комірка"
+

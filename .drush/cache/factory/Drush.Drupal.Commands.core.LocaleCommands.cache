@@ -1,0 +1,272 @@
+{
+    "cid": "Drush\\Drupal\\Commands\\core\\LocaleCommands",
+    "data": {
+        "getModuleHandler": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\LocaleCommands",
+            "method_name": "getModuleHandler",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "getState": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\LocaleCommands",
+            "method_name": "getState",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "check": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\LocaleCommands",
+            "method_name": "check",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "locale:check",
+            "description": "Checks for available translation updates.",
+            "help": "",
+            "aliases": [
+                "locale-check"
+            ],
+            "annotations": {
+                "command": "locale:check",
+                "validate-module-enabled": "locale"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "update": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\LocaleCommands",
+            "method_name": "update",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "locale:update",
+            "description": "Imports the available translation updates.",
+            "help": "",
+            "aliases": [
+                "locale-update"
+            ],
+            "annotations": {
+                "see": [
+                    "TranslationStatusForm::buildForm()",
+                    "TranslationStatusForm::prepareUpdateData()",
+                    "TranslationStatusForm::submitForm()"
+                ],
+                "todo": "This can be simplified once https:\/\/www.drupal.org\/node\/2631584 lands\n   in Drupal core.",
+                "command": "locale:update",
+                "validate-module-enabled": "locale"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": {
+                "langcodes": {
+                    "description": "A comma-separated list of language codes to update. If omitted, all translations will be updated.",
+                    "default": 2
+                }
+            }
+        },
+        "export": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\LocaleCommands",
+            "method_name": "export",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "locale:export",
+            "description": "Exports to a gettext translation file.",
+            "help": "See Drupal Core: \\Drupal\\locale\\Form\\ExportForm::submitForm",
+            "aliases": [
+                "locale-export"
+            ],
+            "annotations": {
+                "throws": "\\Exception",
+                "command": "locale:export",
+                "validate-module-enabled": "locale"
+            },
+            "example_usages": {
+                "drush locale:export nl \u003e nl.po": "Export the Dutch translations with all types.",
+                "drush locale:export nl --types=customized,not-customized \u003e nl.po": "Export the Dutch customized and not customized translations.",
+                "drush locale:export --template \u003e drupal.pot": "Export the source strings only as template file for translation."
+            },
+            "return_type": null,
+            "arguments": {
+                "langcode": {
+                    "description": "The language code of the exported translations.",
+                    "default": null
+                }
+            },
+            "options": {
+                "template": {
+                    "description": "POT file output of extracted source texts to be translated.",
+                    "default": false
+                },
+                "types": {
+                    "description": "String types to include, defaults to all types. Recognized values: \u003cinfo\u003enot-customized\u003c\/info\u003e, \u003cinfo\u003ecustomized\u003c\/info\u003e, \u003c\/info\u003enot-translated\u003cinfo\u003e.",
+                    "default": 2
+                }
+            }
+        },
+        "exportValidate": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\LocaleCommands",
+            "method_name": "exportValidate",
+            "mtime": 1633432454,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "export:validate",
+            "description": "Assure that required options are set.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "validate locale:export"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "import": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\LocaleCommands",
+            "method_name": "import",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "locale:import",
+            "description": "Imports to a gettext translation file.",
+            "help": "",
+            "aliases": [
+                "locale-import"
+            ],
+            "annotations": {
+                "command": "locale:import",
+                "validate-module-enabled": "locale",
+                "throws": "\\Exception"
+            },
+            "example_usages": {
+                "drush locale-import nl drupal-8.4.2.nl.po": "Import the Dutch drupal core translation.",
+                "drush locale-import --type=customized nl drupal-8.4.2.nl.po": "Import the Dutch drupal core translation. Treat imported strings as custom translations.",
+                "drush locale-import --override=none nl drupal-8.4.2.nl.po": "Import the Dutch drupal core translation. Don't overwrite existing translations. Only append new translations.",
+                "drush locale-import --override=not-customized nl drupal-8.4.2.nl.po": "Import the Dutch drupal core translation. Only override non-customized translations, customized translations are kept.",
+                "drush locale-import nl custom-translations.po --type=customized --override=all": "Import customized Dutch translations and override any existing translation."
+            },
+            "return_type": null,
+            "arguments": {
+                "langcode": {
+                    "description": "The language code of the imported translations."
+                },
+                "file": {
+                    "description": "Path and file name of the gettext file."
+                }
+            },
+            "options": {
+                "type": {
+                    "description": "The type of translations to be imported. Recognized values: \u003cinfo\u003ecustomized\u003c\/info\u003e, \u003cinfo\u003enot-customized\u003c\/info\u003e",
+                    "default": "not-customized"
+                },
+                "override": {
+                    "description": "Whether and how imported strings will override existing translations. Defaults to the Import behavior configured in the admin interface. Recognized values: \u003cinfo\u003enone\u003c\/info\u003e, \u003cinfo\u003ecustomized\u003c\/info\u003e, \u003cinfo\u003enot-customized\u003c\/info\u003e, \u003cinfo\u003eall\u003c\/info\u003e,",
+                    "default": 2
+                }
+            }
+        },
+        "preHook": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "preHook",
+            "mtime": 1633432454,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "pre:hook",
+            "description": "Persist commandData for use in primary command callback. Used by 'topic' commands.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "pre-command *"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "commandData": {
+                    "description": ""
+                }
+            },
+            "options": []
+        },
+        "setProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "processManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "processManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "hasProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "hasProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "startBrowser": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "startBrowser",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setLogger": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setLogger",
+            "mtime": 1620040827,
+            "injected_classes": []
+        },
+        "getConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "getConfig",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "parentGetConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "parentGetConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setInput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setInput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setOutput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setOutput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        }
+    },
+    "created": 1663697448,
+    "expire": 0
+}

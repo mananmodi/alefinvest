@@ -1,0 +1,14 @@
+services:
+  other.breadcrumb:
+    class: Drupal\other\Breadcrumb\OtherBreadcrumbBuilder
+    tags:
+      - { name: breadcrumb_builder, priority: 1003 }
+  other.route_subscriber:
+    class: Drupal\other\EventSubscriber\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  other.twig_extension:
+    class: Drupal\other\OtherTwigExtension
+    tags:
+      - { name: twig.extension }
+

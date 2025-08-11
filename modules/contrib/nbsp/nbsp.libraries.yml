@@ -1,0 +1,14 @@
+nbsp.ckeditor5:
+  js:
+    js/build/nbsp.js: { minified: true }
+  css:
+    theme:
+      css/ckeditor.nbsp.css: {}
+  dependencies:
+    - core/drupal
+    - core/ckeditor5
+
+nbsp.admin:
+  css:
+    theme:
+      css/nbsp.admin.css: {}

@@ -1,0 +1,9 @@
+access novaposhta settings:
+  title: 'Access NovaPoshta settings'
+  description: ''
+  restrict access: true
+
+access novaposhta en:
+  title: 'Access NovaPoshta EN'
+  description: ''
+  restrict access: true

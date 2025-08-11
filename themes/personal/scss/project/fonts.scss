@@ -1,0 +1,25 @@
+@mixin font($alias, $name, $weight: 400, $style: normal) {
+  @font-face {
+    font-family: $alias;
+    src: url($fonts + $name + "/" + $name + ".woff2") format("woff2"),
+    url($fonts + $name + "/" + $name + ".woff") format("woff"),
+    url($fonts + $name + "/" + $name + ".ttf") format("ttf");
+		font-weight: $weight;
+		font-style: $style;
+    font-display: swap;
+  }
+}
+
+@include font('ProximaNova', 'ProximaNova-Regular');
+@include font('ProximaNova', 'ProximaNova-Semibold', 600);
+@include font('ProximaNova', 'ProximaNova-Bold', 700);
+@include font('ProximaNova', 'ProximaNova-Extrabold', 800);
+@include font('Cuprum', 'Cuprum-Regular');
+
+@font-face {
+  font-family: "icomoon";
+  src: url($fonts + "icomoon/icomoon.woff") format("woff"), url($fonts + "icomoon/icomoon.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

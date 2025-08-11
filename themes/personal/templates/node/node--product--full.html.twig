@@ -1,0 +1,148 @@
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+
+{{ attach_library('personal/swiper') }}
+{{ attach_library('personal/fancybox') }}
+
+<div{{ attributes.addClass(classes) }}>
+
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div{{ content_attributes.addClass('node__content b-product') }} itemtype="http://schema.org/Product" itemscope>
+    
+    <div itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating" itemscope>
+      {% if rate %}
+        <meta itemprop="reviewCount" content="{{ rate.count }}" />
+        <meta itemprop="ratingValue" content="{{ rate.value }}" />
+      {% else %}
+        <meta itemprop="reviewCount" content="{{ node.id }}" />
+        <meta itemprop="ratingValue" content="5" />
+      {% endif %}
+    </div>
+
+    {% if node.field_product_vendor_code.0.value %}
+      <meta itemprop="mpn" content="{{ node.field_product_vendor_code.0.value }}" />
+      <meta itemprop="sku" content="{{ node.field_product_vendor_code.0.value }}" />
+    {% else %}
+      <meta itemprop="mpn" content="{{ node.id }}" />
+      <meta itemprop="sku" content="{{ node.id }}" />
+    {% endif %}
+
+    <meta itemprop="name" content="{{ node.getTitle }}" />
+
+    {% if content.node_price['#info'].price.priceConvert %}
+      <div itemprop="offers" itemtype="http://schema.org/Offer" itemscope>
+        <link itemprop="url" href="{{ drupal_url('/node/' ~ node.id) }}" />
+        <meta itemprop="priceCurrency" content="{{ content.node_price['#info'].currency }}" />
+        <meta itemprop="price" content="{{ content.node_price['#info'].price.priceConvert|number_format(0, '.', '') }}" />
+        <meta itemprop="priceValidUntil" content="{{ now|date_modify("+1 month")|date("Y-m-d") }}" />
+        {% if node.field_product_under_the_order.0.value == 1 %}
+          <meta itemprop="availability" content="https://schema.org/OutOfStock" />
+        {% else %}
+          <meta itemprop="availability" content="https://schema.org/InStock" />
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="b-product__topline">
+      <div class="left">
+        <div class="b-product__title"><h1>{{ node.getTitle }}</h1></div>
+        {{ top_rating }}
+      </div>
+      {{ content.field_product_vendor_code }}
+    </div>
+
+    <div class="b-product__tabs">
+
+    </div>
+
+    <!-- product-top -->
+    <div class="b-product__top">
+      <div class="b-product__left">
+        <!-- gallery -->
+        <div class="b-gallery">
+          <div class="b-gallery__images">
+            {% if status_info %}
+              <div class="b-product__status">
+                {{ status_info }}
+              </div>
+            {% endif %}
+            {% if content.field_product_images['#items']|length > 0 %}
+            <div class="swiper-container">
+              <div class="swiper-wrapper">
+                {% for image in content.field_product_images['#items'].getValue %}
+                  <div class="swiper-slide">
+                    <a itemprop="image" href="{{ content.field_product_images[loop.index - 1]['#item'].entity.fileuri | image_style('1920x1080m') }}" class="js-fancybox">
+                      <img src="{{ content.field_product_images[loop.index - 1]['#item'].entity.fileuri | image_style('460x410m') }}" alt="{{ image.alt }}">
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% else %}
+              <div class="empty-image">
+                {{ content.field_product_images }}
+              </div>
+            {% endif %}
+          </div>
+          {% if content.field_product_images['#items']|length > 1 %}
+          <div class="b-gallery__thumbs">
+            <div class="swiper-container">
+              <div class="swiper-wrapper">
+                {% for image in content.field_product_images['#items'].getValue %}
+                  <div class="swiper-slide">
+                    <div class="item">
+                      <img src="{{ content.field_product_images[loop.index - 1]['#item'].entity.fileuri | image_style('100x80m') }}" alt="{{ image.alt }}">
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        <!-- /gallery -->
+      </div>
+      <div class="b-product__right">
+        <div class="top">
+          <div class="left">
+            {{ content.basket_add_params }}
+            {{ content.node_price }}
+            {{ content.basket_add }}
+            {{ content.short_text }}
+          </div>
+          {{ delivery }}
+        </div>
+      </div>
+    </div>
+    <!-- /product-top -->
+
+    <!-- product-bottom -->
+    <div class="b-product__bottom">
+      {{ content.field_product_description }}
+      {% if content.field_product_specifications.0 or content.field_product_additional_specs.0 %}
+      <div class="b-product__specs">
+        <div class="b-product__specs-title">{{ 'Specifications'|t }}</div>
+        {{ content.field_product_specifications }}
+        {{ content.field_product_additional_specs }}
+      </div>
+      {% endif %}
+    </div>
+    <!-- /product-bottom -->
+    {{ content['#cache'] }}
+
+    <div class="b-product__comment-form">
+      {{ content.field_product_comments }}
+    </div>
+  </div>
+
+</div>

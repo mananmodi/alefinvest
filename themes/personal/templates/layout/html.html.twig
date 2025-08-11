@@ -1,0 +1,33 @@
+{%
+  set body_classes = [
+    logged_in ? 'user-logged-in',
+    not root_path ? 'page-front' : 'page-not-front page-' ~ root_path|clean_class,
+    node_type ? 'page-node-type-' ~ node_type|clean_class,
+    db_offline ? 'db-offline',
+    'wait-load',
+  ]
+%}
+
+<!DOCTYPE html>
+<html{{ html_attributes }}>
+  <head>
+    <title>{{ head_title|safe_join(' | ') }}</title>
+    <head-placeholder token="{{ placeholder_token }}">
+    <link rel="preload" href="/themes/personal/fonts/ProximaNova-Extrabold/ProximaNova-Extrabold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/themes/personal/fonts/ProximaNova-Semibold/ProximaNova-Semibold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/themes/personal/fonts/Cuprum-Regular/Cuprum-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/themes/personal/fonts/ProximaNova-Regular/ProximaNova-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/themes/personal/fonts/ProximaNova-Bold/ProximaNova-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/themes/personal/fonts/icomoon/icomoon.woff" as="font" type="font/woff" crossorigin="anonymous">
+    <css-placeholder token="{{ placeholder_token }}">
+    <meta name="theme-color" content="#4a4a4a">
+    <meta name="format-detection" content="telephone=no">
+  </head>
+  <body{{ attributes.addClass(body_classes) }}>
+    {{ page_top }}
+    {{ page }}
+    {{ page_bottom }}
+    <js-placeholder token="{{ placeholder_token }}">
+    <js-bottom-placeholder token="{{ placeholder_token }}">
+  </body>
+</html>

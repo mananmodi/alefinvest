@@ -1,0 +1,12 @@
+name: Single DateTimePicker Range
+type: module
+description: Date time picker form element using the xdan jQuery Plugin Date and Time Picker library - https://github.com/xdan/datetimepicker
+core_version_requirement: ^9.2 || ^10 || ^11
+
+dependencies:
+  - drupal:datetime_range
+
+# Information added by Drupal.org packaging script on 2024-06-01
+version: '2.0.0-beta2'
+project: 'single_datetime'
+datestamp: 1717202111

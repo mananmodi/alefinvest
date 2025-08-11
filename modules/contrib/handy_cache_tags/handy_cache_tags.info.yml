@@ -1,0 +1,9 @@
+name: Handy Cache Tags
+description: Provides some handy cache tags for developers to use.
+core_version_requirement: ^8 || ^9 || ^10
+type: module
+
+# Information added by Drupal.org packaging script on 2022-09-26
+version: '8.x-1.4'
+project: 'handy_cache_tags'
+datestamp: 1664207915

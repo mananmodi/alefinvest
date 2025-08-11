@@ -1,0 +1,12 @@
+<div class="b-front-block">
+  <a class="b-front-block__item item-1" href="{{ drupal_url('/catalog/all') }}">
+    <div class="b-front-block__title">{{ 'Products catalog'|t }}</div>
+  </a>
+  <a class="b-front-block__item item-2" href="{{ url('view.brands.page_1') }}">
+    <div class="b-front-block__title">{{ 'Brand directory'|t }}</div>
+  </a>
+  <div class="b-front-block__item item-3">
+    <div class="b-front-block__title">{{ 'Search'|t }}</div>
+    {{ output.search }}
+  </div>
+</div>

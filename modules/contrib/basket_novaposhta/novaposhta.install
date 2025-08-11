@@ -1,0 +1,338 @@
+<?php
+
+use Drupal\Core\Database\Database;
+use Drupal\novaposhta\NovaPoshta;
+
+/**
+ * Implements hook_install().
+ */
+function novaposhta_install() {
+  novaposhta_update_8005();
+}
+
+/**
+ * Implements hook_schema().
+ */
+function novaposhta_schema(){
+  $schema['novaposhta'] = [
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'entity' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'entity_id' => [
+        'type' => 'int',
+        'size' => 'big',
+        'not null' => TRUE,
+      ],
+      'address' => [
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+      ],
+      'data' => [
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'entity' => ['entity'],
+      'entity_id' => ['entity_id'],
+    ],
+  ];
+  $schema['novaposhta_en'] = [
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'order_id' => [
+        'type' => 'int',
+        'not null' => FALSE,
+        'description' => 'Basket order ID',
+      ],
+      'ref' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Express waybill identifier',
+      ],
+      'en_num' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Invoice number',
+      ],
+      'new_en_num' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'New invoice number',
+      ],
+      'created' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Time to create invoice',
+      ],
+      'delivery_day' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Estimated delivery date',
+      ],
+      'cost' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+        'size' => 'big',
+        'description' => 'Announced price, UAH',
+      ],
+      'cost_delivery' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+        'size' => 'medium',
+        'description' => 'Shipping cost, UAH',
+      ],
+      'weight' => [
+        'type' => 'numeric',
+        'precision' => 10,
+        'scale' => 2,
+        'not null' => FALSE,
+        'description' => 'Actual weight, kg',
+      ],
+      'seats_amount' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+        'size' => 'medium',
+        'description' => 'Number of places of departure',
+      ],
+      'description' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Description of departure',
+      ],
+      'address' => [
+        'type' => 'varchar',
+        'length' => 512,
+        'not null' => FALSE,
+        'description' => 'Receive address',
+      ],
+      'status' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Status',
+      ],
+      'date_receiving' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Date of receiving',
+      ],
+      'all_info' => [
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => FALSE,
+        'description' => 'Additional information',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'order_id' => ['order_id'],
+      'ref' => ['ref'],
+      'en_num' => ['en_num'],
+      'created' => ['created'],
+      'delivery_day' => ['delivery_day'],
+      'cost' => ['cost'],
+      'cost_delivery' => ['cost_delivery'],
+      'weight' => ['weight'],
+      'seats_amount' => ['seats_amount'],
+      'description' => ['description'],
+      'address' => ['address'],
+      'status' => ['status'],
+      'date_receiving' => ['date_receiving'],
+    ],
+  ];
+  $schema['novaposhta_en_orders'] = [
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'order_id' => [
+        'type' => 'int',
+        'not null' => FALSE,
+        'description' => 'Basket order ID',
+      ],
+      'en_num' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'Invoice number',
+      ],
+      'new_en_num' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'New invoice number',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'order_id' => ['order_id'],
+      'en_num' => ['en_num'],
+    ],
+  ];
+  $schema['novaposhta_lists'] = [
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'ref_id' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Identifier (REF)',
+      ],
+      'parent_id' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null'  => FALSE,
+        'description' => 'Parent Identifier',
+      ],
+      'type' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'List type',
+      ],
+      'name' => [
+        'type' => 'varchar',
+        'length' => 512,
+        'not null' => TRUE,
+        'description' => 'Description in Ukrainian',
+      ],
+      'last_update' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Time to add / update',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'ref_id' => ['ref_id'],
+      'parent_id' => ['parent_id'],
+      'type' => ['type'],
+    ],
+  ];
+  return $schema;
+}
+
+/**
+ * Update config
+ */
+function novaposhta_update_8001(){
+  foreach ([
+    'novaposhta_en.template' => 'novaposhta.en.template',
+    'novaposhta_en.settings' => 'novaposhta.en.settings',
+  ] as $oldKey => $newKey){
+    $oldConfig = \Drupal::config($oldKey)->get('config');
+    if(!empty($oldConfig)){
+      $config = \Drupal::configFactory()->getEditable($newKey);
+      $config->set('config', $oldConfig);
+      $config->save();
+    }
+    \Drupal::configFactory()->getEditable($oldKey)->delete();
+  }
+}
+
+/**
+ * Create table "novaposhta_en_orders"
+ */
+function novaposhta_update_8002(){
+  $schema = Database::getConnection()->schema();
+  if(!$schema->tableExists('novaposhta_en_orders')){
+    $specs = novaposhta_schema();
+    $schema->createTable('novaposhta_en_orders', $specs['novaposhta_en_orders']);
+  }
+}
+
+/**
+ * Transferring data to a new table
+ */
+function novaposhta_update_8003(){
+  $items = Database::getConnection()->select('novaposhta_en', 'n')
+    ->fields('n', ['order_id', 'en_num'])
+    ->condition('order_id', 0, '>')
+    ->execute()->fetchAllKeyed();
+  if(!empty($items)){
+    foreach ($items as $order_id => $en_num) {
+      Database::getConnection()->merge('novaposhta_en_orders')
+        ->key([
+          'order_id' => $order_id,
+        ])
+        ->insertFields([
+          'order_id' => $order_id,
+          'en_num' => $en_num
+        ])
+        ->execute();
+    }
+  }
+}
+
+/**
+ * Create table "novaposhta_lists"
+ */
+function novaposhta_update_8004() {
+  $schema = Database::getConnection()->schema();
+  if(!$schema->tableExists('novaposhta_lists')){
+    $specs = novaposhta_schema();
+    $schema->createTable('novaposhta_lists', $specs['novaposhta_lists']);
+  }
+}
+
+/**
+ * Update lists.
+ */
+function novaposhta_update_8005() {
+  (new NovaPoshta)->runUpdate('area');
+  (new NovaPoshta)->runUpdate('city');
+}
+
+/**
+ * Added column "new_en_num" to table "novaposhta_en".
+ */
+function novaposhta_update_8006() {
+  $schema = Database::getConnection()->schema();
+  if(!$schema->fieldExists('novaposhta_en', 'new_en_num')) {
+    $specs = novaposhta_schema();
+    $schema->addField('novaposhta_en', 'new_en_num', $specs['novaposhta_en']['fields']['new_en_num']);
+  }
+}
+
+/**
+ * Added column "new_en_num" to table "novaposhta_en_orders".
+ */
+function novaposhta_update_8007() {
+  $schema = Database::getConnection()->schema();
+  if(!$schema->fieldExists('novaposhta_en_orders', 'new_en_num')) {
+    $specs = novaposhta_schema();
+    $schema->addField('novaposhta_en_orders', 'new_en_num', $specs['novaposhta_en_orders']['fields']['new_en_num']);
+  }
+}

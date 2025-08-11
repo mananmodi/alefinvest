@@ -1,0 +1,124 @@
+@mixin typography {
+  @include clearfix;
+  a {
+    color: inherit;
+    transition: all .3s;
+    &:hover {
+      color: $hoverColor;
+    }
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: 40px;
+  }
+  h2 {
+    font-size: 33px;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  h4 {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  img {
+    margin-bottom: 10px;
+    &.align-left {
+      margin-right: 30px;
+    }
+    &.align-right {
+      margin-left: 30px;
+    }
+  }
+  hr {
+    border: none;
+    border-bottom: 1px solid #E8EDF2;
+  }
+  strong,
+  b {
+    font-weight: 700;
+  }
+  ul {
+    margin: 20px auto;
+    padding: 0;
+    line-height: 1.5;
+    list-style: none;
+    overflow: hidden;
+    li {
+      padding-left: 0.9em;
+      position: relative;
+      &::before {
+        content: '';
+        width: 0.358em;
+        height: 0.358em;
+        border-radius: 50%;
+        position: absolute;
+        top: 0.51em;
+        left: 0;
+        background: $mainColor;
+      }
+    }
+  }
+
+  iframe {
+    &.float-left {
+      margin-right: 30px;
+    }
+    &.float-right {
+      margin-left: 30px;
+    }
+  }
+  p {
+    margin: 0 auto 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  table {
+    width: 100%;
+    td {
+      padding: 5px;
+      border: 1px solid #E8EDF2;
+    }
+  }
+  .youtube-embed-wrapper,
+  iframe {
+    display: block;
+    margin: 0 auto 20px;
+  }
+  blockquote {
+    margin: 10px 0;
+    padding: 10px 25px 8px;
+    background: rgba($mainColor, .2);
+  }
+}
+
+.text-formatted {
+  @include typography;
+}
+
+
+/* select NP */
+.chosen-container-single {
+  .chosen-single {
+    background: #F6F6F6;
+    border: 1px solid #E2E2E2;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    span {
+      margin-right: 40px;
+    }
+    div {
+      width: 40px;
+      b {
+        background: url(/images/icons/select-arrow.svg) center center no-repeat;
+      }
+    }
+  }
+}
+.chosen-container .chosen-results li.highlighted {
+  background: $mainColor !important;
+}

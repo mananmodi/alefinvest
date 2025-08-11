@@ -1,0 +1,5 @@
+ckeditor_youtube.settings_form:
+  title: 'CKEditor Youtube Plugin'
+  description: Configuration for CKEditor Youtube Plugin.
+  parent: system.admin_config_content
+  route_name: ckeditor_youtube.settings_form

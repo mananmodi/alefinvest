@@ -1,0 +1,15 @@
+name: 'CKEditor Non-breaking space Plugin'
+type: module
+description: 'Minimal module to insert a non-breaking space into the content by pressing Ctrl+Space or using the provided button.'
+core_version_requirement: ^9.5 || ^10
+package: CKEditor
+
+dependencies:
+  - drupal:editor
+
+interface translation project: nbsp
+
+# Information added by Drupal.org packaging script on 2024-05-31
+version: '8.x-2.4'
+project: 'nbsp'
+datestamp: 1717136709

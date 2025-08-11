@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Basket EXCEL module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_schema().
+ */
+function basket_excel_schema() {
+  $schema['basket_excel_items'] = [
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'system_key' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'System Key',
+        'default' => 'excel',
+      ],
+      'data' => [
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'system_key' => ['system_key'],
+    ],
+  ];
+  return $schema;
+}
+
+/**
+ * Table "basket_excel_items" add column "system_key".
+ */
+function basket_excel_update_8001() {
+  $schema = Database::getConnection()->schema();
+  if (!$schema->fieldExists('basket_excel_items', 'system_key')) {
+    $schemaModule = basket_excel_schema();
+    $schema->addField('basket_excel_items', 'system_key', $schemaModule['basket_excel_items']['fields']['system_key']);
+    $schema->addIndex('basket_excel_items', 'system_key', ['system_key'], $schemaModule['basket_excel_items']);
+  }
+}

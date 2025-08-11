@@ -1,0 +1,141 @@
+.pager {
+  font-size: 18px;
+  margin: 30px auto 0;
+  position: relative;
+  text-align: center;
+  cursor: default;
+  .js-pager__items {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+  .pager__load_more_items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200px;
+    height: 50px;
+    margin-left: -100px;
+    margin-top: -25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    a {
+      color: inherit;
+      text-decoration: none;
+      &::before {
+        content: '\e911';
+        font-family: 'icomoon';
+        color: $hoverColor;
+        font-size: 20px;
+        transform: rotate(180deg);
+        display: inline-block;
+        font-weight: 700;
+        margin-right: 10px;
+        vertical-align: -3px;
+      }
+      &:hover {
+        color: $hoverColor;
+      }
+    }
+  }
+  .pager {
+    &__items {
+      padding: 0;
+      margin: 0;
+      padding-left: 45px;
+      padding-right: 45px;
+      display: inline-block;
+      position: relative;
+    }
+    &__item {
+      display: inline-block;
+      vertical-align: middle;
+      padding: 0;
+      margin: 5px 2px;
+      color: #333;
+      &.pager__item--last,
+      &.pager__item--first {
+        display: none;
+      }
+      &.pager__item--next,
+      &.pager__item--previous {
+        position: absolute;
+        top: 50%;
+        margin-top: -15px;
+        font-size: 0;
+        a {
+          padding-top: 1px;
+          font-size: 0;
+          width: 35px;
+          background: $mainColor;
+          border-color: $mainColor;
+          color: #fff;
+          &:hover {
+            background: $hoverColor;
+            border-color: $hoverColor;
+            color: #fff;
+          }
+          &::after {
+            font-family: 'icomoon';
+            font-size: 12px;
+          }
+
+        }
+      }
+      &.pager__item--next {
+        right: 0;
+        a {
+          &::after {
+            content: '\e918';
+          }
+        }
+      }
+      &.pager__item--previous {
+        left: 0;
+        a {
+          &::after {
+            content: '\e917';
+          }
+        }
+      }
+      &.is-active {
+        a {
+          color: #fff;
+          background: $mainColor;
+          border-color: $mainColor;
+          &:hover {
+            color: #fff;
+          }
+        }
+      }
+      a {
+        color: inherit;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: inherit;
+        text-decoration: none;
+        transition: all .3s;
+        background: #FFFDFD;
+        border: 1px solid #E2E2E2;
+        box-shadow: 0px 0px 22.3276px rgba(83, 83, 83, 0.06);
+        border-radius: 100px;
+        font-size: 13px;
+        line-height: 1;
+        padding-top: 2px;
+        text-decoration: none;
+        &:hover {
+          color: $hoverColor;
+        }
+      }
+    }
+  }
+}

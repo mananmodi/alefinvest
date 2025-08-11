@@ -1,0 +1,30 @@
+.gtext-translate-clear {
+  background-image: url('../img/clear.png');
+  width: 15px;
+  height: 15px;
+  background-size: 100% 100%;
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.gtext-translate-google-button {
+  background-image: url('../img/translate.png');
+  width: 15px;
+  height: 15px;
+  background-size: 100% 100%;
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.ajax-progress.ajax-progress-throbber .message {
+  display: none;
+}
+
+.gtext-translatable-field,
+.gtext-translate-buttons {
+  display: inline-block;
+}
+
+.gtext-in-process+.gtext-translate-buttons div {
+  filter: grayscale(1);
+}

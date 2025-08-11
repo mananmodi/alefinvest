@@ -1,0 +1,8 @@
+<div id="{{ element['#ulogin_id'] }}"
+     data-ulogin="{{ element['#ulogin_data'] }}">
+  {% for item in element['#ulogin_providers']|split(',') %}
+  	<div class="ulogin-icon-{{ item }}" data-uloginbutton="{{ item }}">
+  		{{ 'Sign in with'|t }} <span>{{ item }}</span>
+  	</div>
+  {% endfor %}
+</div>

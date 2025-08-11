@@ -1,0 +1,45 @@
+# Excel
+excel:
+  ico: 'excel.svg'
+  name: 'Excel'
+  title: 'Import / Export of goods through the Excel file'
+# Excel editor
+excel_editor:
+  ico: 'excel.svg'
+  name: 'Excel editor'
+  title: 'Import of goods through the Excel file'
+# Google feed
+google_feed:
+  ico: 'google_feed.svg'
+  name: 'Google feed'
+  title: 'Upload items to Google Merchant Center'
+# Facebook feed
+facebook_feed:
+  ico: 'facebook_feed.svg'
+  name: 'Facebook feed'
+  title: 'Facebook feed for catalogs'
+# Prom.ua
+prom:
+  ico: 'prom.svg'
+  name: 'Prom.ua'
+  title: 'Import goods to a site with prom.ua'
+# Prom.ua YML
+basket_prom_yml:
+  ico: 'prom.svg'
+  name: 'Prom.ua YML'
+  title: 'Unloading goods at prom.ua'
+# ROZETKA.COM.UA
+basket_rozetka:
+  ico: 'rozetka.svg'
+  name: 'ROZETKA.COM.UA'
+  title: 'Unloading goods on rozetka.com.ua'
+# Hotline.ua
+hotline:
+  ico: 'hotline.svg'
+  name: ''
+  title: 'Unloading products in Hotline XML format'
+# ria.com
+ria_com:
+  ico: 'ria_com.svg'
+  name: 'RIA.com'
+  title: 'YML file for RIA.com'

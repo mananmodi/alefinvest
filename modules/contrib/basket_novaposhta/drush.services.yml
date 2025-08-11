@@ -1,0 +1,5 @@
+services:
+  novaposhta.commands:
+    class: \Drupal\novaposhta\Commands\NovaPoshtaCommands
+    tags:
+      - { name: drush.command }

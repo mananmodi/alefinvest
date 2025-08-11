@@ -1,0 +1,194 @@
+<?php
+
+/**
+ * @file
+ * Main file for the gText module.
+ *
+ * @ingroup gText
+ */
+
+use Drupal\Core\Url;
+use Drupal\gtext\Utility\HelpTemplate;
+use Drupal\locale\Locale;
+use Drupal\locale\LocaleEvent;
+use Drupal\locale\LocaleEvents;
+
+use Symfony\Component\EventDispatcher\EventDispatcherInterface as ComponentEventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface as ContractsEventDispatcherInterface;
+
+/**
+ * Implements hook_help().
+ */
+function gtext_help($route_name, $route_match) {
+  if ($route_name === 'help.page.gtext') {
+    $readmy = file_get_contents(__DIR__ . '/README.md');
+    if (!\Drupal::moduleHandler()->moduleExists('markdown')) {
+      $template = HelpTemplate::help();
+      return \Drupal::service('renderer')->render($template);
+    }
+    else {
+      $filter_manager = \Drupal::service('plugin.manager.filter');
+      $settings = \Drupal::configFactory()->get('markdown.settings')->getRawData();
+      $config = ['settings' => $settings];
+      $filter = $filter_manager->createInstance('markdown', $config);
+      return $filter->process($readmy, 'en');
+    }
+  }
+  return NULL;
+
+}
+
+/**
+ * Implements hook_theme().
+ */
+function gtext_theme($existing, $type, $theme, $path) {
+  return [
+    'gtext' => [
+      'render element' => 'element',
+      'variables' => [
+        'children' => '',
+        'message_list' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_gtext_contexts().
+ */
+function gtext_gtext_contexts() {
+  $query = \Drupal::database()->select('locales_source', 's');
+  $query->addExpression('s.context', 'context');
+  $query->groupBy('s.context');
+
+  $contexts = [];
+  foreach ($query->execute() as $c) {
+    if (!empty($c->context) && strpos($c->context, 'Abbreviated') === FALSE) {
+      $contexts[$c->context] = ucfirst(str_replace('_', ' ', $c->context));
+    }
+  }
+
+  return [
+    'gtext' => 'gText',
+  ] + $contexts;
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function gtext_module_implements_alter(&$implements, $hook) {
+  if ('form_alter' == $hook && isset($implements['gtext'])) {
+    $group = $implements['gtext'];
+    unset($implements['gtext']);
+    $implements['gtext'] = $group;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function gtext_form_alter(&$form, $form_state, $form_id) {
+  if (!\Drupal::currentUser()->hasPermission('access gtext translate')) {
+    return;
+  }
+  $storage = $form_state->getStorage();
+
+  if (($form_id == 'config_translation_add_form' || $form_id == 'config_translation_edit_form')) {
+    if (isset($storage['config_translation_language']) && isset($storage['config_translation_source_language'])) {
+      $form['#attributes']['data-gtext-google-url'] = Url::fromRoute('gtext.translate.google')->toString();
+
+      $form['#attributes']['data-gtext-source-language'] = $storage['config_translation_source_language']->getId();
+      $form['#attributes']['data-gtext-target-language'] = $storage['config_translation_language']->getId();
+
+      $form['#attributes']['class'][] = 'gtext-translatable-form';
+      $form['#attributes']['class'][] = 'gtext-config-translatable-form';
+      $form['#attached']['library'][] = 'gtext/entity-form-translate';
+    }
+  }
+
+  if (!isset($storage['langcode']) || !isset($storage['entity_default_langcode']) || $storage['langcode'] == $storage['entity_default_langcode']) {
+    return;
+  }
+
+  $form['#attributes']['data-gtext-google-url'] = Url::fromRoute('gtext.translate.google')->toString();
+
+  $form['#attributes']['data-gtext-source-language'] = $storage['entity_default_langcode'];
+  $form['#attributes']['data-gtext-target-language'] = $storage['langcode'];
+
+  $form['#attributes']['class'][] = 'gtext-translatable-form';
+  $form['#attached']['library'][] = 'gtext/entity-form-translate';
+}
+
+/**
+ * Translates a string to the current language or to a given language.
+ *
+ * This functionality is a wrapper of @link i18n Localization API. @endlink.
+ *
+ * See \Drupal\Core\StringTranslation\TranslatableMarkup::__construct() for
+ * important security information and usage guidelines.
+ *
+ * @param string $context
+ *   (optional) The context the source string.
+ *
+ * @see \Drupal\Core\StringTranslation\TranslatableMarkup::__construct()
+ */
+function gtext($context = NULL) {
+  if (!empty($context)) {
+    return \Drupal::service('gtext')->$context;
+  }
+  else {
+    return \Drupal::service('gtext');
+  }
+}
+
+/**
+ * Refresh related information after string translations have been updated.
+ *
+ * The information that will be refreshed includes:
+ * - JavaScript translations.
+ * - Locale cache.
+ * - Render cache.
+ *
+ * @param array $langcodes
+ *   Language codes for updated translations.
+ * @param array $lids
+ *   (optional) List of string identifiers that have been updated / created.
+ *   If not provided, all caches for the affected languages are cleared.
+ */
+function _gtext_refresh_locale_translations($langcodes, array $lids = []) {
+  if (!empty($langcodes)) {
+    // Update javascript translations if any of the strings has a javascript
+    // location, or if no string ids were provided, update all languages.
+    $storage = \Drupal::service('locale.storage')->getStrings([
+      'lid' => $lids,
+      'type' => 'javascript',
+    ]);
+    if (empty($lids) || $storage) {
+      array_map('_locale_invalidate_js', $langcodes);
+    }
+  }
+
+  // Throw locale.save_translation event.
+  if ( interface_exists(ContractsEventDispatcherInterface::class) && \Drupal::service('event_dispatcher') instanceof ContractsEventDispatcherInterface ){
+    \Drupal::service('event_dispatcher')->dispatch(new LocaleEvent($langcodes, $lids), LocaleEvents::SAVE_TRANSLATION);
+  } else
+  if ( interface_exists(ComponentEventDispatcherInterface::class) && \Drupal::service('event_dispatcher') instanceof ComponentEventDispatcherInterface ){
+    \Drupal::service('event_dispatcher')->dispatch(new LocaleEvent($langcodes, $lids), LocaleEvents::SAVE_TRANSLATION);
+  } else {
+    \Drupal::messenger()->addError( t('Error calling event. It is possible that the changes will be applied only after the cache is cleared'));
+  }
+}
+
+/**
+ * Refreshes configuration after string translations have been updated.
+ *
+ * @param array $langcodes
+ *   Language codes for updated translations.
+ * @param array $lids
+ *   List of string identifiers that have been updated / created.
+ */
+function _gtext_refresh_locale_configuration(array $langcodes, array $lids) {
+  if ($lids && $langcodes && $names = Drupal::service('locale.config_manager') ->getStringNames($lids)) {
+    Drupal::service('locale.config_manager') ->updateConfigTranslations($names, $langcodes);
+  }
+}

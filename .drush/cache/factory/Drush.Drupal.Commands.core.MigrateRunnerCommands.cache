@@ -1,0 +1,444 @@
+{
+    "cid": "Drush\\Drupal\\Commands\\core\\MigrateRunnerCommands",
+    "data": {
+        "status": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\MigrateRunnerCommands",
+            "method_name": "status",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "migrate:status",
+            "description": "List all migrations with current status.",
+            "help": "",
+            "aliases": [
+                "ms",
+                "migrate-status"
+            ],
+            "annotations": {
+                "command": "migrate:status",
+                "topics": "docs:migrate",
+                "validate-module-enabled": "migrate",
+                "field-labels": "\n   id: Migration ID\n   status: Status\n   total: Total\n   imported: Imported\n   needing_update: Needing update\n   unprocessed: Unprocessed\n   last_imported: Last Imported",
+                "default-fields": "id,status,total,imported,unprocessed,last_imported",
+                "throws": "\\Exception\n   If --names-only is used with --field having other value than 'id'."
+            },
+            "example_usages": {
+                "migrate:status": "Retrieve status for all migrations",
+                "migrate:status --tag": "Retrieve status for all migrations, grouped by tag",
+                "migrate:status --tag=user,main_content": "Retrieve status for all migrations tagged with \u003cinfo\u003euser\u003c\/info\u003e or \u003cinfo\u003emain_content\u003c\/info\u003e",
+                "migrate:status classification,article": "Retrieve status for specific migrations",
+                "migrate:status --field=id": "Retrieve a raw list of migration IDs.",
+                "ms --fields=id,status --format=json": "Retrieve a Json serialized list of migrations, each item containing only the migration ID and its status."
+            },
+            "return_type": "\\Consolidation\\OutputFormatters\\StructuredData\\RowsOfFields",
+            "arguments": {
+                "migrationIds": {
+                    "description": "Restrict to a comma-separated list of migrations. Optional.",
+                    "default": null
+                }
+            },
+            "options": {
+                "tag": {
+                    "description": "A comma-separated list of migration tags to list. If only \u003cinfo\u003e--tag\u003c\/info\u003e is provided, all tagged migrations will be listed, grouped by tags.",
+                    "default": 2
+                },
+                "names-only": {
+                    "description": "[Deprecated, use --field=id instead] Only return names, not all the details (faster).",
+                    "default": false
+                }
+            }
+        },
+        "import": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\MigrateRunnerCommands",
+            "method_name": "import",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "migrate:import",
+            "description": "Perform one or more migration processes.",
+            "help": "",
+            "aliases": [
+                "mim",
+                "migrate-import"
+            ],
+            "annotations": {
+                "command": "migrate:import",
+                "topics": "docs:migrate",
+                "validate-module-enabled": "migrate",
+                "throws": "\\Exception\n   When not enough options were provided or no migration was found."
+            },
+            "example_usages": {
+                "migrate:import --all": "Perform all migrations",
+                "migrate:import --all --no-progress": "Perform all migrations but avoid the progress bar",
+                "migrate:import --tag=user,main_content": "Import all migrations tagged with \u003cinfo\u003euser\u003c\/info\u003e and \u003cinfo\u003emain_content\u003c\/info\u003e tags",
+                "migrate:import classification,article": "Import new terms and nodes using migration \u003cinfo\u003eclassification\u003c\/info\u003e and \u003cinfo\u003earticle\u003c\/info\u003e",
+                "migrate:import user --limit=2": "Import no more than 2 users using the \u003cinfo\u003euser\u003c\/info\u003e migration",
+                "migrate:import user --idlist=5": "Import the user record with source ID 5",
+                "migrate:import node_revision --idlist=1:2,2:3,3:5": "Import the node revision record with source IDs [1,2], [2,3], and [3,5]",
+                "migrate:import user --limit=50 --feedback=20": "Import 50 users and show process message every 20th record",
+                "migrate:import --all --delete": "Perform all migrations and delete the destination items that are missing from source"
+            },
+            "return_type": null,
+            "arguments": {
+                "migrationIds": {
+                    "description": "Comma-separated list of migration IDs.",
+                    "default": null
+                }
+            },
+            "options": {
+                "all": {
+                    "description": "Process all migrations.",
+                    "default": false
+                },
+                "tag": {
+                    "description": "A comma-separated list of migration tags to import",
+                    "default": 2
+                },
+                "limit": {
+                    "description": "Limit on the number of items to process in each migration",
+                    "default": 2
+                },
+                "feedback": {
+                    "description": "Frequency of progress messages, in items processed",
+                    "default": 2
+                },
+                "idlist": {
+                    "description": "Comma-separated list of IDs to import. As an ID may have more than one column, concatenate the columns with the colon ':' separator",
+                    "default": 2
+                },
+                "update": {
+                    "description": "In addition to processing unprocessed items from the source, update previously-imported items with the current data",
+                    "default": false
+                },
+                "force": {
+                    "description": "Force an operation to run, even if all dependencies are not satisfied",
+                    "default": false
+                },
+                "execute-dependencies": {
+                    "description": "Execute all dependent migrations first.",
+                    "default": false
+                },
+                "timestamp": {
+                    "description": "Show progress ending timestamp in progress messages",
+                    "default": false
+                },
+                "total": {
+                    "description": "Show total processed item number in progress messages",
+                    "default": false
+                },
+                "progress": {
+                    "description": "Show progress bar",
+                    "default": true
+                },
+                "delete": {
+                    "description": "Delete destination records missed from the source. Not compatible with --limit and --idlist options, and high_water_property source configuration key.",
+                    "default": false
+                }
+            }
+        },
+        "rollback": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\MigrateRunnerCommands",
+            "method_name": "rollback",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "migrate:rollback",
+            "description": "Rollback one or more migrations.",
+            "help": "",
+            "aliases": [
+                "mr",
+                "migrate-rollback"
+            ],
+            "annotations": {
+                "command": "migrate:rollback",
+                "topics": "docs:migrate",
+                "validate-module-enabled": "migrate",
+                "throws": "\\Exception\n   When not enough options were provided."
+            },
+            "example_usages": {
+                "migrate:rollback --all": "Rollback all migrations",
+                "migrate:rollback --all --no-progress": "Rollback all migrations but avoid the progress bar",
+                "migrate:rollback --tag=user,main_content": "Rollback all migrations tagged with \u003cinfo\u003euser\u003c\/info\u003e and \u003cinfo\u003emain_content\u003c\/info\u003e tags",
+                "migrate:rollback classification,article": "Rollback terms and nodes imported by \u003cinfo\u003eclassification\u003c\/info\u003e and \u003cinfo\u003earticle\u003c\/info\u003e migrations",
+                "migrate:rollback user --idlist=5": "Rollback imported user record with source ID 5"
+            },
+            "return_type": null,
+            "arguments": {
+                "migrationIds": {
+                    "description": "Comma-separated list of migration IDs.",
+                    "default": null
+                }
+            },
+            "options": {
+                "all": {
+                    "description": "Process all migrations.",
+                    "default": false
+                },
+                "tag": {
+                    "description": "A comma-separated list of migration tags to rollback",
+                    "default": 2
+                },
+                "feedback": {
+                    "description": "Frequency of progress messages, in items processed",
+                    "default": 2
+                },
+                "idlist": {
+                    "description": "Comma-separated list of IDs to rollback. As an ID may have more than one column, concatenate the columns with the colon ':' separator",
+                    "default": 2
+                },
+                "progress": {
+                    "description": "Show progress bar",
+                    "default": true
+                }
+            }
+        },
+        "stop": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\MigrateRunnerCommands",
+            "method_name": "stop",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "migrate:stop",
+            "description": "Stop an active migration operation.",
+            "help": "",
+            "aliases": [
+                "mst",
+                "migrate-stop"
+            ],
+            "annotations": {
+                "command": "migrate:stop",
+                "topics": "docs:migrate",
+                "validate-module-enabled": "migrate",
+                "validate-migration-id": ""
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "migrationId": {
+                    "description": "The ID of migration to stop."
+                }
+            },
+            "options": []
+        },
+        "resetStatus": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\MigrateRunnerCommands",
+            "method_name": "resetStatus",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "migrate:reset-status",
+            "description": "Reset an active migration's status to idle.",
+            "help": "",
+            "aliases": [
+                "mrs",
+                "migrate-reset-status"
+            ],
+            "annotations": {
+                "command": "migrate:reset-status",
+                "topics": "docs:migrate",
+                "validate-module-enabled": "migrate",
+                "validate-migration-id": ""
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "migrationId": {
+                    "description": "The ID of migration to reset."
+                }
+            },
+            "options": []
+        },
+        "messages": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\MigrateRunnerCommands",
+            "method_name": "messages",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "migrate:messages",
+            "description": "View any messages associated with a migration.",
+            "help": "",
+            "aliases": [
+                "mmsg",
+                "migrate-messages"
+            ],
+            "annotations": {
+                "command": "migrate:messages",
+                "topics": "docs:migrate",
+                "validate-module-enabled": "migrate",
+                "validate-migration-id": "",
+                "field-labels": "\n   level: Level\n   source_ids: Source ID(s)\n   destination_ids: Destination ID(s)\n   message: Message\n   hash: Source IDs hash",
+                "default-fields": "level,source_ids,destination_ids,message,hash"
+            },
+            "example_usages": {
+                "migrate:messages article": "Show all messages for the \u003cinfo\u003earticle\u003c\/info\u003e migration",
+                "migrate:messages article --idlist=5": "Show messages related to article record with source ID 5.",
+                "migrate:messages node_revision --idlist=1:2,2:3,3:5": "Show messages related to node revision records with source IDs [1,2], [2,3], and [3,5].",
+                "migrate:messages custom_node_revision --idlist=1:\"r:1\",2:\"r:3\"": "Show messages related to node revision records with source IDs [1,\"r:1\"], and [2,\"r:3\"]."
+            },
+            "return_type": "\\Consolidation\\OutputFormatters\\StructuredData\\RowsOfFields",
+            "arguments": {
+                "migrationId": {
+                    "description": "The ID of the migration."
+                }
+            },
+            "options": {
+                "idlist": {
+                    "description": "Comma-separated list of IDs to import. As an ID may have more than one column, concatenate the columns with the colon ':' separator.",
+                    "default": 2
+                }
+            }
+        },
+        "fieldsSource": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\MigrateRunnerCommands",
+            "method_name": "fieldsSource",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "migrate:fields-source",
+            "description": "List the fields available for mapping in a source.",
+            "help": "",
+            "aliases": [
+                "mfs",
+                "migrate-fields-source"
+            ],
+            "annotations": {
+                "command": "migrate:fields-source",
+                "topics": "docs:migrate",
+                "validate-module-enabled": "migrate",
+                "validate-migration-id": "",
+                "field-labels": "\n   machine_name: Field name\n   description: Description",
+                "default-fields": "machine_name,description"
+            },
+            "example_usages": {
+                "migrate:fields-source article": "List fields for the source in the article migration"
+            },
+            "return_type": "\\Consolidation\\OutputFormatters\\StructuredData\\RowsOfFields",
+            "arguments": {
+                "migrationId": {
+                    "description": "The ID of the migration."
+                }
+            },
+            "options": []
+        },
+        "validateMigrationId": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\MigrateRunnerCommands",
+            "method_name": "validateMigrationId",
+            "mtime": 1633432454,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "validate:migration-id",
+            "description": "Validates a migration ID is valid.",
+            "help": "If the argument to be validated is not named migrationId, pass the\nargument name as the value of the annotation.",
+            "aliases": [],
+            "annotations": {
+                "hook": "validate @validate-migration-id"
+            },
+            "example_usages": [],
+            "return_type": "\\Consolidation\\AnnotatedCommand\\CommandError|null",
+            "arguments": {
+                "commandData": {
+                    "description": ""
+                }
+            },
+            "options": []
+        },
+        "preHook": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "preHook",
+            "mtime": 1633432454,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "pre:hook",
+            "description": "Persist commandData for use in primary command callback. Used by 'topic' commands.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "pre-command *"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "commandData": {
+                    "description": ""
+                }
+            },
+            "options": []
+        },
+        "setProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "processManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "processManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "hasProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "hasProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "startBrowser": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "startBrowser",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setLogger": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setLogger",
+            "mtime": 1620040827,
+            "injected_classes": []
+        },
+        "getConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "getConfig",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "parentGetConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "parentGetConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setInput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setInput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setOutput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setOutput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        }
+    },
+    "created": 1663697448,
+    "expire": 0
+}

@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the LiqPay module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function liqpay_schema() {
+  $schema['payments_liqpay'] = [
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'nid' => [
+        'type' => 'int',
+        'size' => 'big',
+        'not null' => FALSE,
+      ],
+      'sid' => [
+        'type' => 'int',
+        'size' => 'big',
+        'not null' => FALSE,
+      ],
+      'uid' => [
+        'type' => 'int',
+        'size' => 'big',
+        'not null' => FALSE,
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => FALSE,
+        'length' => 100,
+      ],
+      'paytime' => [
+        'type' => 'int',
+        'not null' => FALSE,
+        'length' => 100,
+      ],
+      'amount' => [
+        'type' => 'varchar',
+        'not null' => FALSE,
+        'length' => 255,
+      ],
+      'currency' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ],
+      'status' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ],
+      'data' => [
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'nid' => ['nid'],
+      'sid' => ['sid'],
+      'uid' => ['uid'],
+      'currency' => ['currency'],
+      'created' => ['created'],
+      'paytime' => ['paytime'],
+      'status' => ['status'],
+    ],
+  ];
+  return $schema;
+}

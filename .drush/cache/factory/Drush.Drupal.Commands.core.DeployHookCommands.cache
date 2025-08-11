@@ -1,0 +1,224 @@
+{
+    "cid": "Drush\\Drupal\\Commands\\core\\DeployHookCommands",
+    "data": {
+        "status": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\DeployHookCommands",
+            "method_name": "status",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "deploy:hook-status",
+            "description": "Prints information about pending deploy update hooks.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "field-labels": "\n   module: Module\n   hook: Hook\n   description: Description",
+                "default-fields": "module,hook,description",
+                "command": "deploy:hook-status",
+                "topics": "docs:deploy",
+                "filter-default-field": "hook"
+            },
+            "example_usages": {
+                "deploy:hook-status": "Prints information about pending deploy hooks."
+            },
+            "return_type": "\\Consolidation\\OutputFormatters\\StructuredData\\RowsOfFields",
+            "arguments": [],
+            "options": []
+        },
+        "run": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\DeployHookCommands",
+            "method_name": "run",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "deploy:hook",
+            "description": "Run pending deploy update hooks.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "command": "deploy:hook",
+                "topics": "docs:deploy"
+            },
+            "example_usages": {
+                "deploy:hook": "Run pending deploy hooks."
+            },
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "process": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\DeployHookCommands",
+            "method_name": "process",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "deploy:batch-process",
+            "description": "Process operations in the specified batch set.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "command": "deploy:batch-process",
+                "bootstrap": "full",
+                "hidden": ""
+            },
+            "example_usages": [],
+            "return_type": "\\Consolidation\\OutputFormatters\\StructuredData\\UnstructuredListData",
+            "arguments": {
+                "batch_id": {
+                    "description": "The batch id that will be processed."
+                }
+            },
+            "options": {
+                "format": {
+                    "description": "",
+                    "default": "json"
+                }
+            }
+        },
+        "updateFinished": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\DeployHookCommands",
+            "method_name": "updateFinished",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "markComplete": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\DeployHookCommands",
+            "method_name": "markComplete",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "deploy:mark-complete",
+            "description": "Mark all deploy hooks as having run.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "command": "deploy:mark-complete",
+                "topics": "docs:deploy"
+            },
+            "example_usages": {
+                "deploy:mark-complete": "Skip all pending deploy hooks and mark them as complete."
+            },
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "preHook": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "preHook",
+            "mtime": 1633432454,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "pre:hook",
+            "description": "Persist commandData for use in primary command callback. Used by 'topic' commands.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "pre-command *"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "commandData": {
+                    "description": ""
+                }
+            },
+            "options": []
+        },
+        "setProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "processManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "processManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "hasProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "hasProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "startBrowser": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "startBrowser",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setLogger": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setLogger",
+            "mtime": 1620040827,
+            "injected_classes": []
+        },
+        "getConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "getConfig",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "parentGetConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "parentGetConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setInput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setInput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setOutput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setOutput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setSiteAliasManager": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\DeployHookCommands",
+            "method_name": "setSiteAliasManager",
+            "mtime": 1645660758,
+            "injected_classes": []
+        },
+        "siteAliasManager": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\DeployHookCommands",
+            "method_name": "siteAliasManager",
+            "mtime": 1645660758,
+            "injected_classes": []
+        },
+        "hasSiteAliasManager": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\core\\DeployHookCommands",
+            "method_name": "hasSiteAliasManager",
+            "mtime": 1645660758,
+            "injected_classes": []
+        }
+    },
+    "created": 1663697448,
+    "expire": 0
+}

@@ -1,0 +1,17 @@
+name: 'Basket IMEX'
+type: module
+description: 'Basket Import and Export system'
+package: 'Online store'
+core_version_requirement: '^9 || ^10'
+dependencies:
+  - basket
+'interface translation project': basket_imex
+'interface translation server pattern': modules/basket/%project/translations/%project-%version.%language.po
+
+# Information added by Alternativecommerce.org packaging script on 2024-05-14
+# project: basket_imex
+# datestamp: 1715684872
+# Information added by Drupal.org packaging script on 2024-09-17
+version: '10.0.1'
+project: 'basket_imex'
+datestamp: 1726581198

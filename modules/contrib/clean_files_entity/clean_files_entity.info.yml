@@ -1,0 +1,11 @@
+name: Clean Files Entity
+type: module
+description: ''
+package: Media
+core_version_requirement: ^9 || ^10
+hidden: false
+
+# Information added by Drupal.org packaging script on 2024-06-11
+version: '8.x-1.4'
+project: 'clean_files_entity'
+datestamp: 1718090854

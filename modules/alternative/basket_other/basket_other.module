@@ -1,0 +1,198 @@
+<?php
+	
+	use Drupal\basket_other\basketPages;
+	use Drupal\basket_other\FormAlter\exposedFormCatalogPage1;
+	use Drupal\basket_other\FormAlter\taxonomyOverviewVocabularies;
+	use Drupal\basket_other\FormAlter\taxonomyVocabularyForm;
+	use Drupal\basket_other\FormAlter\userEditForm;
+	use Drupal\basket_other\FormAlter\userLoginForm;
+	use Drupal\basket_other\FormAlter\userRegisterForm;
+	use Drupal\basket_other\nodeView;
+	use Drupal\basket_other\viewCartGoodsCart;
+	use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+	use Drupal\Core\Entity\EntityInterface;
+	use Drupal\Core\Form\FormStateInterface;
+	use Drupal\views\ViewExecutable;
+	use Drupal\views\Plugin\views\query\QueryPluginBase;
+	use Drupal\Core\Ajax\ReplaceCommand;
+	use Drupal\Core\Url;
+
+/**
+ * Implements hook_node_view_alter().
+ */
+function basket_other_node_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display){
+	nodeView::alter($build, $entity, $display);
+}
+/**
+ * Implements hook_form_alter().
+ */
+function basket_other_form_alter(&$form, FormStateInterface $form_state, $form_id){
+	switch($form_id){
+		case'taxonomy_vocabulary_form':
+			taxonomyVocabularyForm::alter($form, $form_state);
+			break;
+		case'config_translation_add_form':
+		case'config_translation_edit_form':
+			taxonomyVocabularyForm::alterConfig($form, $form_state);
+			break;
+		case'user_form':
+		case'user_edit_profile_form':
+			userEditForm::alter($form, $form_state);
+			break;
+		case'user_login_form':
+			userLoginForm::alter($form, $form_state);
+			break;
+		case'user_register_form':
+			userRegisterForm::alter($form, $form_state);
+			break;
+		case'taxonomy_overview_vocabularies':
+			taxonomyOverviewVocabularies::alter($form, $form_state);
+			break;
+	}
+	switch($form['#id']){
+		case'views-exposed-form-catalog-page-1':
+			exposedFormCatalogPage1::alter($form, $form_state);
+			break;
+		case'views-exposed-form-catalog-page-3':
+			$form['#attached']['library'][] = 'basket_other/basket_other.js';
+			$form['actions']['submit']['#attributes']['style'] = 'display:none;';
+			if(!empty($form['compare'])){
+				$form['compare']['#attributes']['onchange'] = 'filter_auto_submit(this)';
+			}
+			break;
+	}
+}
+
+/**
+ * Implements hook_theme().
+ */
+function basket_other_theme(){
+	$tpls = [];
+	foreach ([
+		'basket_other_node_price_full',
+		'basket_other_color_label',
+    'basket_other_node_avail'
+	] as $tpl_name){
+		$tpls[$tpl_name] = [
+			'variables' => [
+				'info'      => NULL,
+			],
+		];
+	}
+	return $tpls;
+}
+/**
+ * Implements hook_preprocess_theme().
+ */
+function basket_other_preprocess_views_view_table(&$vars){
+	if($vars['view']->id() == 'cart_goods' && $vars['view']->current_display == 'cart' ||
+    $vars['view']->id() == 'cart_goods' && $vars['view']->current_display == 'block_2'){
+		viewCartGoodsCart::viewsViewTable($vars);
+	}
+	if($vars['view']->id() == 'cart_goods' && $vars['view']->current_display == 'block_1'){
+		viewCartGoodsCart::viewsViewTableBlock1($vars);
+	}
+}
+
+/**
+ * Implements hook_preprocess_theme().
+ */
+function basket_other_preprocess_views_view(&$vars){
+	if($vars['view']->id() == 'cart_goods' && $vars['view']->current_display == 'block_1'){
+		viewCartGoodsCart::viewsViewBlock1($vars);
+	}
+	if($vars['view']->id() == 'cart_goods' && $vars['view']->current_display == 'block_2'){
+		$vars['attributes']['class'][] = 'view-display-id-cart';
+	}
+	if($vars['view']->id() == 'catalog' && $vars['view']->current_display == 'page_1'){
+		exposedFormCatalogPage1::viewsView($vars);
+	}
+	if($vars['view']->id() == 'catalog' && $vars['view']->current_display == 'block_1' && !empty($vars['more']['#url'])){
+		$vars['more']['#url']->setOption('query', ['sort' => 'popular|DESC']);
+	}
+	if($vars['view']->id() == 'catalog' && $vars['view']->current_display == 'block_5' && !empty($vars['more']['#url'])){
+		$vars['more']['#url']->setOption('query', ['sort' => 'rating|DESC']);
+	}
+}
+
+/**
+ * Implements hook_basket_pages_alter().
+ */
+function basket_other_basket_pages_alter(&$element, $page_type, $page_subtype){
+	basketPages::alter($element, $page_type, $page_subtype);
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function basket_other_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
+	if($view->id() == 'catalog' && $view->current_display == 'page_1'){
+		exposedFormCatalogPage1::viewsQueryAlter($view, $query);
+	}
+	// Remove duplicates in basket products list.
+	if ($view->id() === 'basket' && $view->current_display === 'block_3') {
+		$query->addField('node_field_data', 'nid', 'n_nid', ['function' => 'groupby']);
+		$query->addGroupBy("node_field_data.nid");
+		// Fix order when table sort enabled.
+		$query->addOrderBy('node_field_data', 'created', 'DESC');
+	}
+}
+
+/**
+ * Implements hook_basket_ajaxReloadDelivery_alter().
+ */
+function basket_other_basket_ajaxReloadDelivery_alter(&$response){
+	$response->addCommand(new ReplaceCommand('[data-cartid="view_wrap-cart_goods-block_1"]', \Drupal::service('Basket')->getView('cart_goods', 'block_1')));
+}
+
+function basket_other_preprocess_user(&$vars){
+	if(\Drupal::routeMatch()->getRouteName() == 'entity.user.canonical' && !empty($vars['user']) && $vars['user']->id() == \Drupal::currentUser()->id()){
+		$formObject = \Drupal::entityTypeManager()->getFormObject('user', 'edit_profile')->setEntity($vars['user']);
+		$vars['content']['edit_profile'] = \Drupal::formBuilder()->getForm($formObject);
+	}
+}
+
+function basket_other_entity_type_build(array &$entity_types) {
+	$entity_types['user']->setFormClass('edit_profile', 'Drupal\user\ProfileForm');
+}
+
+function basket_other_preprocess_menu__account(&$vars){
+	if(!empty($vars['items'])){
+		foreach ($vars['items'] as &$item){
+			if(empty($item['url'])) continue;
+			if(\Drupal::routeMatch()->getRouteName() == 'entity.user.canonical' && $item['url']->getRouteName() == 'user.page'){
+				$item['url']->setOption('attributes', ['class' => ['is-active']]);
+			}
+		}
+	}
+}
+
+function basket_other_preprocess_basket_admin_header(&$vars) {
+	if(!empty($vars['info']['items'])){
+		$route_name = \Drupal::service('path.matcher')->isFrontPage() ? '<front>' : '<current>';
+		$type = 'language_interface';
+		$links = \Drupal::service('language_manager')->getLanguageSwitchLinks($type, Url::fromRoute($route_name));
+		if(!empty($links->links)){
+			$options = [];
+			$activeLang = NULL;
+			foreach ($links->links as $langcode => $link){
+				$link['url']->setOption('language', $link['language']);
+				$link['url']->setOption('query', $link['query']);
+				$options[$link['url']->toString()] = $langcode;
+				if($langcode == \Drupal::languageManager()->getCurrentLanguage()->getId()){
+					$activeLang = $link['url']->toString();
+				}
+			}
+			array_splice($vars['info']['items'], 0, 0, [
+				'lang'          => [
+					'#type'         => 'select',
+					'#options'      => $options,
+					'#value'        => $activeLang,
+					'#attributes'   => [
+						'onchange'      => 'window.location = jQuery(this).val();'
+					]
+				]
+			]);
+		}
+	}
+}

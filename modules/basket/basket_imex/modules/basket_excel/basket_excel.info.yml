@@ -1,0 +1,16 @@
+name: Basket IMEX Excel
+type: module
+description: Basket Import and Export by Excel
+package: Online store
+core_version_requirement: ^9 || ^10
+dependencies:
+  - basket
+  - basket_imex
+interface translation project: basket_excel
+interface translation server pattern: modules/basket/%project/translations/%project-%version.%language.po
+
+# project: 'basket_imex'
+# Information added by Drupal.org packaging script on 2024-09-17
+version: '10.0.1'
+project: 'basket_imex'
+datestamp: 1726581198

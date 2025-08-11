@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * Module for organization of import and export of goods.
+ */
+
+use Drupal\basket_imex\AdminPages;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_basket_translate_context_alter().
+ */
+function basket_imex_basket_translate_context_alter(&$context): void {
+  $context[] = 'basket_imex';
+}
+
+/**
+ * Implements hook_basket_admin_page_alte().
+ */
+function basket_imex_basket_admin_page_alter(&$element, $params): void {
+  (new AdminPages)->alter($element, $params);
+}
+
+/**
+ * Forming a list of fields.
+ *
+ * @param string $nodeType
+ *   Material type.
+ *
+ * @return mixed
+ *   Array of fields.
+ */
+function basket_imex_get_fields($nodeType) {
+  $getFields = &drupal_static(__FUNCTION__);
+  if (!isset($getFields[$nodeType])) {
+    $getFields[$nodeType] = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $nodeType);
+
+    // Sub Fields.
+    \Drupal::service('BasketIMEX')->subFields($getFields[$nodeType]);
+
+    $getFields[$nodeType]['basket_imex_old_redirect'] = [
+      'label' => \Drupal::service('Basket')->translate('basket_imex')->t('Redirect from the old link'),
+      'type' => 'basket_imex_old_redirect',
+    ];
+    $getFields[$nodeType]['basket_imex_is_delete'] = [
+      'label' => \Drupal::service('Basket')->translate('basket_imex')->t('To delete'),
+      'type' => 'basket_imex_is_delete',
+    ];
+
+    \Drupal::moduleHandler()->alter('basket_imex_node_fields', $getFields[$nodeType], $nodeType);
+
+    $getFields[$nodeType]['nid']->setLabel('NID');
+  }
+  return $getFields[$nodeType];
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function basket_imex_node_delete(EntityInterface $entity): void {
+  \Drupal::database()->delete('basket_imex_redirect')
+    ->condition('nid', $entity->id())
+    ->execute();
+}

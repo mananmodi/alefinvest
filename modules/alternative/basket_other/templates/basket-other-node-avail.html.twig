@@ -1,0 +1,15 @@
+{% if info.under_the_order %}
+	<div class="product-avail order">
+		{{ 'Under the orer'|t }}
+	</div>
+{% else %}
+	{% if info.infos[info.color].count and info.infos[info.color].count > 0 %}
+		<div class="product-avail on">
+			{{ 'Are available'|t }}
+		</div>
+	{% else %}
+		<div class="product-avail off">
+			{{ 'Not available'|t }}
+		</div>
+	{% endif %}
+{% endif %}

@@ -1,0 +1,7 @@
+imagecache_external_test.api.endpoint:
+  path: '/imagecache_external_test/api.jsp'
+  defaults:
+    _controller: '\Drupal\imagecache_external_test\Controller\ImagecacheExternalTestController::api'
+    _title: 'Imagecache external API image'
+  requirements:
+    _permission: 'access content'

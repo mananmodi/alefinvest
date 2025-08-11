@@ -1,0 +1,15 @@
+name: gText
+type: module
+package: Multilingual
+description: Utility to simplify the translation of strings on the site.
+core_version_requirement: ^8.8 || ^9 || ^10 || ^11
+
+dependencies:
+  - drupal:locale
+
+configure: gtext.translate
+
+# Information added by Drupal.org packaging script on 2024-07-31
+version: '9.0.12'
+project: 'gtext'
+datestamp: 1722445997

@@ -1,0 +1,9 @@
+services:
+  gtext.translate_extension:
+    class: Drupal\gtext\Twig\TwigTranslateExtension
+    arguments: ['@gtext']
+    tags:
+      - { name: twig.extension }
+
+  gtext:
+    class: Drupal\gtext\TextTranslationFactory

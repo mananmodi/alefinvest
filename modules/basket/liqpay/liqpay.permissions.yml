@@ -1,0 +1,4 @@
+access liqpay settings:
+  title: 'Access Liqpay settings'
+  description: ''
+  restrict access: true

@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the ckeditor_youtube module.
+ */
+
+/**
+ * Add the CKEditor Youtube default configuration.
+ */
+function ckeditor_youtube_update_8001() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('ckeditor_youtube.settings');
+  $config->set('library_path', 'libraries/youtube');
+  $config->save(TRUE);
+}
+
+/**
+ * Set CKEditor Youtube plugin location to drupal-ckeditor-libraries-group
+ * composer auto-install location.
+ */
+function ckeditor_youtube_update_8002() {
+  if (\file_exists(\Drupal::root() . '/libraries/youtube/youtube/plugin.js')) {
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('ckeditor_youtube.settings');
+    $config->set('library_path', 'libraries/youtube/youtube');
+    $config->save(TRUE);
+  }
+}

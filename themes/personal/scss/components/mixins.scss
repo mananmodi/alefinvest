@@ -1,0 +1,281 @@
+@mixin clearfix() {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin placeholder {
+  $placeholders: ":-webkit-input" ":-moz" "-ms-input";
+  @each $placeholder in $placeholders {
+    &:#{$placeholder}-placeholder {
+      @content;
+    }
+  }
+}
+
+@mixin media($width: 1500px) {
+	@media screen and(min-width: $width){
+		@content;
+	}
+}
+
+@mixin title {
+  font-size: 35px;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: 35px;
+}
+
+@mixin scroll($thumb: $mainColor, $track: rgba($mainColor, .3), $width: 6px) {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: $thumb $track;
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+  &::-webkit-scrollbar-track {
+    background: $track;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $thumb;
+  }
+}
+
+
+@mixin trans($time: 0.2s) {
+  transition: $time;
+}
+
+@mixin button($big: "", $color: #fff, $bg: $mainColor, $reverse: '', $arrow: '') {
+	@if $color == '' {
+		$color: #fff;
+	}
+	@if $bg == '' {
+		$bg: $mainColor;
+	}
+  display: inline-flex;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  outline: none;
+  user-select: none;
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  color: $color;
+  margin: 0;
+  text-shadow: none;
+  box-shadow: none;
+  @if $reverse == 1 {
+    background: transparent;
+    border: 1px solid $bg;
+    color: $bg;
+  }
+  @else {
+    background: $bg;
+  }
+  border-radius: 5px;
+  z-index: 1;
+  transition: 0.2s;
+  font-weight: 600;
+
+  @if $big == 1 {
+    padding: 13px 50px 11px;
+    min-height: 50px;
+    font-size: 18px;
+  }
+  @else {
+    padding: 4px 25px;
+    min-height: 40px;
+    font-size: $FSize;
+  }
+  &:before {
+    content:'';
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    display:block;
+    z-index:-1;
+    transition: 0.5s;
+    background: $bg;
+    border-radius: 5px;
+    @if $reverse == 1 {
+      opacity: 0;
+      transform: scaleX(1.2) scaleY(1.5);
+    }
+    @else {
+      opacity: 0.3;
+    }
+  }
+  &:hover {
+    transform : translateY(-2px);
+    @if $reverse == 1 {
+      background: $bg;
+      color: $color;
+      &:before {
+        transform: scaleX(1) scaleY(1);
+        opacity: 0.3;
+      }
+    }
+    @else {
+      background: $color1;
+      &:before {
+        transform: scaleX(1.2) scaleY(1.5);
+        opacity: 0;
+      }
+    }
+  }
+  &:active {
+    transform:translateY(-1px);
+  }
+  
+  @if $arrow == 1 {
+    &:after {
+      @include icomoon;
+      content: '\e90d';
+      margin: 0 0 0 10px;
+      font-size: 18px;
+    }
+    &:hover {
+      &:after {
+        animation-duration: 1s;
+        animation-name: slideOutRight;
+        animation-iteration-count: infinite;
+      }
+    }
+  }
+}
+
+@mixin hover_link($color: currentColor, $reverse: '', $before: '') {
+  @if $color == '' {
+    $color: currentColor;
+  }
+  @include trans();
+  position: relative;
+  text-decoration: none;
+  @if $before == 1 {
+    &:before {
+      background: $color;
+      @include trans();
+      content: '';
+      position: absolute;
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transform: scaleX(0);
+    }
+  } @else {
+    &:after {
+      background: $color;
+      @include trans();
+      content: '';
+      position: absolute;
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transform: scaleX(0);
+    }
+  }
+  @if $reverse == 1 {
+    @if $before == 1 {
+      &:before {
+        transform: scaleX(1);
+      }
+      &:hover {
+        &:before {
+          transform: scaleX(0);
+        }
+      }
+    } @else {
+      &:after {
+        transform: scaleX(1);
+      }
+      &:hover {
+        &:after {
+          transform: scaleX(0);
+        }
+      }
+    }
+  } @else {
+    @if $before == 1 {
+      &:hover {
+        &:before {
+          transform: scaleX(1);
+        }
+      }
+    } @else {
+      &:hover {
+        &:after {
+          transform: scaleX(1);
+        }
+      }
+    }
+  }
+}
+
+@mixin block_full() {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 0;
+}
+
+@mixin icomoon() {
+  line-height: 1;
+  font-family: icomoon;
+  font-weight: normal;
+}
+
+@mixin animation($time: 1s, $count: infinite) {
+    animation-duration: $time;
+    animation-iteration-count: $count;
+}
+
+@mixin hover_line($color: currentColor, $color2: currentColor, $reverse: '', $height: 1px) {
+  @if $color == '' {
+    $color: currentColor;
+  }
+  @if $color2 == '' {
+    $color2: currentColor;
+  }
+  background: linear-gradient(to right, $color 0%, $color2 100%) no-repeat 0 bottom;
+
+  @if $reverse == 1 {
+    background-size: 100% $height;
+  }
+  @else {
+    background-size: 0 $height;
+  }
+  text-decoration: none;
+  @include trans;
+  &:hover {
+    @if $reverse == 1 {
+      background-size: 0 $height;
+    }
+    @else {
+      background-size: 100% $height;
+    }
+  }
+}
+
+
+// styles
+@mixin style16_400(){
+  font-size: 16px;
+}
+
+@mixin style16_800(){
+  font-size: 16px;
+  font-weight: 800;
+}

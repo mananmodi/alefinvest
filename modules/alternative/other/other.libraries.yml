@@ -1,0 +1,23 @@
+main:
+  version: VERSION
+  js:
+    js/other.js: {}
+  dependencies:
+  - core/jquery
+  - core/drupal.ajax
+admin:
+  version: VERSION
+  js:
+    js/other-admin.js: {}
+  dependencies:
+  - core/jquery
+recaptcha-ajax:
+  js:
+    https://www.google.com/recaptcha/api.js: {type: external}
+    js/recaptcha-ajax.js: {}
+form:
+  version: VERSION
+  js:
+    js/other-form.js: {}
+  dependencies:
+  - core/jquery

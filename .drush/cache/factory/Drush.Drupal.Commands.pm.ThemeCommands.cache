@@ -1,0 +1,160 @@
+{
+    "cid": "Drush\\Drupal\\Commands\\pm\\ThemeCommands",
+    "data": {
+        "getThemeInstaller": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\pm\\ThemeCommands",
+            "method_name": "getThemeInstaller",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "enable": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\pm\\ThemeCommands",
+            "method_name": "enable",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "theme:enable",
+            "description": "Enable one or more themes.",
+            "help": "",
+            "aliases": [
+                "then",
+                "theme-enable"
+            ],
+            "annotations": {
+                "command": "theme:enable"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "themes": {
+                    "description": "A comma delimited list of themes.",
+                    "default": []
+                }
+            },
+            "options": []
+        },
+        "uninstall": {
+            "schema": 4,
+            "class": "Drush\\Drupal\\Commands\\pm\\ThemeCommands",
+            "method_name": "uninstall",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "theme:uninstall",
+            "description": "Uninstall theme.",
+            "help": "",
+            "aliases": [
+                "thun",
+                "theme-uninstall"
+            ],
+            "annotations": {
+                "command": "theme:uninstall"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "themes": {
+                    "description": "A comma delimited list of themes.",
+                    "default": []
+                }
+            },
+            "options": []
+        },
+        "preHook": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "preHook",
+            "mtime": 1633432454,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "pre:hook",
+            "description": "Persist commandData for use in primary command callback. Used by 'topic' commands.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "pre-command *"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "commandData": {
+                    "description": ""
+                }
+            },
+            "options": []
+        },
+        "setProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "processManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "processManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "hasProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "hasProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "startBrowser": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "startBrowser",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setLogger": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setLogger",
+            "mtime": 1620040827,
+            "injected_classes": []
+        },
+        "getConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "getConfig",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "parentGetConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "parentGetConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setInput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setInput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setOutput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setOutput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        }
+    },
+    "created": 1663697448,
+    "expire": 0
+}

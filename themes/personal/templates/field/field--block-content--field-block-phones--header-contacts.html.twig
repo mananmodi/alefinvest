@@ -1,0 +1,36 @@
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+  ]
+%}
+{%
+  set title_classes = [
+    'field__label',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  <div class="field__label">{{ 'Hot line'|t }}</div>
+  <div class="field__items">
+    <div class="phones">
+      <div{{ items.0.attributes.addClass('field__item') }}>{{ items.0.content }}</div>
+      {% if items|length > 1 %}
+        <div class="hidden-phones">
+          <div class="arrow"></div>
+          <div class="hidden-phones-inner">
+            {% for item in items %}
+              {% if loop.index == 1 %}
+              {% else %}
+                <div{{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for gText.
+ *
+ * @ingroup gText
+ */
+
+use Drupal\Core\Site\Settings;
+
+/**
+ * Implements hook_install().
+ */
+function gtext_install() {
+  $file_system = \Drupal::service('file_system');
+  $settings_options = ['id', 'label', 'bundle', 'get', '__toString', 'toString'];
+  $settings_name = 'twig_sandbox_whitelisted_methods';
+  $twig_whitelisted = Settings::get($settings_name, $settings_options);
+  $twig_whitelisted = array_merge($twig_whitelisted, ['t', 'plural']);
+  $twig_whitelisted = array_unique($twig_whitelisted);
+
+  $settingData = '$settings["twig_sandbox_whitelisted_methods"] = [' . PHP_EOL
+    . '    "' . implode('", ' . PHP_EOL . '    "', $twig_whitelisted) . '"' . PHP_EOL
+    . '];';
+
+  if(\Drupal::hasService('site.path')) {
+    $settingFile = \Drupal::service('site.path') . '/settings.php';
+  } else {
+    $settingFile = DRUPAL_ROOT . '/sites/default/settings.php';
+  }
+  if (file_exists($settingFile)) {
+    if (!is_writable($settingFile)) {
+      $file_system->chmod($settingFile, 0644);
+    }
+    if (is_writable($settingFile)) {
+      file_put_contents($settingFile, PHP_EOL . $settingData . PHP_EOL, FILE_APPEND);
+      $file_system->chmod($settingFile, 0444);
+    }
+  }
+}

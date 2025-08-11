@@ -1,0 +1,58 @@
+<h2>{{ 'For example in @type' | t({'@type' : 'php'}, {'context' : 'gtext'}) }}:</h2>
+<br>
+<h3>{{ 'Simple text' | t({}, {'context' : 'gtext'}) }}:</h3>
+<code>
+	gtext('giz')->t('Home page')<br>
+	gtext()->giz('Home page')<br>
+	gtext()->giz->t('Home page')<br>
+	\Drupal::service('gtext')->giz->t('Home page')<br>
+</code>
+<br>
+<h3>{{ 'With parameters' | t({}, {'context' : 'gtext'}) }}:</h3>
+
+<code>
+	gtext()->giz('User @name', ['@name' => 'Admin'])<br>
+	gtext('giz')->t('User @name', ['@name' => 'Admin'])<br>
+	gtext()->giz->t('User @name', ['@name' => 'Admin'])<br>
+	Drupal::service('gtext')->giz->t('User @name', ['@name' => 'Admin'])<br>
+</code>
+<br>
+<h3>{{ 'Plural' | t({}, {'context' : 'gtext'}) }}:</h3>
+
+<code>
+	gtext()->giz->plural(1, '@count comment', '@count comments')
+</code>
+<br>
+<br>
+<br>
+
+<h2>{{ 'For example in @type' | t({'@type' : 'twig'}, {'context' : 'gtext'}) }}:</h2>
+<br>
+<h3>{{ 'Filter' | t({}, {'context' : 'gtext'}) }}:</h3>
+
+<code>
+	{{ "{{'Home page'|gtext('giz')}}" }}
+</code>
+<br>
+<br>
+<h3>{{ 'Filter (with params)' | t({}, {'context' : 'gtext'}) }}:</h3>
+<code>
+	{{ "{{ 'User @name'|gtext('giz', {'@name': 'Admin'}) }}" }}
+</code>
+<br>
+<br>
+<h3>{{ 'Global variable' | t({}, {'context' : 'gtext'}) }}:</h3>
+{{ "<p>{{ gtext.giz.t('Home page') }}</p>" }}
+<br>
+<h3>{{ 'Global variable (with params)' | t({}, {'context' : 'gtext'}) }}:</h3>
+<code>{{ "<p>{{ gtext.giz.t('User @name', {'@name': 'Admin'}) }}</p>" }}</code>
+<br>
+<h3>{{ 'Plural variants' | t({}, {'context' : 'gtext'}) }}:</h3>
+<code>{{ "{{ gtext.giz.plural(4, '@count comment', '@count comments') }} }}" }}</code>
+<br>
+<h3>{{ 'Plural variants (with params)' | t({}, {'context' : 'gtext'}) }}:</h3>
+<code>
+	{{ "{{ gtext.giz.plural(4,  '@count page from \"%site\"', '@count pages  from \"%site\"', {'%site': 'example site'}) }}" }}
+</code>
+
+<br><br><br>

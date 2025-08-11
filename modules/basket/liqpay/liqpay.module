@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * @file
+ * Module for LiqPay API 3.0 (v2).
+ */
+
+use Drupal\liqpay\Form\LiqpayPaymentsForm;
+
+/**
+ * Implements hook_basket_translate_context_alter().
+ */
+function liqpay_basket_translate_context_alter(&$context) {
+  $context[] = 'liqpay';
+}
+
+/**
+ * Implements hook_basket_noty_actions_alter().
+ */
+function liqpay_basket_noty_actions_alter(&$actions) {
+  $actions['change_liqpay_status'] = t('Change payment status (Liqpay)', [], ['context' => 'liqpay']);
+}
+
+/**
+ * Implements hook_basket_noty_twig_tokens_alter().
+ */
+function liqpay_basket_noty_twig_tokens_alter(&$tokens) {
+  $tokens['liqpay_status'] = NULL;
+  if (!empty($tokens['order']->nid)) {
+    $payment = \Drupal::getContainer()->get('LiqPay')->load([
+      'nid' => $tokens['order']->nid,
+    ]);
+    if (!empty($payment->status)) {
+      $statuses = (new LiqpayPaymentsForm())->getStatuses();
+      if (!empty($statuses[$payment->status])) {
+        $tokens['liqpay_status'] = $statuses[$payment->status];
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function liqpay_theme() {
+  return [
+    'liqpay_success_page' => [
+      'variables' => [
+        'info' => NULL,
+      ],
+    ],
+  ];
+}

@@ -1,0 +1,25 @@
+liqpay.settings:
+  path: '/admin/config/development/liqpay'
+  defaults:
+    _title: 'Liqpay settings'
+    _form: '\Drupal\liqpay\Form\LiqpaySettingsForm'
+  requirements:
+    _permission: 'access liqpay settings'
+
+liqpay.payments:
+  path: '/admin/config/development/liqpay/payments'
+  defaults:
+    _title: 'Payments'
+    _form: '\Drupal\liqpay\Form\LiqpayPaymentsForm'
+  requirements:
+    _permission: 'access liqpay settings'
+
+liqpay.pages:
+  path: '/liqpay/{page_type}'
+  defaults:
+    _title: 'Payment'
+    _title_callback: '\Drupal\liqpay\Controller\LiqpayPages::title'
+    _controller: '\Drupal\liqpay\Controller\LiqpayPages::pages'
+    page_type: '{page_type}'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,179 @@
+{
+    "cid": "Drush\\Commands\\pm\\SecurityUpdateCommands",
+    "data": {
+        "security": {
+            "schema": 4,
+            "class": "Drush\\Commands\\pm\\SecurityUpdateCommands",
+            "method_name": "security",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "pm:security",
+            "description": "Check Drupal Composer packages for pending security updates.",
+            "help": "This uses the [Drupal security advisories package](https:\/\/github.com\/drupal-composer\/drupal-security-advisories) to determine if updates\nare available. An exit code of 3 indicates that the check completed, and insecure packages were found.",
+            "aliases": [
+                "sec",
+                "pm-security"
+            ],
+            "annotations": {
+                "command": "pm:security",
+                "bootstrap": "none",
+                "table-style": "default",
+                "field-labels": "\n   name: Name\n   version: Installed Version",
+                "default-fields": "name,version",
+                "filter-default-field": "name",
+                "throws": "\\Exception"
+            },
+            "example_usages": {
+                "drush pm:security --format=json": "Get security data in JSON format.",
+                "HTTP_PROXY=tcp:\/\/localhost:8125 pm:security": "Proxy Guzzle requests through an http proxy."
+            },
+            "return_type": "\\Consolidation\\OutputFormatters\\StructuredData\\RowsOfFields",
+            "arguments": [],
+            "options": {
+                "no-dev": {
+                    "description": "Only check production dependencies.",
+                    "default": false
+                }
+            }
+        },
+        "suggestComposerCommand": {
+            "schema": 4,
+            "class": "Drush\\Commands\\pm\\SecurityUpdateCommands",
+            "method_name": "suggestComposerCommand",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "securityPhp": {
+            "schema": 4,
+            "class": "Drush\\Commands\\pm\\SecurityUpdateCommands",
+            "method_name": "securityPhp",
+            "mtime": 1633432454,
+            "injected_classes": [],
+            "name": "pm:security-php",
+            "description": "Check non-Drupal PHP packages for pending security updates.",
+            "help": "Packages are discovered via composer.lock file. An exit code of 3\nindicates that the check completed, and insecure packages were found.",
+            "aliases": [
+                "sec-php",
+                "pm-security-php"
+            ],
+            "annotations": {
+                "throws": "\\Exception",
+                "command": "pm:security-php",
+                "validate-php-extension": "json",
+                "bootstrap": "none"
+            },
+            "example_usages": {
+                "drush pm:security-php --format=json": "Get security data in JSON format.",
+                "HTTP_PROXY=tcp:\/\/localhost:8125 pm:security": "Proxy Guzzle requests through an http proxy."
+            },
+            "return_type": "Consolidation\\OutputFormatters\\StructuredData\\UnstructuredData",
+            "arguments": [],
+            "options": {
+                "format": {
+                    "description": "",
+                    "default": "yaml"
+                },
+                "no-dev": {
+                    "description": "Only check production dependencies.",
+                    "default": false
+                }
+            }
+        },
+        "preHook": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "preHook",
+            "mtime": 1633432454,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "pre:hook",
+            "description": "Persist commandData for use in primary command callback. Used by 'topic' commands.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "pre-command *"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "commandData": {
+                    "description": ""
+                }
+            },
+            "options": []
+        },
+        "setProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "processManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "processManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "hasProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "hasProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "startBrowser": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "startBrowser",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setLogger": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setLogger",
+            "mtime": 1620040827,
+            "injected_classes": []
+        },
+        "getConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "getConfig",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "parentGetConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "parentGetConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setInput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setInput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setOutput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setOutput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        }
+    },
+    "created": 1663697447,
+    "expire": 0
+}

@@ -1,0 +1,28 @@
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+    'comment-wrapper',
+  ]
+%}
+{%
+  set title_classes = [
+    'title',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+{#{{ dd() }}#}
+<div{{ attributes.addClass(classes) }}>
+{#  {% if comments['#sorted'] %}#}
+{#    {{ comments }}#}
+{#  {% else %}#}
+{#    <div class="empty-reviews">{{ 'No reviews added yet. Be the first who will add it.'|t }}</div>#}
+{#  {% endif %}#}
+  {% if comment_form %}
+    <div class="comment-form-wrapper">
+      {{ comment_form }}
+    </div>
+  {% endif %}
+</div>

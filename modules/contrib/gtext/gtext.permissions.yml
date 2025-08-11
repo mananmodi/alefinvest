@@ -1,0 +1,6 @@
+access gtext translate strings:
+  title: 'Access to translate string (/admin/config/texts)'
+  restrict access: TRUE
+
+access gtext translate:
+  title: 'Access translate entities, blocks other (access to show gtext translate buttons)'

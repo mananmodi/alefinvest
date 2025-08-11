@@ -1,0 +1,15 @@
+/* stylelint-disable selector-type-no-unknown -- Custom element nbsp has been created on purpose for CKEditor5. */
+nbsp {
+  display: inline-block;
+  border: 2px solid rgba(0, 123, 198, 1);
+  background-color: rgba(0, 123, 198, 0.4);
+}
+
+/**
+ * The previous tag (span.nbsp) is still on the filter to keep compatibility with previous content created.
+ */
+span.nbsp {
+  border: 1px solid rgba(0, 123, 198, 1);
+  background-color: rgba(0, 123, 198, 0.4);
+}
+/* stylelint-enable selector-type-no-unknown */

@@ -1,0 +1,47 @@
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    personal_counter ? 'has-counter',
+  ]
+%}
+
+{%
+  set content_classes = [
+    'node__content',
+    'b-product-small',
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div{{ content_attributes.addClass(content_classes) }}>
+    <div class="b-product-small__visible">
+      {% if status_info %}
+        <div class="b-product__status">
+          {{ status_info }}
+        </div>
+      {% endif %}
+      {{ content.field_product_images }}
+      <div class="b-product-small__title"><a href="{{ url }}">{{ label }}</a></div>
+      {{ price }}
+      {{ content|without('field_product_images', 'basket_add', 'short_text') }}
+    </div>
+    <div class="b-product-small__hidden">
+      <div class="b-product-small__buttons">
+        {{ content.basket_add }}
+      </div>
+      {{ content.short_text }}
+    </div>
+
+  </div>
+  {% if personal_counter %}
+    <div class="b-product-small__counter">{{ personal_counter }}</div>
+  {% endif %}
+
+</div>

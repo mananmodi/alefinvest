@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Theme override of an image.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the img tag.
+ * - style_name: (optional) The name of the image style applied.
+ *
+ * @see template_preprocess_image()
+ */
+#}
+{%
+set classes = [
+  style_name ? 'image-style-' ~ style_name|clean_class,
+]
+%}
+<img{{ attributes.addClass(classes) }} />
+{% if lazy %}
+  <span class="lazy-wrapper" style="width: {{ width }}px; max-width: 100%;"><span class="lazy-wrapper-inner" style="padding-bottom: {{ lazy.ratio * 100 }}%;"></span></span>
+{% endif %}
+

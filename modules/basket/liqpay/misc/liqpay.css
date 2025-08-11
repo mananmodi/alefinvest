@@ -1,0 +1,40 @@
+#payment_form {
+  width: 360px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid rgb(224, 230, 237);
+  border-radius: 15px;
+  box-shadow: 0 3px 10px 0 rgba(0,0,0,.1);
+  padding: 16px;
+}
+#payment_form * {
+  padding: 0;
+  margin: 0;
+}
+#payment_form .form-submit {
+  margin-top: 24px;
+  background: #7ab72b;
+  height: 44px;
+  color: #fff;
+  border-radius: 2px;
+  width: 100%;
+  line-height: 44px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+}
+#payment_form .form-submit:hover {
+  background: #60941d;
+}
+#payment_form .sum {
+  color: #bac2cd;
+  font-size: 14px;
+  text-align: center;
+}
+#payment_form .sum label {
+  font-weight: normal;
+  display: inline-block;
+}

@@ -1,0 +1,6 @@
+[submodule "youtube"]
+    path=/modules/contrib/youtube
+    url=https://git.drupalcode.org/project/youtube.git
+[submodule "views_fieldsets"]
+    path=/modules/contrib/views_fieldsets
+    url=https://git.drupalcode.org/project/views_fieldsets.git

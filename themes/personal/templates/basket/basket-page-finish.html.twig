@@ -1,0 +1,76 @@
+{% if info.order %}
+	<div class="b-basket-finish">
+		<div class="b-basket-finish__top">
+			<p class="b-basket-finish__title">{{ '@user, thanks for your order!'|t({ '@user': info.order.name }) }}</p>
+			<p>{{ 'Your order is accepted. We will contact you shortly to confirm the order №@order.'|t({ '@order': info.order.id }) }}</p>
+			{% if info.order.authenticated %}
+				<p>{{ 'You can track the status of your order in your <a href="@link">account</a>'|t({ '@link': info.order.authenticated }) }}</p>
+			{% endif %}
+		</div>
+		<div class="b-basket-finish__info">
+			<div class="b-basket-finish__header">
+				<div class="b-basket-finish__number">{{ 'Your order №@order'|t({ '@order': info.order.id }) }}</div>
+				<div class="b-basket-finish__count">{{ info.order.count }}</div>
+			</div>
+		</div>
+		<div class="b-basket-finish__table">
+			{{ info.order.goods }}
+		</div>
+		<div class="b-basket-finish__summ">
+			<table>
+				{% if info.order.delivery_price %}
+				<tr>
+					<td>{{ 'Delivery price'|t }}:</td>
+					<td>{{ info.order.delivery_price }}</td>
+				</tr>
+				{% endif %}
+				<tr>
+					<td>{{ 'Order price'|t }}:</td>
+					<td>{{ info.order.pay_price }}</td>
+				</tr>
+			</table>
+		</div>
+		<div class="b-basket-finish__bottom">
+			<table>
+				<tr>
+					<td>{{ 'Delivery'|t }}</td>
+					<td>
+						<p>{{ info.order.delivery }}</p>
+						{% if info.order.delivery_address %}
+							<p class="address">{{ info.order.delivery_address }}</p>
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td>{{ 'Payment'|t }}</td>
+					<td>{{ info.order.payment }}</td>
+				</tr>
+				<tr>
+					<td>{{ 'Buyer'|t }}</td>
+					<td>
+						<p>{{ info.order.name }}</p>
+						<p>{{ info.order.user_phone }}</p>
+						<p>{{ info.order.user_mail }}</p>
+					</td>
+				</tr>
+				{% if info.order.notes %}
+				<tr>
+					<td>{{ 'Notes'|t }}</td>
+					<td>{{ info.order.notes }}</td>
+				</tr>
+				{% endif %}
+			</table>
+		</div>
+	</div>
+{% else %}
+	{% if info.config.template.value %}
+		{{ prefix }}
+		{% set body = {
+			'#type':   'processed_text',
+			'#text':    info.config.template.value,
+			'#format':  info.config.template.format,
+		} %}
+		{{ body|raw }}
+		{{ suffix }}
+	{% endif %}
+{% endif %}

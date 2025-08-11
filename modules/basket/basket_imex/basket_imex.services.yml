@@ -1,0 +1,14 @@
+services:
+
+  BasketIMEX:
+    class: Drupal\basket_imex\Plugins\IMEX\BasketManagerIMEX
+    parent: default_plugin_manager
+
+  BasketIMEXfield:
+    class: Drupal\basket_imex\Plugins\IMEXfield\BasketManagerIMEXfield
+    parent: default_plugin_manager
+    
+  BasketIMEX404.route_subscriber:
+    class: Drupal\basket_imex\Event\EventSubscriber
+    tags:
+      - { name: event_subscriber }

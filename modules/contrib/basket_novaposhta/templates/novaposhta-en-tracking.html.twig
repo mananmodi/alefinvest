@@ -1,0 +1,19 @@
+<div class="novaposhta_en_view auto_width">
+	<div class="header_">
+		<div class="invoice-header">
+			<div class="invoice-header__left">
+				{{ info.en_num }}
+			</div>
+		</div>
+	</div>
+	<div class="invoice__info">
+		<div class="info-row">
+			<div class="row">
+				<div class="label">{{ 'Status'|t([], {'context': 'novaposhta'}) }}</div>
+				<div class="val">
+					{{ info.request.Status }}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

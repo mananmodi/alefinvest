@@ -1,0 +1,6 @@
+gtext.translate:
+  title: 'Translating texts'
+  title_context: gtext
+  route_name: gtext.translate
+  parent: system.admin_config
+  weight: 1

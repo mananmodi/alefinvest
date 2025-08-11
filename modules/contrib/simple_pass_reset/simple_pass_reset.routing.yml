@@ -1,0 +1,9 @@
+simple_pass_reset.admin_settings:
+  path: '/admin/config/people/accounts/simple_pass_reset'
+  defaults:
+    _form: '\Drupal\simple_pass_reset\Form\SettingsForm'
+    _title: 'Simple Password Reset Settings'
+  requirements:
+    _permission: 'administer users'
+  options:
+    _admin_route: TRUE

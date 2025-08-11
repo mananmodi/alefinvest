@@ -1,0 +1,8 @@
+name: 'Imagecache External test'
+core_version_requirement: ^10.1 || ^11
+package: 'Display Suite'
+type: module
+# Information added by Drupal.org packaging script on 2024-08-03
+version: '3.0.4'
+project: 'imagecache_external'
+datestamp: 1722719305

@@ -1,0 +1,229 @@
+#novaposhta_en_form_ajax_wrap{
+	td{
+		vertical-align: top;
+	}
+	.form-item{
+		display: flex;
+    	align-items: center;
+    	margin: 0 0 5px;
+    	label{
+    		width: 25%;
+    		flex-shrink: 0;
+    	}
+	}
+	.field-suffix{
+		margin: 0 0 0 5px;
+		a{
+			margin: 0;
+		}
+	}
+	.button--link{
+		margin-left: 10px;
+		&:hover{
+			color: #fff !important;
+			&:after{
+				display: none;
+			}
+		}
+	}
+}
+.all-print	{
+	margin-left: 15px;
+}
+.b_content_novaposhta{
+	table{
+		th{
+			font-size: 12px;
+			vertical-align: top;
+			a{
+				display: flex;
+				justify-content: space-between;
+				.sort_arrow{
+					top: 0 !important;
+					margin: 0 0 0 5px !important;
+				}
+			}
+		}
+		.nowrap{
+			    white-space: nowrap;
+		}
+	}
+}
+.novaposhta_en_view{
+	width: 864px;
+	margin: 0 auto;
+	border-radius: 4px;
+	color: rgba(0,0,0,.87);
+    font-size: 16px;
+    line-height: 18px;
+    background: #fff;
+    &.auto_width{
+    	width: auto;
+    }
+	.header_{
+		padding: 10px 24px 0;
+		border-bottom: 1px solid rgba(0,0,0,.12);
+		.invoice__date{
+			font-size: 12px;
+		    line-height: 16px;
+		    color: rgba(0,0,0,.54);
+		}
+		.invoice-header{
+			display: flex;
+			padding: 11px 0 16px;
+			.invoice-header__left{
+				width: 51%;
+				font-size: 36px;
+				line-height: 42px;
+			}
+			.invoice-header__right{
+				width: 49%;
+				display: flex;
+				.row{
+					margin: 0 24px 0 0;
+				}
+			}
+		}
+	}
+	.content_{
+		padding: 8px 24px 24px;
+		.invoice-body{
+			display: flex;
+		}
+		.invoice-body__left{
+			padding-right: 24px;
+    		width: 51%;
+    		.invoice-state{
+    			position: relative;
+			    margin-bottom: 24px;
+			    padding-left: 24px;
+			    font-size: 16px;
+			    line-height: 24px;
+			    .invoice-state__progress{
+			    	position: absolute;
+				    top: 20px;
+				    bottom: 20px;
+				    left: 1px;
+				    width: 8px;
+				    background-color: rgba(0,0,0,.38);
+				    background-image: -webkit-gradient(linear,left top,left bottom,from(#ff9c00),to(#ff9c00));
+				    background-image: linear-gradient(#ff9c00,#ff9c00);
+				    background-repeat: no-repeat;
+				    background-size: 100% 0;
+				    &:after{
+				    	position: absolute;
+					    top: 0;
+					    right: 0;
+					    bottom: 0;
+					    left: 0;
+					    z-index: 1;
+					    background: url(misc/images/status.svg) repeat-y;
+					    content: '';
+				    }
+			    }
+			    .invoice-state__startpoint{
+			    	position: relative;
+    				margin-bottom: 24px;
+    				&:after{
+					    position: absolute;
+					    top: 7px;
+					    left: -24px;
+					    display: block;
+					    -webkit-box-sizing: border-box;
+					    box-sizing: border-box;
+					    width: 10px;
+					    height: 10px;
+					    border: 2px solid rgba(0,0,0,.87);
+					    border-radius: 50%;
+					    background-color: #fff;
+					    content: '';
+    				}
+    				.invoice-state__startpoint-location{
+					    font-size: 12px;
+						line-height: 16px;
+    				}
+			    }
+			    .invoice-state__name{
+			    	font-size: 13px;
+			    	line-height: 16px;
+			    	color: rgba(0,0,0,.38);
+			    }
+			    .invoice-state__endpoint{
+		    	    position: relative;
+					margin-top: 24px;
+					.ng-star-inserted{
+						font-size: 16px;
+    					line-height: 24px;
+					}
+					.invoice-state__endpoint-location{
+						font-size: 12px;
+    					line-height: 16px;
+					}
+					&:after{
+						position: absolute;
+					    bottom: 7px;
+					    left: -24px;
+					    display: block;
+					    box-sizing: border-box;
+					    width: 10px;
+					    height: 10px;
+					    border: 2px solid rgba(0,0,0,.87);
+					    border-radius: 50%;
+					    background-color: #fff;
+					    content: '';
+					}
+			    }
+    		}
+		}
+		.invoice-body__right{
+			width: 49%;
+			.row{
+				margin-bottom: 24px;
+				&:last-child{
+					margin-bottom: 0;
+				}
+			}
+		}
+		.invoice__info{
+		    padding: 16px 0;
+			border-top: 1px solid #d8d8d8;
+			display: flex;
+			.info-row{
+				display: flex;
+				flex: 1;
+				margin: 0 -15px;
+				.row{
+					display: flex;
+					padding: 0 15px;
+					width: 50%;
+					flex-direction: column;
+				}
+			}
+		}
+	}
+	.label{
+		position: relative;
+		font-weight: normal;
+	    color: rgba(0,0,0,.54);
+	    font-size: 12px;
+	    line-height: 14px;
+	}
+	.button--link{
+		width: auto;
+		background: rgba(0,0,0,.12);
+	}
+}
+.mfp-close-btn-in .mfp-close {
+	color: #333333;
+}
+body {
+    width: fit-content;
+}
+.view-novaposhta.view-id-novaposhta{
+	position: relative;
+}
+.np-print-filter{
+	position: absolute;
+	right: 0;
+	top: 0;
+}

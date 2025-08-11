@@ -1,0 +1,10 @@
+name: Account Field Split
+type: module
+description: "Split up user profile \"User name and password\" field into separate list of fields that could be managed independently through the \"Manage form display\" UI."
+core_version_requirement: ^8.8 || ^9 || ^10
+package: User
+
+# Information added by Drupal.org packaging script on 2024-04-04
+version: '2.0.3'
+project: 'account_field_split'
+datestamp: 1712196042

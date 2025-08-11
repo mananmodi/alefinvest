@@ -1,0 +1,7 @@
+simple_pass_reset.settings:
+  type: mapping
+  label: 'Simple Password Reset Settings'
+  mapping:
+    login_redirection:
+      type: string
+      label: 'Redirect destination'

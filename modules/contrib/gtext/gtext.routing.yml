@@ -1,0 +1,65 @@
+gtext.translate:
+  path: '/admin/config/texts'
+  defaults:
+    _title: 'Translating texts'
+    _controller: '\Drupal\gtext\Controller\TranslateController::translatePage'
+    _title_context: 'gtext'
+  requirements:
+    _permission: 'access gtext translate strings'
+
+gtext.translate.string:
+  path: '/admin/config/texts/{lid}'
+  defaults:
+    _title_callback: '\Drupal\gtext\Controller\TranslateController::translateStringTitle'
+    _controller:     '\Drupal\gtext\Controller\TranslateController::translateStringPage'
+  requirements:
+    _permission: 'access gtext translate strings'
+    lid: '\d+'
+
+gtext.translate.update:
+  path: '/admin/config/texts/{lid}/reload'
+  defaults:
+    _controller: '\Drupal\gtext\Controller\TranslateController::translateStringUpdate'
+  requirements:
+    _permission: 'access gtext translate strings'
+    lid: '\d+'
+
+gtext.translate.export:
+  path: '/admin/config/texts/{langcode}/{group}/export'
+  defaults:
+    _title: 'Translating texts export'
+    _title_context: 'gtext'
+    _controller: '\Drupal\gtext\Controller\APIController::translateExport'
+  requirements:
+    _permission: 'access gtext translate strings'
+
+
+gtext.translate.delete:
+  path: '/api/gtext/{lid}/delete'
+  defaults:
+    _controller: '\Drupal\gtext\Controller\APIController::deleteTranslate'
+  requirements:
+    _permission: 'access gtext translate strings'
+
+gtext.translate.settings:
+  path: '/api/gtext/settings'
+  defaults:
+    _form: 'Drupal\gtext\Form\SettingsForm'
+    _title: 'Google API key settigns'
+  requirements:
+    _permission: 'administer site configuration'
+
+gtext.translate.settings_page:
+  path: '/admin/config/gtext/settings'
+  defaults:
+    _form: 'Drupal\gtext\Form\SettingsForm'
+    _title: 'Google API key settigns'
+  requirements:
+    _permission: 'administer site configuration'
+
+gtext.translate.google:
+  path: '/api/gtext/google'
+  defaults:
+    _controller: '\Drupal\gtext\Controller\APIController::googleTranslateText'
+  requirements:
+    _permission: 'access gtext translate+access gtext translate strings'

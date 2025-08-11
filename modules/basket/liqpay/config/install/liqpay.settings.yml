@@ -1,0 +1,21 @@
+config:
+  sandbox: 1
+  public_key_sandbox: ''
+  private_key_sandbox: ''
+  public_key: ''
+  private_key: ''
+  currency: UAH
+  description:
+    en: 'Payment order'
+    uk: 'Оплата замовлення'
+    ru: 'Оплата заказа'
+  success:
+    en:
+      value: "<p class=\"text-align-center\"><strong>Payment was successful.</strong></p>\r\n"
+      format: full_html
+    uk:
+      value: "<p class=\"text-align-center\"><strong>Оплата пройшла успішно.</strong></p>\r\n"
+      format: full_html
+    ru:
+      value: "<p class=\"text-align-center\"><strong>Оплата прошла успешно.</strong></p>\r\n"
+      format: full_html

@@ -1,0 +1,10 @@
+<?php
+
+use Drupal\clean_files_entity\CleanFilesEntity;
+
+function clean_files_entity_cron(){
+	if(!empty($GLOBALS['config']['clean_files_entity']['folders'])){
+		CleanFilesEntity::runFolder($GLOBALS['config']['clean_files_entity']['folders']);
+	}
+	CleanFilesEntity::run('node');
+}

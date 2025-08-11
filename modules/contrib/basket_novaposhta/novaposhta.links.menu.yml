@@ -1,0 +1,35 @@
+novaposhta.settings:
+  title: 'NovaPoshta settings'
+  parent: system.admin_config_development
+  route_name: novaposhta.settings
+
+# Info
+# - Nova Poshta
+basket.novaposhta:
+  title: 'Nova Poshta'
+  title_context: 'novaposhta'
+  route_name: basket.admin.pages
+  menu_name: basket
+  route_parameters: 
+    page_type: 'novaposhta'
+  parent: 'basket.info'
+  weight: 2
+  options:
+    ico_name: 'np.svg'
+    ico_module: 'novaposhta'
+    view_count: 'new_novaposhta'
+
+# Settings
+# - Basic settings
+# -- Settings Nova Poshta
+basket.novaposhta.settings:
+  title: 'Settings Nova Poshta'
+  title_context: 'novaposhta'
+  route_name: basket.admin.pages
+  menu_name: basket
+  route_parameters: 
+    page_type: 'settings-novaposhta'
+  parent: 'basket.basic_settings'
+  weight: 6
+  options:
+    basket_access: 'novaposhta access_page settings'

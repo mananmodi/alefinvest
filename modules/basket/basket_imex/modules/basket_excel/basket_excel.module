@@ -1,0 +1,137 @@
+<?php
+
+/**
+ * @file
+ * Module for organization of import and export of goods by *.xls.
+ */
+
+use Drupal\basket_excel\generateFile;
+use Drupal\basket_excel\Plugin\IMEX\BasketExcel;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Render\Markup;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_basket_translate_context_alter().
+ */
+function basket_excel_basket_translate_context_alter(&$context) {
+  $context[] = 'basket_excel';
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function basket_excel_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case'basket_imex_form':
+
+      /** @var \Drupal\basket\Basket $basket */
+      $basket = \Drupal::getContainer()->get('Basket');
+
+      $download = \Drupal::request()->query->get('download');
+      $system = \Drupal::request()->query->get('system');
+      $systemBase = str_replace(':', '_', $system);
+      $imexEntity = NULL;
+
+      if (str_contains($system, 'imex_multis:')) {
+        $imexEntity = \Drupal::entityTypeManager()->getStorage('imex_multi_entity')
+          ->load(str_replace('imex_multis:', '', $system));
+        if (!empty($imexEntity)) {
+          $system = $imexEntity->get('system');
+        }
+      }
+
+      if (!empty($download) && $system == 'excel') {
+        if (!empty(\Drupal::request()->query->get('run'))) {
+          (new generateFile($systemBase))->run($download, $imexEntity);
+          exit;
+        }
+        foreach (Element::children($form) as $formKey) {
+          $form[$formKey]['#access'] = FALSE;
+        }
+        $downloadUrl = Url::fromRoute('basket.admin.pages', [
+          'page_type' => 'stock-imex',
+        ], [
+          'query' => [
+            'system' => Drupal::request()->query->get('system'),
+            'download' => $download,
+            'run' => 1,
+          ],
+        ])->toString();
+        $query = \Drupal::request()->query->all();
+        unset($query['download']);
+        $closeUrl = Url::fromRoute('<current>', [], ['query' => $query])->toString();
+        $form['export'] = [
+          '#prefix' => '<div id="export_finish">',
+          '#suffix' => '</div>',
+          [
+            '#prefix' => '<div class="b_content">',
+            '#suffix' => '</div>',
+            [
+              '#type' => 'inline_template',
+              '#template' => '<b>{{ title }}</b><br/>{{ text }}',
+              '#context' => [
+                'title' => $basket->translate('basket_excel')->t('Export completed successfully.'),
+                'text' => $basket->translate('basket_excel')->t('If the automatic download has not started - click on the @link@.', [
+                  '@link@' => Markup::create(
+                    '<a href="' . $downloadUrl . '">' . $basket->translate('basket_excel')->t('link') . '</a>'
+                  ),
+                ]),
+              ],
+            ], [
+              '#type' => 'inline_template',
+              '#template' => '<br/><a href="{{ url }}" class="download">{{text}}</a>',
+              '#context' => [
+                'text' => $basket->translate('basket_excel')->t('Close page'),
+                'url' => $closeUrl,
+              ],
+            ], [
+              '#markup' => Markup::create('<script type="text/javascript">window.location.href="' . $downloadUrl . '";</script>'),
+            ],
+          ],
+        ];
+      }
+      elseif (!empty($system) && $system == 'excel') {
+        if (!empty($form['imex'])) {
+          $form['imex_description'] = [
+            '#type' => 'details',
+            '#title' => \Drupal::service('Basket')->translate('basket_excel')->t('Additional Information'),
+            '#weight' => 100,
+            [
+              '#theme' => 'basket_excel_description',
+              '#info' => [
+                'rows' => (new generateFile($systemBase))->getColumnInfos(),
+              ],
+            ],
+          ];
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function basket_excel_theme() {
+  return [
+    'basket_excel_description' => [
+      'variables' => [
+        'info' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function basket_excel_element_info_alter(array &$info) {
+  if (!empty($info['managed_file'])) {
+    $info['managed_file']['#process'][] = [
+      BasketExcel::class,
+      'managedFileProcess',
+    ];
+  }
+}

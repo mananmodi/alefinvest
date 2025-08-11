@@ -1,0 +1,19 @@
+services:
+  simple_pass_reset.route_subscriber:
+    class: Drupal\simple_pass_reset\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  simple_pass_reset.access_checker:
+    class: Drupal\simple_pass_reset\AccessChecks\ResetPassAccessCheck
+    arguments:
+      [
+        '@entity_type.manager',
+        '@logger.channel.simple_pass_reset',
+        '@datetime.time',
+        '@config.factory',
+      ]
+    tags:
+      - { name: access_check, applies_to: _simple_pass_reset_access }
+  logger.channel.simple_pass_reset:
+    parent: logger.channel_base
+    arguments: ['simple_pass_reset']

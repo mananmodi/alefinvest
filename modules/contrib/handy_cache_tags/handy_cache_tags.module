@@ -1,0 +1,123 @@
+<?php
+
+/**
+ * @file
+ * The module file for handy cache tags.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * The cache prefix we use for all cache tags.
+ */
+const HANDY_CACHE_TAGS_CACHE_PREFIX = 'handy_cache_tags';
+
+/**
+ * Implements hook_entity_insert().
+ */
+function handy_cache_tags_entity_insert(EntityInterface $entity) {
+  _handy_cache_tags_clear_entity_tags($entity);
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function handy_cache_tags_entity_update(EntityInterface $entity) {
+  _handy_cache_tags_clear_entity_tags($entity);
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function handy_cache_tags_entity_delete(EntityInterface $entity) {
+  _handy_cache_tags_clear_entity_tags($entity);
+}
+
+/**
+ * Helper to invalidate caches based on an entity.
+ */
+function _handy_cache_tags_clear_entity_tags(EntityInterface $entity) {
+  /** @var \Drupal\handy_cache_tags\HandyCacheTagsHandler $handler */
+  $handler = \Drupal::service('handy_cache_tags.handler');
+  $handler->invalidateEntity($entity);
+}
+
+/**
+ * Helper to get all entity tags for an entity.
+ *
+ * @deprecated in handy_cache_tags:8.x-1.0-beta1 and is removed from
+ * handy_cache_tags:2.0.0. Try to not use this, since its procedural. Use
+ * \Drupal::service('handy_cache_tags.manager')->getEntityTags() instead.
+ *
+ * @see https://www.drupal.org/project/handy_cache_tags/issues/2939178
+ */
+function handy_cache_tags_get_entity_tags(EntityInterface $entity) {
+  /** @var \Drupal\handy_cache_tags\HandyCacheTagsManager $manager */
+  $manager = \Drupal::service('handy_cache_tags.manager');
+  return $manager->getEntityTags($entity);
+}
+
+/**
+ * Helper to get cache tag for entity type.
+ *
+ * @deprecated in handy_cache_tags:8.x-1.0-beta1 and is removed from
+ * handy_cache_tags:2.0.0. Try to not use this, since its procedural. Use
+ * \Drupal::service('handy_cache_tags.manager')->getEntityTypeTagFromEntity()
+ * instead.
+ *
+ * @see https://www.drupal.org/project/handy_cache_tags/issues/2939178
+ */
+function handy_cache_tags_get_entity_type_tag_from_entity(EntityInterface $entity) {
+  /** @var \Drupal\handy_cache_tags\HandyCacheTagsManager $manager */
+  $manager = \Drupal::service('handy_cache_tags.manager');
+  return $manager->getEntityTypeTagFromEntity($entity);
+}
+
+/**
+ * Create a tag from a string.
+ *
+ * @param string $type
+ *   The suffix, so to speak.
+ *
+ * @deprecated in handy_cache_tags:8.x-1.0-beta1 and is removed from
+ * handy_cache_tags:2.0.0. Try to not use this, since its procedural. Use
+ * \Drupal::service('handy_cache_tags.manager')->getTag() instead.
+ *
+ * @see https://www.drupal.org/project/handy_cache_tags/issues/2939178
+ */
+function handy_cache_tags_get_tag($type) {
+  /** @var \Drupal\handy_cache_tags\HandyCacheTagsManager $manager */
+  $manager = \Drupal::service('handy_cache_tags.manager');
+  return $manager->getTag($type);
+}
+
+/**
+ * Helper to get cache tag for entity bundle.
+ *
+ * @deprecated in handy_cache_tags:8.x-1.0-beta1 and is removed from
+ * handy_cache_tags:2.0.0. Try to not use this, since its procedural. Use
+ * \Drupal::service('handy_cache_tags.manager')->getBundleTagFromEntity()
+ * instead.
+ *
+ * @see https://www.drupal.org/project/handy_cache_tags/issues/2939178
+ */
+function handy_cache_tags_get_bundle_tag_from_entity(EntityInterface $entity) {
+  /** @var \Drupal\handy_cache_tags\HandyCacheTagsManager $manager */
+  $manager = \Drupal::service('handy_cache_tags.manager');
+  return $manager->getBundleTagFromEntity($entity);
+}
+
+/**
+ * Create a tag for bundles.
+ *
+ * @deprecated in handy_cache_tags:8.x-1.0-beta1 and is removed from
+ * handy_cache_tags:2.0.0. Try to not use this, since its procedural. Use
+ * \Drupal::service('handy_cache_tags.manager')->getBundleTag() instead.
+ *
+ * @see https://www.drupal.org/project/handy_cache_tags/issues/2939178
+ */
+function handy_cache_tags_get_bundle_tag($entity_type, $bundle) {
+  /** @var \Drupal\handy_cache_tags\HandyCacheTagsManager $manager */
+  $manager = \Drupal::service('handy_cache_tags.manager');
+  return $manager->getBundleTag($entity_type, $bundle);
+}

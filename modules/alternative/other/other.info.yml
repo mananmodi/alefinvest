@@ -1,0 +1,9 @@
+name: Other module
+description: Other drupal functions
+package: Other
+
+type: module
+core_version_requirement: ^9 || ^10
+
+dependencies:
+  - block

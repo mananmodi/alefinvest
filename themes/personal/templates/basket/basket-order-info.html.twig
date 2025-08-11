@@ -1,0 +1,40 @@
+<div id="novaposhta_tracking_result_wrap">
+	<div class="status_wrap">
+		<div class="status">{{ 'Order number'|t({}, {'context' : 'basket_order_info'}) }}: {{ info.orderId }}</div>
+		<div class="sub_status">{{ basket_t('Status') }}: {{ basket_t(info.order.status.name) }}</div>
+	</div>
+	{% if info.dop.np %}
+		<div class="status_wrap">
+			{% if info.dop.np.data[0].RecipientDateTime %}
+				<div class="status is-complete">{{ 'Retrieved'|t([], {'context': 'basket_order_info'}) }} {{  info.dop.np.data[0].RecipientDateTime }} {{ info.dop.np.dop.np.data[0].Status }}</div>
+			{% else %}
+				<div class="status">{{ info.dop.np.data[0].Status }}</div>
+			{% endif %}
+		</div>
+		{% if info.dop.np.data[0].CitySender and  info.dop.np.data[0].CityRecipient %}
+			<div class="route_wrap">
+				<div class="label">{{ 'Route'|t }}</div>
+				<div class="routes">
+					<div class="start">{{ info.dop.np.data[0].CitySender }}</div>
+					<div class="end">{{ info.dop.np.data[0].CityRecipient }}</div>
+				</div>
+			</div>
+		{% endif %}
+		{% if info.dop.np.data[0].WarehouseRecipient or info.dop.np.data[0].AmountToPay %}
+			<div class="items">
+				{% if info.dop.np.data[0].WarehouseRecipient %}
+					<div class="item">
+						<div class="label">{{ 'Delivery address'|t([], {'context': 'basket_order_info'}) }}</div>
+						<div class="value">{{  info.dop.np.data[0].WarehouseRecipient }}</div>
+					</div>
+				{% endif %}
+				{% if info.dop.np.data[0].AmountToPay %}
+					<div class="item">
+						<div class="label">{{ 'Amount to be paid'|t([], {'context': 'basket_order_info'}) }}</div>
+						<div class="value">{{ info.dop.np.data[0].AmountToPay }}</div>
+					</div>
+				{% endif %}
+			</div>
+		{% endif %}
+	{% endif %}
+</div>

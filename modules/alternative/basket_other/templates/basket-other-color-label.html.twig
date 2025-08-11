@@ -1,0 +1,21 @@
+{% if info.isInline %}
+	<span class="color" style="box-shadow:0 0 5px #cccccc;display:inline-block;width:16px;height:16px;border-radius:2px;margin:0 3px -3px 0;background:{% if info.term.field_tax_color_code[0].color %}{{ info.term.field_tax_color_code[0].color }}{% else %}#ffffff{% endif %};"></span>
+	<span class="name">
+		{% if info.term %}
+			{{ info.term.label }}
+		{% else %}
+			{{ 'Not specified'|gtext('shop') }}
+		{% endif %}
+	</span>
+{% else %}
+	<span class="color" style="background:{% if info.term.field_tax_color_code[0].color %}{{ info.term.field_tax_color_code[0].color }}{% else %}#ffffff{% endif %};">
+		color
+	</span>
+	<span class="name">
+		{% if info.term %}
+			{{ info.term.label }}
+		{% else %}
+			{{ 'Not specified'|gtext('shop') }}
+		{% endif %}
+	</span>
+{% endif %}

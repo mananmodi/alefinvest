@@ -1,0 +1,34 @@
+other.home:
+  path: '/home'
+  defaults:
+    _controller: '\Drupal\other\Controller\OtherController::homePage'
+  requirements:
+    _permission: 'access content'
+other.error_404:
+  path: '/error_404'
+  defaults:
+    _controller: '\Drupal\other\Controller\OtherController::error404'
+    _title: 'Page not found'
+  requirements:
+    _permission: 'access content'
+other.error_403:
+  path: '/error_403'
+  defaults:
+    _controller: '\Drupal\other\Controller\OtherController::error403'
+    _title: 'Access denied'
+  requirements:
+    _permission: 'access content'
+other.comment_answer:
+  path: '/api/other/comments/{cid}'
+  defaults:
+    _controller: '\Drupal\other\Controller\OtherController::comments'
+  requirements:
+    _permission: 'access content'
+other.search_autocomplete:
+  path: '/api/other/search'
+  defaults:
+    _controller: '\Drupal\other\Controller\OtherController::searchAutocomplete'
+  requirements:
+    _permission: 'access content'
+
+

@@ -1,0 +1,266 @@
+{
+    "cid": "Drupal\\pathauto\\Commands\\PathautoCommands",
+    "data": {
+        "generateAliases": {
+            "schema": 4,
+            "class": "Drupal\\pathauto\\Commands\\PathautoCommands",
+            "method_name": "generateAliases",
+            "mtime": 1657960895,
+            "injected_classes": [],
+            "name": "pathauto:aliases-generate",
+            "description": "(Re)generate URL aliases.",
+            "help": "",
+            "aliases": [
+                "pag"
+            ],
+            "annotations": {
+                "command": "pathauto:aliases-generate",
+                "throws": "\\Exception"
+            },
+            "example_usages": {
+                "drush pathauto:aliases-generate all all": "Generate all URL aliases.",
+                "drush pathauto:aliases-generate create canonical_entities:node": "Generate URL aliases for un-aliased node paths only.",
+                "drush pathauto:aliases-generate": "When the arguments are omitted they can be chosen from an interactive menu."
+            },
+            "return_type": null,
+            "arguments": {
+                "action": {
+                    "description": "The action to take. Possible actions are \"create\" (generate aliases for un-aliased paths only), \"update\" (update aliases for paths that have an existing alias) or \"all\" (generate aliases for all paths).",
+                    "default": null
+                },
+                "types": {
+                    "description": "Comma-separated list of aliase typess to generate. Pass \"all\" to generate aliases for all types.",
+                    "default": null
+                }
+            },
+            "options": []
+        },
+        "deleteAliases": {
+            "schema": 4,
+            "class": "Drupal\\pathauto\\Commands\\PathautoCommands",
+            "method_name": "deleteAliases",
+            "mtime": 1657960895,
+            "injected_classes": [],
+            "name": "pathauto:aliases-delete",
+            "description": "Delete URL aliases",
+            "help": "",
+            "aliases": [
+                "pad"
+            ],
+            "annotations": {
+                "command": "pathauto:aliases-delete",
+                "throws": "\\Exception"
+            },
+            "example_usages": {
+                "drush pathauto:aliases-delete canonical_entities:node": "Delete all automatically generated URL aliases for node entities, preserving manually created aliases.",
+                "drush pathauto:aliases-delete all": "Delete all automatically generated URL aliases, preserving manually created ones.",
+                "drush pathauto:aliases-delete all --purge": "Delete all URL aliases, including manually created ones.",
+                "drush pathauto:aliases-delete": "When the alias types are omitted they can be chosen from an interactive menu."
+            },
+            "return_type": null,
+            "arguments": {
+                "types": {
+                    "description": "Comma-separated list of alias types to delete. Pass \"all\" to delete aliases for all types.",
+                    "default": null
+                }
+            },
+            "options": {
+                "purge": {
+                    "description": "Deletes all URL aliases, including manually created ones.",
+                    "default": false
+                }
+            }
+        },
+        "interactGenerateAliases": {
+            "schema": 4,
+            "class": "Drupal\\pathauto\\Commands\\PathautoCommands",
+            "method_name": "interactGenerateAliases",
+            "mtime": 1657960895,
+            "injected_classes": [
+                "Symfony\\Component\\Console\\Output\\Output",
+                "Symfony\\Component\\Console\\Input\\Input"
+            ],
+            "name": "interact:generate-aliases",
+            "description": "",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "interact pathauto:aliases-generate",
+                "throws": "\\Drush\\Exceptions\\UserAbortException\n   Thrown when the user cancels the operation during CLI interaction."
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "interactAliasTypes": {
+            "schema": 4,
+            "class": "Drupal\\pathauto\\Commands\\PathautoCommands",
+            "method_name": "interactAliasTypes",
+            "mtime": 1657960895,
+            "injected_classes": [
+                "Symfony\\Component\\Console\\Output\\Output",
+                "Symfony\\Component\\Console\\Input\\Input"
+            ],
+            "name": "interact:alias-types",
+            "description": "",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "interact"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "validateGenerateAliases": {
+            "schema": 4,
+            "class": "Drupal\\pathauto\\Commands\\PathautoCommands",
+            "method_name": "validateGenerateAliases",
+            "mtime": 1657960895,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "validate:generate-aliases",
+            "description": "",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "validate pathauto:aliases-generate",
+                "throws": "\\InvalidArgumentException\n   Thrown when one of the passed arguments is invalid"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "validateAliaseTypes": {
+            "schema": 4,
+            "class": "Drupal\\pathauto\\Commands\\PathautoCommands",
+            "method_name": "validateAliaseTypes",
+            "mtime": 1657960895,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "validate:aliase-types",
+            "description": "",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "validate",
+                "throws": [
+                    "\\InvalidArgumentException\n   Thrown when one of the passed arguments is invalid",
+                    "\\Drupal\\Component\\Plugin\\Exception\\PluginException\n   Thrown when an alias type can not be instantiated."
+                ]
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": [],
+            "options": []
+        },
+        "getAliasTypes": {
+            "schema": 4,
+            "class": "Drupal\\pathauto\\Commands\\PathautoCommands",
+            "method_name": "getAliasTypes",
+            "mtime": 1657960895,
+            "injected_classes": []
+        },
+        "preHook": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "preHook",
+            "mtime": 1633432454,
+            "injected_classes": [
+                "Consolidation\\AnnotatedCommand\\CommandData"
+            ],
+            "name": "pre:hook",
+            "description": "Persist commandData for use in primary command callback. Used by 'topic' commands.",
+            "help": "",
+            "aliases": [],
+            "annotations": {
+                "hook": "pre-command *"
+            },
+            "example_usages": [],
+            "return_type": null,
+            "arguments": {
+                "commandData": {
+                    "description": ""
+                }
+            },
+            "options": []
+        },
+        "setProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "processManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "processManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "hasProcessManager": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "hasProcessManager",
+            "mtime": 1645243795,
+            "injected_classes": []
+        },
+        "startBrowser": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "startBrowser",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setLogger": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setLogger",
+            "mtime": 1620040827,
+            "injected_classes": []
+        },
+        "getConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "getConfig",
+            "mtime": 1633432454,
+            "injected_classes": []
+        },
+        "setConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "parentGetConfig": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "parentGetConfig",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setInput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setInput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        },
+        "setOutput": {
+            "schema": 4,
+            "class": "Drush\\Commands\\DrushCommands",
+            "method_name": "setOutput",
+            "mtime": 1633665091,
+            "injected_classes": []
+        }
+    },
+    "created": 1663697448,
+    "expire": 0
+}
